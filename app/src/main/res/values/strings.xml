@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Vaveyla</string>
+    <string name="alertTitle">Uyarı</string>
+    <string name="alertButtonNo">Hayır</string>
+    <string name="alertButtonYes">Evet</string>
+    <string name="alertMessageGonderi">Gönderiyi paylaşmak istediğinize emin misiniz?</string>
+    <string name="alertMessageGonderiCikis">Gönderi paylaşımı yapmadan çıkmak istediğinize emin misiniz?</string>
+    <string name="alertMessageGorev">Görev paylaşımı yapmak istediğinize emin misiniz?</string>
+    <string name="alertMessageGorevCikis">Görev paylaşımı yapmadan çıkmak istediğinize emin misiniz?</string>
+    <string name="alertMessageProfilDuzenle">Değişiklikleri kaydetmek ister misiniz?</string>
+    <string name="alertMessageProfilDuzenlemeden">Profilinizi düzenlemeden çıkmak istediğinize emin misiniz?</string>
+    <string name="alertMessageHesapCikis">Çıkış yapmak istediğinize emin misiniz?</string>
+    <string name="alertMessageReklam">Sadece reklam izleyerek 5 puan kazanmak ister misin?</string>
+    <string name="alertReklamTitle">Reklam Uyarısı</string>
+
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="ad_unit_id">ca-app-pub-3940256099942544/5224354917</string>
+
+    <string name="fab1_label">Görev Paylaş</string>
+    <string name="fab2_label">Gönderi Paylaş</string>
+</resources>

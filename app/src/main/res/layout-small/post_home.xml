@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/seffaf_siyah_yuzde_10"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        app:contentPadding="15dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        app:cardBackgroundColor="@color/cardview_shadow_end_color"
+        app:cardElevation="2dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profil_resmi_txtGonderiActivity"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:id="@+id/txt_kullaniciadi_txtGonderiActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Kullanıcı Adı"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:typeface="serif"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_weight="0.9">
+                </View>
+
+                <ImageView
+                    android:id="@+id/buBirGorev"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/clock"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/more"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_more" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_gonderiHakkinda_txtGonderiActivity"
+                android:text="Gönderi Hakkında"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:typeface="serif"
+                android:layout_height="wrap_content"
+                android:maxLines="15" />
+
+            <ImageView
+                android:id="@+id/image_textGonderiActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:maxHeight="100dp"
+                android:padding="5dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <!--            <VideoView-->
+            <!--                android:id="@+id/video_textGonderiActivity"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:visibility="gone"-->
+            <!--                android:layout_marginTop="7dp"-->
+            <!--                android:paddingLeft="20dp"-->
+            <!--                android:paddingRight="20dp"-->
+            <!--                android:maxHeight="100dp"-->
+            <!--                android:padding="5dp"-->
+            <!--                />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/begeni_txtGonderiActivity"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_hand_like"/>
+                <TextView
+                    android:id="@+id/txt_begeniler_txtGonderiActivity"
+                    android:text="10"
+                    android:typeface="serif"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/yorum_txtGonderiActivity"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="11dp"
+                    android:src="@drawable/ic_yorum_bu"
+                    android:layout_toEndOf="@+id/begeni_gonderi_ogesi"
+                    android:layout_marginStart="15dp"/>
+
+                <TextView
+                    android:id="@+id/txt_yorum_txtGonderiActivity"
+                    android:text="20"
+                    android:textColor="@color/black"
+                    android:typeface="serif"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="3.5">
+                </View>
+
+
+                <TextView
+                    android:id="@+id/txt_zaman"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="10dk"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:typeface="serif" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

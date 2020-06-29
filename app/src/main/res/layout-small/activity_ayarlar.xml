@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".AyarlarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/bar_ayarlarCerceve"
+            android:background="?android:attr/windowBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/windowBackground"
+                android:id="@+id/toolbar">
+
+                <!--        <LinearLayout-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:orientation="horizontal">-->
+
+                <!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:id="@+id/geri_ayarlar"&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:layout_alignParentStart="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:layout_marginEnd="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;                android:src="@drawable/ic_geri"/>&ndash;&gt;-->
+
+                <!--            <TextView-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:textSize="18sp"-->
+                <!--                android:maxLines="1"-->
+                <!--                android:text="Ayarlar"-->
+                <!--                android:textStyle="bold"-->
+                <!--                android:id="@+id/ayarlar_toolbar"-->
+                <!--                android:textColor="#000" />-->
+
+                <!--        </LinearLayout>-->
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/yardim_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_yardim"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yardım"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!--        <LinearLayout-->
+            <!--            android:id="@+id/hakkinda_linear"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:orientation="horizontal"-->
+            <!--            android:padding="15dp">-->
+
+            <!--            <ImageView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:src="@drawable/ic_info"-->
+            <!--                android:layout_marginStart="5dp"/>-->
+
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="Hakkında"-->
+            <!--                android:layout_marginLeft="10dp"-->
+            <!--                android:textStyle="bold" />-->
+            <!--        </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/kullanici_sozlesmesi_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_create"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gizlilik Bildirimi"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/cikis_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_cikis"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Çıkış Yap"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vaveyla"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"/>
+
+    <TextView
+        android:id="@+id/yardim_ulasim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bize Ulaşın: "
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"/>
+    <TextView
+        android:id="@+id/yardim_ulasim_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" vaveylayardim@gmail.com"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"/>
+
+</RelativeLayout>

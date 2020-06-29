@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sozlesme_toolbar"
+                android:background="?android:attr/windowBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gizlilik Bildirimi"
+                        style="@style/BlackText"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"/>
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vaveyla'ya Hoşgeldiniz!"
+                    android:typeface="serif"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vaveyla kullanımınızın tabi olduğu bu Kullanım Koşulları, Vaveyla Hizmeti hakkında aşağıda belirtilen bilgileri sağlamaktadır. Bir Vaveyla hesabı oluşturduğunuzda veya Vaveyla'yı kullandığınızda bu koşulları kabul etmiş sayılırsınız."
+                    android:layout_marginTop="8dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1 - Bu Gizlilik Bildiriminde Ne Belirtilmiştir?"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bu Gizlilik Bildirimindeki bölümler size aşağıdakiler hakkında bilgi verir: \n
+●	İşlenen Kişisel Verilerin türleri, \n
+●	Kişisel Verilerin işlenme amaçları, \n
+●	Kişisel Verilerin işlendiği yerler, \n
+●	Kişisel Verileri korumak için uygulanan güvenlik önlemleri, \n
+●	Üçüncü şahıslarla ilgili sorumluluk sınırları, \n
+●	Kişisel Verilerinizi görüntüleme, değiştirme ve silme, \n
+●	Bu Gizlilik Bildiriminde yapılan değişiklikler;  \n
+●	Sorunuz veya açıklamalarınız varsa ne yapacaksınız? \n
+"
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2 - İşlenen Kişisel Verilerin Türleri"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText12"
+                    android:paddingLeft="8dp"
+                    android:text="A. Hizmetimiz tarafından kullanılan Kişisel Veriler " />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hizmetimizi geliştirmek için Anonim Verileri kullanırız. Bu bilgiler, Hizmet aracılığıyla kamuya açıklanmayacaktır."
+                    android:textSize="15sp"
+                    android:typeface="serif"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText12"
+                    android:paddingLeft="8dp"
+                    android:text="B. Otomatik Olarak Oluşturulan Bilgiler  " />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Çoğu diğer web siteleri ve çevrimiçi hizmetler gibi, Uygulamayı nasıl kullandığınızla ilgili olarak otomatik olarak üretilen bilgileri toplar ve işleriz. Toplanan bilgiler, ip adresinizi ve / veya benzersiz cihaz kimliğinizi içerir."
+                    android:textSize="15sp"
+                    android:typeface="serif"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Özellikle katılmayı seçerseniz, Uygulama, coğrafi konum bilgilerinizi toplayabilir. Her durumda, coğrafi konum bilginizin alınmasını mobil cihazınızın ayarlarından engelleyebilirsiniz.\n
+Sosyal ağ hesabınızdan bilgi erişimi ve toplama izni vermeyi özellikle tercih ederseniz, sosyal ağ hesabınızdaki temel kişisel bilgileriniz (adınız ve e-posta adresiniz gibi) ve ayrıca sosyal ağ kullanıcı kimliği ( şifreniz değil ) ve Uygulama aracılığıyla paylaştığınız yayınlarla ilgili parametreler. Erişilebilen ve alınabilecek bilgileri kontrol etmek için hesabınızın gizlilik tercihlerini nasıl ayarlayabileceğiniz hakkında daha fazla bilgi için lütfen sosyal ağın gizlilik politikasına bakın.
+"
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bu, aynı zamanda, Uygulamayı nasıl kullandığınıza ilişkin otomatik olarak oluşturulmuş bilgilerle ilgili olarak gerçekleşir. Bu tür bilgiler, Uygulamanın nasıl kullanıldığını daha iyi anlamamıza ve bir kullanıcı olarak ihtiyacınıza uygun hizmet üretmemize yardımcı olur.\n Uygulama içindeki kullanıcı yetkilendirme özelliklerini etkinleştirirseniz, aşağıdaki ek bilgiler saklanır: \n
+●	İsim, \n
+●	E-posta,
+"
+                    android:textSize="15sp"
+                    android:typeface="serif"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText12"
+                    android:paddingLeft="8dp"
+                    android:text="C. Belirli Bilgiler  " />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Size sadakat kartı, haber bültenleri, reklamcılık gibi bazı etkinliklerle başvurmanız istenebilir; bu durumda bazı kişisel bilgiler istenir. Bu bilgiler, hizmetimizin (üçüncü şahıslar dahil) veritabanında saklanır ve bizimle paylaşılacaktır.
+Uygulamadaki fotoğraflar da dahil olmak üzere veri yüklediğinizde, bu paylaşılacak ve uygulamanın diğer tüm kullanıcıları tarafından görülebilecektir.
+"
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3 - Kişisel Verilerin işlenme amaçları"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Taraflar Kişisel Verileri aşağıdaki amaçlarla işlemektedir: \n
+●	Hizmeti kullanabilmenizi sağlamak için, \n
+●	Hizmetimizle ilgili bilgileri güncel tutmak için, \n
+●	Hizmetin iyileştirilmesi ve/veya özelleştirilmesi için, \n
+●	Sizi tanımlamak ve/veya Hizmeti özelleştirmek için, \n
+●	Sizi tanımak ve dolandırıcılığı önlemek için, \n
+●	Destek sağlamak için, \n
+●	Kişisel Verilerinizi, bizden bunu talep ettiğiniz takdirde veya yasal olarak yükümlü olduğumuz durumlarda, üçüncü şahıslara iletmek.
+"
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4 - Kişisel Verilerin işlendiği Yerler "
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hizmet kapsamında işlenen verilerin tutulduğu veri merkezi Türkiye'de bulunmaktadır."
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5 - Kişisel Verileri Korumak İçin Hangi Güvenlik Önlemleri Uygulanmaktadır? "
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Verilerinizin güvenliği ve diğer Kullanıcıların güvenliği bizim için çok önemlidir. Kişisel Verilerinizi kayıp ya da herhangi bir yasadışı işleme karşı korumak için teknik ve organizasyonel önlemler aldık. Aşağıdaki tedbirleri uyguladık: sunucularımızı güvenlik duvarları, SSL bağlantıları ve hassas verilerin şifrelenmesi yoluyla koruma. Bu liste ayrıntılı değildir. "
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6 - Kişisel Verileri Görüntüleme ve Silme"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Uygulamayı kullanarak toplanan kişisel bilgilere e-posta yoluyla bizimle iletişime geçmek veya silmek için bir istek gönderebilirsiniz. Kimliğinizi doğrulamak için ek bilgi sağlamanız istenebilir."
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="7 - Çocuk Gizliliği"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Çocuklarla ilgili kişisel bilgiler bilerek veya kasıtlı olarak toplanmamaktadır."
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="8 - Güvenlik"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kişisel bilgilerinizin güvenliğini sağlamak, hasar riskini en aza indirmek, bilgi kaybı ve yetkisiz erişimden veya bilgiyi kullanmak için önlemler uygulanmaktadır. Bununla birlikte, bu tedbirler mutlak bilgi güvenliği sağlayamamaktadır. Dolayısıyla, kişisel bilgilerinizin güvenliğini sağlamak için çaba sarf edilir, ancak bu garanti edilmez ve Uygulamanın ve ilgili veritabanlarının herhangi bir haksız davranış, arıza, izinsiz engeller veya erişim veya diğer kötüye kullanım ve kötüye kullanımdan muaf olacağını makul bir şekilde bekleyemezsiniz."
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="9 - Herhangi bir sorunuz ya da açıklamalarınız varsa ne yapacaksınız?"
+                    android:layout_marginTop="5dp"
+                    style="@style/BlackText15"
+                    android:paddingLeft="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bu Gizlilik Bildirimi ile ilgili herhangi bir sorunuz veya açıklamalarınız varsa, lütfen bir e-posta göndererek bizimle iletişime geçin. "
+                    android:layout_marginTop="5dp"
+                    android:typeface="serif"
+                    android:textSize="15sp"
+                    android:paddingLeft="8dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

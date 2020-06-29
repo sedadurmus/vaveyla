@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_back"
+    android:padding="20dp"
+    tools:context=".RegisterActivity"
+    android:gravity="center">
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/logo"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="85dp"-->
+    <!--        android:src="@drawable/logo_circle"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="50dp"/>-->
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:cardCornerRadius="20dp"-->
+    <!--        app:contentPadding="15dp"-->
+    <!--        android:paddingRight="4dp"-->
+    <!--        android:paddingLeft="4dp"-->
+    <!--        app:cardBackgroundColor="@color/seffaf_beyaz_hex_14"-->
+    <!--        app:cardElevation="4dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:layout_marginBottom="15dp"-->
+    <!--        android:layout_below="@+id/logo">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/kullaniciAdiTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="190sp">
+            <EditText
+                android:id="@+id/edt_kullaniciAdi"
+                android:inputType="text"
+                android:hint="Kullanıcı Adınız"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/AdiTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/kullaniciAdiTIL"
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/edt_Ad"
+                android:inputType="text"
+                android:hint="Adınız"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TarihTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/kullaniciAdiTIL"
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/edt_Tarih"
+                android:inputType="text"
+                android:hint="Doğum Tarihiniz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/AdiTIL"
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/edt_email"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:id="@+id/passwordTIL"
+            android:layout_below="@+id/emailTIL"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/edt_sifre"
+                android:inputType="textPassword"
+                android:hint="Şifre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_kaydol_activity"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/passwordTIL"
+            android:layout_marginTop="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_login"
+            android:text="Kaydol"
+            android:textColor="#fff"/>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txt_girisSayfasina_git"
+        android:text="Mevcut hesabın var mı? Giriş Yap.."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"/>
+    <!--    </androidx.cardview.widget.CardView>-->
+</RelativeLayout>

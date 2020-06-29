@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/yorumCercevesi"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="1dp"
+    android:paddingBottom="1dp"
+    android:orientation="horizontal"
+    android:background="@color/LightGrey">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="3dp"
+        app:contentPadding="7dp"
+        app:cardBackgroundColor="@color/cardview_light_background">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profil_resmi_yorumOgesi"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_toEndOf="@id/profil_resmi_yorumOgesi">
+
+        <TextView
+            android:id="@+id/txt_kullaniciadi_yorumOgesi"
+            android:text="kullaniciAdi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txt_yorum_yorumOgesi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:maxLines="5"
+            android:typeface="serif"
+            android:textColor="@color/black"
+            android:text="Yorum burada görünecek"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+</LinearLayout>
