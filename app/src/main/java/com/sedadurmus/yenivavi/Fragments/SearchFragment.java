@@ -3,6 +3,7 @@ package com.sedadurmus.yenivavi.Fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
+import com.sedadurmus.yenivavi.Api.ApiClient;
+import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.Kullanici;
+import com.sedadurmus.yenivavi.Model.Movie;
+import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +108,7 @@ public class SearchFragment extends Fragment {
         recyclerView.setAdapter(kullaniciAdapter);
 
         kullanicileriOku();
-
+        loadMovies();
         arama_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -212,5 +220,27 @@ public class SearchFragment extends Fragment {
 
             }
         });
+    }
+
+    private final void loadMovies() {
+        ApiInterface var10000 = (ApiInterface)ApiClient.createService(ApiInterface.class);
+        if (var10000 != null) {
+            ApiInterface apiService = var10000;
+            Call call = apiService.getMovies("https://api.themoviedb.org/3/movie/popular?api_key=b7ee738bdfe5a91a0cec31c619d58968");
+            call.enqueue((Callback)(new Callback() {
+                public void onResponse(@NotNull Call call, @NotNull Response response) {
+
+                    TheMovieDB theMovieDB = (TheMovieDB)response.body();
+                    List<Movie> movies = theMovieDB.getResults();
+                    Integer len = movies.toArray().length;
+                    Log.e("TheMovieDB", len.toString());
+                }
+
+                public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+
+                    Log.e("MOVIES", "request fail");
+                }
+            }));
+        }
     }
 }
