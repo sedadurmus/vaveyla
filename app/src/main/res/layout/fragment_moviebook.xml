@@ -56,11 +56,11 @@
             app:tabPaddingStart="0dp">
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyler_view_Arama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="NotSibling" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/recyler_view_Arama"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:ignore="NotSibling" />-->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

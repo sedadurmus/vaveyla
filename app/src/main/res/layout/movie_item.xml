@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/card_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:cardCornerRadius="20dp"-->
+<!--        app:contentPadding="15dp"-->
+<!--        android:paddingRight="4dp"-->
+<!--        android:paddingLeft="4dp"-->
+<!--        app:cardBackgroundColor="@color/cardview_shadow_end_color"-->
+<!--        app:cardElevation="4dp" >-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_film_adi"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="Film Adı"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:typeface="serif" />-->
+
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_film_hakkinda"-->
+<!--                android:text="Film Hakkında"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:typeface="serif"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:maxLines="15" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/txt_tarih"-->
+<!--                android:text="Film Hakkında"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:typeface="serif"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:maxLines="15" />-->
+
+            <ImageView
+                android:id="@+id/film_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="7dp"
+                android:maxHeight="100dp"
+                android:padding="5dp"
+                android:src="@mipmap/ic_launcher" />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/film_begeni"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:src="@drawable/ic_hand_like"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_begeniler"-->
+<!--                    android:text="10"-->
+<!--                    android:typeface="serif"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+</androidx.cardview.widget.CardView>
