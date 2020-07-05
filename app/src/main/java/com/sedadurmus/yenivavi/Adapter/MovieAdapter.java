@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,7 +44,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
 //        String sDate1 = mMovies.get(position).getRelease_date();
 //        SimpleDateFormat  formatter  =new SimpleDateFormat("yyyy-MM-dd");
-        holder.filmAdi.setText(mMovies.get(position).getTitle());
+//        holder.filmAdi.setText(mMovies.get(position).getTitle());
 //        holder.filmHakkinda.setText(mMovies.get(position).getOverview());
 
 
@@ -63,9 +62,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            filmAdi= itemView.findViewById(R.id.txt_film_adi);
-//            filmHakkinda= itemView.findViewById(R.id.txt_film_hakkinda);
-//            filmBegeni= itemView.findViewById(R.id.txt_begeniler);
             filmGorsel= itemView.findViewById(R.id.film_img);
 
 //            txtTarih= itemView.findViewById(R.id.txt_tarih);
@@ -80,10 +76,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         intent.putExtra("title", mMovies.get(pos).getTitle());
                         intent.putExtra("poster_path", mMovies.get(pos).getPosterPath());
                         intent.putExtra("overview", mMovies.get(pos).getOverview());
+                        intent.putExtra("release_date", mMovies.get(pos).getRelease_date());
                         intent.putExtra("vote_average", Double.toString(mMovies.get(pos).getVote_average()));
+                        intent.putExtra("vote_count", Integer.toString(mMovies.get(pos).getVote_count()));
+                        intent.putExtra("video",(mMovies.get(pos).getVideo()));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
-                        Toast.makeText(view.getContext(), clickedDataItem.getTitle() + "  Tıkladınız" , Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(view.getContext(), clickedDataItem.getTitle() + "  Tıkladınız" , Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -21,11 +21,12 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CFCDCD">
+        android:background="#EDEBEB">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp">
 
             <ImageView
                 android:id="@+id/film_poster2"
@@ -49,11 +50,12 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textGone">
+                app:layout_constraintTop_toTopOf="@+id/textGone"
+                app:cardCornerRadius="10dp">
 
                 <ProgressBar
                     android:id="@+id/progressBarDetail"
@@ -88,6 +90,7 @@
                         android:layout_marginEnd="24dp"
                         android:textStyle="bold"
                         android:text="Baslik"
+                        android:textSize="20sp"
                         app:layout_constraintStart_toEndOf="@+id/film_poster"
                         app:layout_constraintTop_toTopOf="@+id/film_poster" />
 
@@ -95,51 +98,54 @@
                         android:id="@+id/puan_movie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="26sp"
+                        android:textSize="20sp"
                         android:text="5.5"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:ignore="MissingConstraints" />
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Yayın Tarihi: "
                         app:layout_constraintStart_toStartOf="@+id/movie_title"
                         app:layout_constraintTop_toBottomOf="@+id/movie_title" />
-
                     <TextView
-                        android:id="@+id/tvReleaseDate"
+                        android:id="@+id/puan_movie_slash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="25/24/5802"
-                        app:layout_constraintStart_toEndOf="@+id/date"
-                        app:layout_constraintTop_toTopOf="@+id/date" />
-
-                    <TextView
-                        android:id="@+id/textView_oylayan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Oylayan: "
-                        app:layout_constraintStart_toStartOf="@+id/date"
-                        app:layout_constraintTop_toBottomOf="@+id/date" />
+                        android:textSize="20sp"
+                        android:text="/"
+                        app:layout_constraintStart_toEndOf="@+id/puan_movie"
+                        app:layout_constraintTop_toTopOf="@+id/puan_movie"/>
 
                     <TextView
                         android:id="@+id/tvVote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="58"
-                        app:layout_constraintStart_toEndOf="@+id/textView_oylayan"
-                        app:layout_constraintTop_toTopOf="@+id/textView_oylayan" />
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/puan_movie"
+                        app:layout_constraintStart_toEndOf="@+id/puan_movie_slash"
+                        app:layout_constraintTop_toTopOf="@+id/puan_movie_slash" />
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/date"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Yayın Tarihi: "-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/puan_movie"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/puan_movie" />-->
+
+                    <TextView
+                        android:id="@+id/tvReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25/24/5802"
+                        app:layout_constraintStart_toStartOf="@+id/puan_movie"
+                        app:layout_constraintTop_toBottomOf="@+id/puan_movie"  />
 
                     <ImageView
                         android:id="@+id/imgFavorite"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:layout_marginTop="10dp"
                         android:src="@drawable/ic_favorite"
-                        app:layout_constraintStart_toStartOf="@+id/textView_oylayan"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_oylayan" />
+                        app:layout_constraintBottom_toTopOf="@+id/viewDivider"
+                        app:layout_constraintStart_toStartOf="@+id/tvReleaseDate"
+                        app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate" />
 
                     <View
                         android:id="@+id/viewDivider"
@@ -161,25 +167,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/viewDivider" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Film Türü"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_hakkinda" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerviewGenres"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -193,7 +180,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

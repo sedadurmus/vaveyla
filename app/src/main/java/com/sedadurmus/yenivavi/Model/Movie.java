@@ -23,6 +23,9 @@ public class Movie implements Serializable {
     @SerializedName("title")
     String title;
 
+    @SerializedName("id")
+    String id;
+
     @SerializedName("overview")
     String overview;
 
@@ -58,6 +61,9 @@ public class Movie implements Serializable {
     }
     public Integer getVote_count() {
         return this.vote_count;
+    }
+    public String getId() {
+        return this.id;
     }
 
 }
