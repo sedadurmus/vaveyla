@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,6 +31,7 @@ public class MovieFragment extends Fragment {
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private List<Movie> movies;
+    private ProgressBar bar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,8 @@ public class MovieFragment extends Fragment {
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(gridLayoutManager);
+        bar=view.findViewById(R.id.progress_bar);
+
         loadMovies();
 
         movieAdapter =new MovieAdapter(getContext());
@@ -52,6 +56,7 @@ public class MovieFragment extends Fragment {
     }
 
     private final void loadMovies() {
+
         ApiInterface var10000 = (ApiInterface)ApiClient.createService(ApiInterface.class);
         if (var10000 != null) {
             ApiInterface apiService = var10000;

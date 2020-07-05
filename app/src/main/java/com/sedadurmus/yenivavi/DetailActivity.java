@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,10 +19,12 @@ import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView filmAdi, filmBegeni, filmHakkinda, txtTarih, puan;
+    TextView filmAdi, filmBegeni, filmHakkinda, txtTarih, puan, oySayisi;
     ImageView filmGorsel;
+
     Movie movie;
     private ArrayList<Movie> mMovies;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,8 @@ public class DetailActivity extends AppCompatActivity {
         filmHakkinda=findViewById(R.id.movie_hakkinda);
         filmGorsel=findViewById(R.id.film_poster);
         puan = findViewById(R.id.puan_movie);
+        oySayisi = findViewById(R.id.tvVote);
+
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra("title")){
@@ -51,14 +56,15 @@ public class DetailActivity extends AppCompatActivity {
             String movieName = getIntent().getExtras().getString("title");
             String hakkinda = getIntent().getExtras().getString("overview");
             String puan_ort = getIntent().getExtras().getString("vote_average");
+            String puan_oy = getIntent().getExtras().getString("vote_count");
 
-            Glide.with(this)
-                    .load(poster)
-                    .into(filmGorsel);
-//            new DownLoadImageTask(filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(Integer.parseInt(poster)).getPosterPath());
+            Glide.with(this).load(poster).into(filmGorsel);
+//            new DownLoadImageTask(filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(poster).getPosterPath());
             filmAdi.setText(movieName);
             filmHakkinda.setText(hakkinda);
             puan.setText(puan_ort);
+            oySayisi.setText(puan_oy);
+
         }else {
             Toast.makeText(this, "Api bulunamadı", Toast.LENGTH_SHORT).show();
         }

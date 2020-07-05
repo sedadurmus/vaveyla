@@ -6,15 +6,18 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
     @SerializedName("popularity")
+    private
     double popularity;
 
     @SerializedName("vote_count")
-    int vote_count;
+    private
+    Integer vote_count;
 
     @SerializedName("video")
     boolean video;
 
     @SerializedName("poster_path")
+    private
     String poster_path;
 
     @SerializedName("title")
@@ -30,12 +33,11 @@ public class Movie implements Serializable {
     Double vote_average;
 
 
+
     public double getPopularity() {
         return this.popularity;
     }
-    public int getVoteCount() {
-        return this.vote_count;
-    }
+
     public boolean getVideo() {
         return this.video;
     }
@@ -53,6 +55,9 @@ public class Movie implements Serializable {
     }
     public double getVote_average() {
         return this.vote_average;
+    }
+    public Integer getVote_count() {
+        return this.vote_count;
     }
 
 }

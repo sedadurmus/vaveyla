@@ -45,7 +45,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
 //        String sDate1 = mMovies.get(position).getRelease_date();
 //        SimpleDateFormat  formatter  =new SimpleDateFormat("yyyy-MM-dd");
-//        holder.filmAdi.setText(mMovies.get(position).getTitle());
+        holder.filmAdi.setText(mMovies.get(position).getTitle());
 //        holder.filmHakkinda.setText(mMovies.get(position).getOverview());
 
 
@@ -60,12 +60,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView filmAdi, filmBegeni, filmHakkinda, txtTarih;
         ImageView filmGorsel;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            filmAdi= itemView.findViewById(R.id.txt_film_adi);
+            filmAdi= itemView.findViewById(R.id.txt_film_adi);
 //            filmHakkinda= itemView.findViewById(R.id.txt_film_hakkinda);
 //            filmBegeni= itemView.findViewById(R.id.txt_begeniler);
             filmGorsel= itemView.findViewById(R.id.film_img);
+
 //            txtTarih= itemView.findViewById(R.id.txt_tarih);
 
             itemView.setOnClickListener(new View.OnClickListener() {
