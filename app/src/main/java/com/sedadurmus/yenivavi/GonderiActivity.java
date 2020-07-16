@@ -21,8 +21,10 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +45,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GonderiActivity extends AppCompatActivity {
 
@@ -51,10 +54,15 @@ public class GonderiActivity extends AppCompatActivity {
     String benimUrim = "";
     Intent videoIntent = new Intent();
 
+    ImageView filmPoster, filmposter2;
+    EditText hakkinda;
+    ConstraintLayout constraintMovie;
+
     VideoView videoView;
 
     StorageTask yuklemeGorevi;
     StorageReference resimYukleYolu;
+
 
     ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
     TextView txt_Gonder, txt_tema;
@@ -66,72 +74,110 @@ public class GonderiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gonderi);
 
+        Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+        filmPoster =findViewById(R.id.film_img);
+        filmposter2=findViewById(R.id.film_poster);
+        hakkinda =findViewById(R.id.edit_movie_gonderi);
+        constraintMovie =findViewById(R.id.constraint_movie);
+
         btn_gonderiActivitye_git = findViewById(R.id.btn_gonderiActivitye_git);
-        image_Kapat = findViewById(R.id.close_gonderi);
+//        image_Kapat = findViewById(R.id.close_gonderi);
         image_Eklendi = findViewById(R.id.imageView_gonderi);
 
         txt_Gonder = findViewById(R.id.txt_gonder);
         gonderi_hakkinda = findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
 
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
-        image_Kapat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this, R.style.AlertDialogTheme);
-                View view = LayoutInflater.from(GonderiActivity.this).inflate(
-                        R.layout.alert_dialog,
-                        (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-                );
-//                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this);
-                builder.setCancelable(false);
-                builder.setView(view);
-                ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
-                ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGonderiCikis));
-                ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
-                ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
-                ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-//                builder.setTitle("Uyarı");
-//                builder.setMessage("Gönderiyi kaydetmeden çıkmak istediğinize emin misiniz?");
-                final AlertDialog alertDialog1 = builder.create();
-                view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(GonderiActivity.this, "Gönderi Paylaşılamadı!", Toast.LENGTH_SHORT).show();
-                        finish();
-                        Intent ıntent = new Intent(GonderiActivity.this, MainActivity.class);
-                        startActivity(ıntent);
-                    }
-                });
-                view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog1.cancel();
-                    }
-                });
-//                builder.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
+//        image_Kapat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this, R.style.AlertDialogTheme);
+//                View view = LayoutInflater.from(GonderiActivity.this).inflate(
+//                        R.layout.alert_dialog,
+//                        (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
+//                );
+////                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this);
+//                builder.setCancelable(false);
+//                builder.setView(view);
+//                ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
+//                ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGonderiCikis));
+//                ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
+//                ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
+//                ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
+////                builder.setTitle("Uyarı");
+////                builder.setMessage("Gönderiyi kaydetmeden çıkmak istediğinize emin misiniz?");
+//                final AlertDialog alertDialog1 = builder.create();
+//                view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
 //                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Evet'e basılınca yapılacak işlemleri yazınız
-//                        Toast.makeText(GonderiActivity.this, "Gönderiyi kaydetmediniz.", Toast.LENGTH_SHORT).show();
+//                    public void onClick(View view) {
+//                        Toast.makeText(GonderiActivity.this, "Gönderi Paylaşılamadı!", Toast.LENGTH_SHORT).show();
 //                        finish();
 //                        Intent ıntent = new Intent(GonderiActivity.this, MainActivity.class);
 //                        startActivity(ıntent);
 //                    }
 //                });
-//                builder.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
+//                view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
 //                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Hayır'a baslınca yapılacak işmeleri yazınız
-//                        dialog.cancel();
+//                    public void onClick(View view) {
+//                        alertDialog1.cancel();
 //                    }
 //                });
+////                builder.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
+////                    @Override
+////                    public void onClick(DialogInterface dialog, int which) {
+////                        // Evet'e basılınca yapılacak işlemleri yazınız
+////                        Toast.makeText(GonderiActivity.this, "Gönderiyi kaydetmediniz.", Toast.LENGTH_SHORT).show();
+////                        finish();
+////                        Intent ıntent = new Intent(GonderiActivity.this, MainActivity.class);
+////                        startActivity(ıntent);
+////                    }
+////                });
+////                builder.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
+////                    @Override
+////                    public void onClick(DialogInterface dialog, int which) {
+////                        // Hayır'a baslınca yapılacak işmeleri yazınız
+////                        dialog.cancel();
+////                    }
+////                });
+//
+//                if (alertDialog1.getWindow() != null){
+//                    alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+//                }
+//                alertDialog1.show();
+//            }
+//        });
 
-                if (alertDialog1.getWindow() != null){
-                    alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                }
-                alertDialog1.show();
-            }
-        });
+
+        Intent intentThatStartedThisActivity = getIntent();
+        if (intentThatStartedThisActivity.hasExtra("title")){
+            constraintMovie.setVisibility(View.VISIBLE);
+            String poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
+            String movieName = getIntent().getExtras().getString("title");
+            String hakkinda = getIntent().getExtras().getString("overview");
+            String puan_ort = getIntent().getExtras().getString("vote_average");
+            String puan_oy = getIntent().getExtras().getString("vote_count");
+            String tarih = getIntent().getExtras().getString("release_date");
+
+            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + poster).into(filmPoster);
+            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + poster).into(filmposter2);
+
+        }else {
+            constraintMovie.setVisibility(View.GONE);
+            Toast.makeText(this, "Api bulunamadı", Toast.LENGTH_SHORT).show();
+        }
+
+
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,22 +213,6 @@ public class GonderiActivity extends AppCompatActivity {
                     }
                 });
 
-//                builder.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Evet'e basılınca yapılacak işlemleri yazınız
-//                        resimYukle();
-//                    }
-//                });
-//                builder.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Hayır'a baslınca yapılacak işmeleri yazınız
-//                        dialog.cancel();
-//                        Toast.makeText(GonderiActivity.this, "Gönderi paylaşılamadı!", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                AlertDialog alert = builder.create();
                 if (alertDialog.getWindow() != null){
                     alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
@@ -200,16 +230,6 @@ public class GonderiActivity extends AppCompatActivity {
             }
         });
 
-//        btn_video.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                videoIntent = new Intent();
-//                videoIntent.setType("video/*");
-//                videoIntent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(videoIntent, "Select Video"), REQUEST_TAKE_GALLERY_VIDEO);
-//
-//            }
-//        });
     }
 
     boolean isOkey = true;
@@ -273,6 +293,7 @@ public class GonderiActivity extends AppCompatActivity {
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
                         hashMap.put("onaydurumu", false);
+
 
                         veriYolu.child(gonderiId).setValue(hashMap);
                         final DatabaseReference kullaniciYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").child(FirebaseAuth.getInstance().getCurrentUser().getUid());

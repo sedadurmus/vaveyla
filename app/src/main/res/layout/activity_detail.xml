@@ -15,6 +15,21 @@
             android:background="?android:attr/windowBackground"
             android:id="@+id/toolbar">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/create_gonderi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_create"/>
+
+            </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -116,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="58"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/puan_movie"
                         app:layout_constraintStart_toEndOf="@+id/puan_movie_slash"
                         app:layout_constraintTop_toTopOf="@+id/puan_movie_slash" />

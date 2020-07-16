@@ -12,6 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.DetailActivity;
 import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
 import com.sedadurmus.yenivavi.Model.Movie;
@@ -23,6 +30,8 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Movie> mMovies;
+
+    private FirebaseUser mevcutFirebaseUser;
 
     public MovieAdapter(Context mContext) {
         this.mContext = mContext;
@@ -38,16 +47,26 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final Movie movie =mMovies.get(position);
-//        Glide.with(mContext).load(movie.getPosterPath()).into(holder.filmGorsel);
+        mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
-//        String sDate1 = mMovies.get(position).getRelease_date();
-//        SimpleDateFormat  formatter  =new SimpleDateFormat("yyyy-MM-dd");
-//        holder.filmAdi.setText(mMovies.get(position).getTitle());
-//        holder.filmHakkinda.setText(mMovies.get(position).getOverview());
 
+        favoriEklendi(movie.getTitle(), holder.favori);
+        //beğeni resmi tıklama olayı
+        holder.favori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.favori.getTag().equals("ekle")) {
+                    FirebaseDatabase.getInstance().getReference().child("Favoriler").child(movie.getTitle())
+                            .child(mevcutFirebaseUser.getUid()).setValue(true);
 
+                } else {
+                    FirebaseDatabase.getInstance().getReference().child("Favoriler").child(movie.getTitle())
+                            .child(mevcutFirebaseUser.getUid()).removeValue();
+                }
+            }
+        });
     }
 
     @Override
@@ -57,14 +76,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView filmAdi, filmBegeni, filmHakkinda, txtTarih;
-        ImageView filmGorsel;
+        ImageView filmGorsel, favori;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             filmGorsel= itemView.findViewById(R.id.film_img);
-
-//            txtTarih= itemView.findViewById(R.id.txt_tarih);
+            favori= itemView.findViewById(R.id.favoriEkle);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +104,35 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     }
                 }
             });
+
+
         }
+    }
+
+
+    //favori ekleme için yaptıklarım
+    private void favoriEklendi(String title, final ImageView imageView) {
+        final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
+                .child("Favoriler").child(title);
+
+        begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
+                    imageView.setImageResource(R.drawable.ic_check_circle);
+                    imageView.setTag("eklendi");
+                } else {
+                    imageView.setImageResource(R.drawable.ic_add_circle);
+                    imageView.setTag("ekle");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
     public void addAll(List<Movie> videoModelList) {

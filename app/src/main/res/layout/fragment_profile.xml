@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_profilCerceve"
@@ -209,16 +208,35 @@
                     android:text="Profili Düzenle"
                     android:textColor="@color/white" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/btn_profiliDuzenle_profilCercevesi"
-                    android:orientation="horizontal">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyler_view_profilCercevesi"
+                    android:orientation="vertical"
+                    tools:ignore="ObsoleteLayoutParam">
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayoutProfile"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="50dp"
+                        android:scrollIndicators="end"
+                        app:tabIndicatorColor="#000"
+                        android:background="?android:attr/windowBackground"
+                        app:tabMode="fixed"
+                        app:tabTextColor="#000"
+                        app:tabPaddingStart="0dp">
+                    </com.google.android.material.tabs.TabLayout>
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPagerProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </androidx.viewpager.widget.ViewPager>
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/recyler_view_profilCercevesi"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"/>-->
                 </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 

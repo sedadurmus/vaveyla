@@ -13,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sedadurmus.yenivavi.Adapter.FotografAdapter;
+import com.sedadurmus.yenivavi.Adapter.SectionPagerAdapter;
 import com.sedadurmus.yenivavi.AyarlarActivity;
 import com.sedadurmus.yenivavi.MessageActivity;
 import com.sedadurmus.yenivavi.Model.Gonderi;
@@ -37,8 +38,6 @@ import com.sedadurmus.yenivavi.TakipcilerActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,13 +47,16 @@ import static com.sedadurmus.yenivavi.LoginActivity.kullanici;
 public class ProfileFragment extends Fragment {
 
     //    fotoğrafları profilde görme reyclerı
-    RecyclerView recyclerViewFotograflar;
-    FotografAdapter fotografAdapter;
-    List<Gonderi> gonderiList = new ArrayList<>();
+//    RecyclerView recyclerViewFotograflar;
+//    FotografAdapter fotografAdapter;
+//    List<Gonderi> gonderiList = new ArrayList<>();
+    View myFragment;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
-    TextView txt_gonderiler, txt_takipciler, txt_takipEdilenler, txt_Ad, txt_bio, txt_kullaniciAdi, txt_puan;
+    private TextView txt_gonderiler, txt_takipciler, txt_takipEdilenler, txt_Ad, txt_bio, txt_kullaniciAdi, txt_puan;
 
-    Button btn_profili_düzenle;
+    private Button btn_profili_düzenle;
 
     private List<String> kaydettiklerim;
 
@@ -73,45 +75,48 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view= inflater.inflate(R.layout.fragment_profile, container, false);
+        myFragment= inflater.inflate(R.layout.fragment_profile, container, false);
+        viewPager = myFragment.findViewById(R.id.viewPagerProfile);
+        tabLayout = myFragment.findViewById(R.id.tabLayoutProfile);
+
         mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profilId = prefs.getString("profileid", "none");
 
-        profil_resmi = view.findViewById(R.id.profil_resmi_profilCercevesi);
-        puan_resim = view.findViewById(R.id.txt_puan_resim);
-        ayarlar = view.findViewById(R.id.profil_ayarlar);
-        mesaj = view.findViewById(R.id.profil_message);
-        txt_gonderiler = view.findViewById(R.id.txt_gonderiler_profilCercevesi);
-        txt_takipciler = view.findViewById(R.id.txt_takipciler_profilCercevesi);
-        txt_takipEdilenler = view.findViewById(R.id.txt_takip_profilCercevesi);
+        profil_resmi = myFragment.findViewById(R.id.profil_resmi_profilCercevesi);
+        puan_resim = myFragment.findViewById(R.id.txt_puan_resim);
+        ayarlar = myFragment.findViewById(R.id.profil_ayarlar);
+        mesaj = myFragment.findViewById(R.id.profil_message);
+        txt_gonderiler = myFragment.findViewById(R.id.txt_gonderiler_profilCercevesi);
+        txt_takipciler = myFragment.findViewById(R.id.txt_takipciler_profilCercevesi);
+        txt_takipEdilenler = myFragment.findViewById(R.id.txt_takip_profilCercevesi);
 //        txt_bio = view.findViewById(R.id.txt_bio_profilCercevesi);
-        txt_Ad = view.findViewById(R.id.txt_ad_profilCercevesi);
-        txt_puan = view.findViewById(R.id.txt_puan_profilCercevesi);
-        txt_kullaniciAdi = view.findViewById(R.id.kullaniciAdi_toolbar);
-        btn_profili_düzenle = view.findViewById(R.id.btn_profiliDuzenle_profilCercevesi);
-        refreshLayout = view.findViewById(R.id.refresh);
+        txt_Ad = myFragment.findViewById(R.id.txt_ad_profilCercevesi);
+        txt_puan = myFragment.findViewById(R.id.txt_puan_profilCercevesi);
+        txt_kullaniciAdi = myFragment.findViewById(R.id.kullaniciAdi_toolbar);
+        btn_profili_düzenle = myFragment.findViewById(R.id.btn_profiliDuzenle_profilCercevesi);
+        refreshLayout = myFragment.findViewById(R.id.refresh);
 
         //metotlar
         kullaniciBilgisi();
         takipcileriAl();
         gonderiSayisiAl();
-        fotograflarim();
+//        fotograflarim();
 
         //profilde paylaştıklarının görünmesi için
-        recyclerViewFotograflar = view.findViewById(R.id.recyler_view_profilCercevesi);
-        recyclerViewFotograflar.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerViewFotograflar.setLayoutManager(linearLayoutManager);
-        gonderiList = new ArrayList<>();
-        gonderiList.clear();
-        fotografAdapter = new FotografAdapter(getContext(), gonderiList);
-        recyclerViewFotograflar.setAdapter(fotografAdapter);
-
+//        recyclerViewFotograflar = view.findViewById(R.id.recyler_view_profilCercevesi);
+//        recyclerViewFotograflar.setHasFixedSize(true);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        recyclerViewFotograflar.setLayoutManager(linearLayoutManager);
+//        gonderiList = new ArrayList<>();
+//        gonderiList.clear();
+//        fotografAdapter = new FotografAdapter(getContext(), gonderiList);
+//        recyclerViewFotograflar.setAdapter(fotografAdapter);
+//
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                gonderiList.clear();
+//                gonderiList.clear();
                 kullaniciBilgisiRefresh();
             }
         });
@@ -205,12 +210,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
-
-
-        return view;
+        return myFragment;
     }
 
     private void kullaniciBilgisi() {
@@ -232,6 +232,36 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setUpViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+    private void setUpViewPager(ViewPager viewPager) {
+        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new ProfilPaylasimFragment(), "Başlıca");
+        adapter.addFragment(new FavoriteMovieFragment(), "Film");
+        viewPager.setAdapter(adapter);
+    }
+
 
     private void takipKontrolu() {
         DatabaseReference takipYolu = FirebaseDatabase.getInstance().getReference().child("Takip").child(mevcutKullanici.getUid())
@@ -309,38 +339,38 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    //fotograflarımızı profilde göstermek için yapılanlar
-    private void fotograflarim() {
-        final DatabaseReference fotografYolu = FirebaseDatabase.getInstance().getReference("Gonderiler");
-
-        fotografYolu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                gonderiList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Gonderi gonderi = snapshot.getValue(Gonderi.class);
-                    if (gonderi != null && gonderi.getGonderen().equals(profilId)) {
-                        gonderi.setGonderiUid(snapshot.getKey());
-                        Object tarih = snapshot.child("gonderiTarihi").getValue();
-
-                        gonderi.setTarih(tarih != null ? tarih.toString() : "");
-                        Object onay = snapshot.child("onaydurumu").getValue();
-//                        Uri uri=Uri.parse(dataSnapshot.child("gonderiVideo").getValue(true).toString());
-                        gonderi.setOnayDurumu(onay != null && (boolean) onay);
-                        if ((gonderi.isGorevmi() && gonderi.isOnayDurumu())
-                                || (!gonderi.isGorevmi() && !gonderi.isOnayDurumu()))
-                            gonderiList.add(gonderi);
-                    }
-                }
-                Collections.reverse(gonderiList);
-                fotografAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+//    //fotograflarımızı profilde göstermek için yapılanlar
+//    private void fotograflarim() {
+//        final DatabaseReference fotografYolu = FirebaseDatabase.getInstance().getReference("Gonderiler");
+//
+//        fotografYolu.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                gonderiList.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Gonderi gonderi = snapshot.getValue(Gonderi.class);
+//                    if (gonderi != null && gonderi.getGonderen().equals(profilId)) {
+//                        gonderi.setGonderiUid(snapshot.getKey());
+//                        Object tarih = snapshot.child("gonderiTarihi").getValue();
+//
+//                        gonderi.setTarih(tarih != null ? tarih.toString() : "");
+//                        Object onay = snapshot.child("onaydurumu").getValue();
+////                        Uri uri=Uri.parse(dataSnapshot.child("gonderiVideo").getValue(true).toString());
+//                        gonderi.setOnayDurumu(onay != null && (boolean) onay);
+//                        if ((gonderi.isGorevmi() && gonderi.isOnayDurumu())
+//                                || (!gonderi.isGorevmi() && !gonderi.isOnayDurumu()))
+//                            gonderiList.add(gonderi);
+//                    }
+//                }
+//                Collections.reverse(gonderiList);
+//                fotografAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//    }
 
     String simdikiTarih;
     private void bildirimleriEkle() {
@@ -376,7 +406,7 @@ public class ProfileFragment extends Fragment {
                 txt_puan.setText(String.valueOf((int) kullanici.getProfilPuan()));
                 takipcileriAlRefresh();
                 gonderiSayisiAlRefresh();
-                fotograflarimRefresh();
+//                fotograflarimRefresh();
             }
 
             @Override
@@ -453,39 +483,40 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-    //fotograflarımızı profilde göstermek için yapılanlar
-    private void fotograflarimRefresh() {
-        final DatabaseReference fotografYolu = FirebaseDatabase.getInstance().getReference("Gonderiler");
+//    //fotograflarımızı profilde göstermek için yapılanlar
+//    private void fotograflarimRefresh() {
+//        final DatabaseReference fotografYolu = FirebaseDatabase.getInstance().getReference("Gonderiler");
+//
+//        fotografYolu.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                gonderiList.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Gonderi gonderi = snapshot.getValue(Gonderi.class);
+//                    if (gonderi != null && gonderi.getGonderen().equals(profilId)) {
+//                        gonderi.setGonderiUid(snapshot.getKey());
+//                        Object tarih = snapshot.child("gonderiTarihi").getValue();
+//
+//                        gonderi.setTarih(tarih != null ? tarih.toString() : "");
+//                        Object onay = snapshot.child("onaydurumu").getValue();
+//
+//                        gonderi.setOnayDurumu(onay != null && (boolean) onay);
+//                        if ((gonderi.isGorevmi() && gonderi.isOnayDurumu())
+//                                || (!gonderi.isGorevmi() && !gonderi.isOnayDurumu()))
+//                            gonderiList.add(gonderi);
+//                    }
+//                }
+//                Collections.reverse(gonderiList);
+//                fotografAdapter.notifyDataSetChanged();
+//                refreshLayout.setRefreshing(false);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//    }
 
-        fotografYolu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                gonderiList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Gonderi gonderi = snapshot.getValue(Gonderi.class);
-                    if (gonderi != null && gonderi.getGonderen().equals(profilId)) {
-                        gonderi.setGonderiUid(snapshot.getKey());
-                        Object tarih = snapshot.child("gonderiTarihi").getValue();
-
-                        gonderi.setTarih(tarih != null ? tarih.toString() : "");
-                        Object onay = snapshot.child("onaydurumu").getValue();
-
-                        gonderi.setOnayDurumu(onay != null && (boolean) onay);
-                        if ((gonderi.isGorevmi() && gonderi.isOnayDurumu())
-                                || (!gonderi.isGorevmi() && !gonderi.isOnayDurumu()))
-                            gonderiList.add(gonderi);
-                    }
-                }
-                Collections.reverse(gonderiList);
-                fotografAdapter.notifyDataSetChanged();
-                refreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
 
 
 

@@ -15,9 +15,8 @@
         android:roundIcon="@mipmap/ic_vaveyla_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".SingleMovie" />
-        <activity android:name=".RewardedActivity" />
+        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".DetailActivity" />
         <activity android:name=".ReklamActivity" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".IntroActivity" />
