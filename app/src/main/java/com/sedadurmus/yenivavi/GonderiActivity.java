@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -53,7 +54,7 @@ public class GonderiActivity extends AppCompatActivity {
     Uri resimUri, videoUri;
     String benimUrim = "";
     Intent videoIntent = new Intent();
-
+    String posterUrl;
     ImageView filmPoster, filmposter2;
     EditText hakkinda;
     ConstraintLayout constraintMovie;
@@ -73,7 +74,7 @@ public class GonderiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gonderi);
-
+        posterUrl = getIntent().getExtras().getString("poster");
         Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
@@ -87,6 +88,7 @@ public class GonderiActivity extends AppCompatActivity {
 
 
         filmPoster =findViewById(R.id.film_img);
+        new DownLoadImageTask(filmPoster).execute( posterUrl);
         filmposter2=findViewById(R.id.film_poster);
         hakkinda =findViewById(R.id.edit_movie_gonderi);
         constraintMovie =findViewById(R.id.constraint_movie);

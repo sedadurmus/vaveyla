@@ -76,8 +76,8 @@ public class ProfilPaylasimFragment extends Fragment {
         recyclerViewFotograflar.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewFotograflar.setLayoutManager(linearLayoutManager);
-        gonderiList = new ArrayList<>();
-        gonderiList.clear();
+        //gonderiList = new ArrayList<>();
+        //gonderiList.clear();
         fotoAdapter = new FotografAdapter(getContext(), gonderiList);
         recyclerViewFotograflar.setAdapter(fotoAdapter);
 

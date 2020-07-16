@@ -26,7 +26,11 @@ public class DetailActivity extends AppCompatActivity {
     private FirebaseUser mevcutFirebaseUser;
     Movie movie;
     Context mContext;
+    String poster;
     private ArrayList<Movie> mMovies;
+    public DetailActivity(Context context){
+        this.mContext=context;
+    }
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra("title")){
-            String poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
+            poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
             String movieName = getIntent().getExtras().getString("title");
             String hakkinda = getIntent().getExtras().getString("overview");
             String puan_ort = getIntent().getExtras().getString("vote_average");
@@ -96,7 +100,10 @@ public class DetailActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DetailActivity.this, GonderiActivity.class));
+                Intent intent = new Intent(mContext, GonderiActivity.class);
+                intent.putExtra("poster", poster);
+                startActivity(intent);
+               // startActivity(new Intent(DetailActivity.this, GonderiActivity.class));
             }
         });
     }
