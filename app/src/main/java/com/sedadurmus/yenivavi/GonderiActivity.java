@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -75,6 +76,7 @@ public class GonderiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gonderi);
         posterUrl = getIntent().getExtras().getString("poster");
+        Log.e("posterUrl", posterUrl);
         Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
@@ -88,7 +90,7 @@ public class GonderiActivity extends AppCompatActivity {
 
 
         filmPoster =findViewById(R.id.film_img);
-        new DownLoadImageTask(filmPoster).execute( posterUrl);
+        //new DownLoadImageTask(filmPoster).execute( "https://image.tmdb.org/t/p/w500" +  posterUrl);
         filmposter2=findViewById(R.id.film_poster);
         hakkinda =findViewById(R.id.edit_movie_gonderi);
         constraintMovie =findViewById(R.id.constraint_movie);
@@ -162,22 +164,14 @@ public class GonderiActivity extends AppCompatActivity {
 
 
         Intent intentThatStartedThisActivity = getIntent();
-        if (intentThatStartedThisActivity.hasExtra("title")){
+
             constraintMovie.setVisibility(View.VISIBLE);
             String poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
             String movieName = getIntent().getExtras().getString("title");
-            String hakkinda = getIntent().getExtras().getString("overview");
-            String puan_ort = getIntent().getExtras().getString("vote_average");
-            String puan_oy = getIntent().getExtras().getString("vote_count");
-            String tarih = getIntent().getExtras().getString("release_date");
 
-            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + poster).into(filmPoster);
-            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + poster).into(filmposter2);
+            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmPoster);
+            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
 
-        }else {
-            constraintMovie.setVisibility(View.GONE);
-            Toast.makeText(this, "Api bulunamadı", Toast.LENGTH_SHORT).show();
-        }
 
 
         txt_Gonder.setOnClickListener(new View.OnClickListener() {

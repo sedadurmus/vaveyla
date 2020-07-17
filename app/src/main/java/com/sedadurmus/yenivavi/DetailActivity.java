@@ -28,9 +28,7 @@ public class DetailActivity extends AppCompatActivity {
     Context mContext;
     String poster;
     private ArrayList<Movie> mMovies;
-    public DetailActivity(Context context){
-        this.mContext=context;
-    }
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,7 @@ public class DetailActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, GonderiActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GonderiActivity.class);
                 intent.putExtra("poster", poster);
                 startActivity(intent);
                // startActivity(new Intent(DetailActivity.this, GonderiActivity.class));
