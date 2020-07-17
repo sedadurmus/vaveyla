@@ -9,12 +9,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_gonderi"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
@@ -27,13 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/close_gonderi"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_alignParentStart="true"-->
-                <!--                    android:layout_marginLeft="20dp"-->
-                <!--                    android:src="@drawable/ic_close_black"/>-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/close_gonderi"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:src="@drawable/ic_close_black"/>-->
 
                 <TextView
                     android:id="@+id/txt_gonder"
@@ -43,9 +40,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
                     android:text="Paylaş"
+                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -53,17 +50,15 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <LinearLayout
-        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bar_gonderi"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp">
 
 
         <EditText
@@ -77,7 +72,7 @@
             android:hint="Gönderi Hakkında.."
             android:imeOptions="actionDone"
             android:lines="7"
-            android:padding="7dp" />
+            android:padding="7dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,55 +110,23 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_gonderiActivitye_git" />
 
-        <!--        <VideoView-->
-        <!--            android:id="@+id/videoView"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="300dp"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:layout_marginStart="16dp"-->
-        <!--            android:layout_marginLeft="16dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginEnd="16dp"-->
-        <!--            android:layout_marginRight="16dp"-->
-        <!--            android:padding="5dp"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/btn_video" />-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_movie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
-            android:padding="7dp"
-            android:visibility="visible"
-            tools:ignore="MissingConstraints,NotSibling">
-
-            <ImageView
-                android:id="@+id/film_img"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/film_poster"
-                android:layout_width="90dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="15dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="@+id/film_img"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="5dp"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_video" />
 
 
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

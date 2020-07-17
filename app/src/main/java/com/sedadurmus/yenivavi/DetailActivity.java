@@ -98,7 +98,7 @@ public class DetailActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GonderiActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
                 intent.putExtra("poster", poster);
                 startActivity(intent);
                // startActivity(new Intent(DetailActivity.this, GonderiActivity.class));

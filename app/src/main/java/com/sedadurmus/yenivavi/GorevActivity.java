@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.Continuation;
@@ -37,6 +38,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GorevActivity extends AppCompatActivity {
 
@@ -54,53 +56,24 @@ public class GorevActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gorev);
+        Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Görev Oluştur");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         btn_gonderiActivitye_git=findViewById(R.id.btn_gonderiActivitye_git);
-        image_Kapat=findViewById(R.id.close_gonderi);
+//        image_Kapat=findViewById(R.id.close_gonderi);
         image_Eklendi=findViewById(R.id.imageView_gonderi);
         txt_Gonder=findViewById(R.id.txt_gonder);
         gonderi_hakkinda=findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
-        image_Kapat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GorevActivity.this, R.style.AlertDialogTheme);
-                View view = LayoutInflater.from(GorevActivity.this).inflate(
-                        R.layout.alert_dialog,
-                        (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-                );
-//                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this);
-                builder.setCancelable(false);
-                builder.setView(view);
-                ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
-                ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGorevCikis));
-                ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
-                ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
-                ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-//                builder.setTitle("Uyarı");
-//                builder.setMessage("Gönderiyi kaydetmeden çıkmak istediğinize emin misiniz?");
-                final AlertDialog alertDialog1 = builder.create();
-                view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(GorevActivity.this, "Görev Paylaşılamadı!", Toast.LENGTH_SHORT).show();
-                        finish();
-                        Intent ıntent = new Intent(GorevActivity.this, MainActivity.class);
-                        startActivity(ıntent);
-                    }
-                });
-                view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog1.cancel();
-                    }
-                });
-                if (alertDialog1.getWindow() != null){
-                    alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                }
-                alertDialog1.show();
-
-            }
-        });
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +97,8 @@ public class GorevActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         resimYukle();
+                        Toast.makeText(GorevActivity.this, "Göreviniz 24 saat içinde incelenecektir.", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
@@ -251,39 +226,8 @@ public class GorevActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(GorevActivity.this, R.style.AlertDialogTheme);
-        View view = LayoutInflater.from(GorevActivity.this).inflate(
-                R.layout.alert_dialog,
-                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-        );
-        builder.setCancelable(false);
-        builder.setView(view);
-        ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
-        ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGorevCikis));
-        ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
-        ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
-        ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-        final AlertDialog alertDialog1 = builder.create();
-        view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(GorevActivity.this, "Paylaşım yapmadınız..", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(GorevActivity.this, MainActivity.class));
-            }
-        });
-        view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog1.cancel();
-            }
-        });
-        if (alertDialog1.getWindow() != null){
-            alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        alertDialog1.show();
+        super.onBackPressed();
     }
 }

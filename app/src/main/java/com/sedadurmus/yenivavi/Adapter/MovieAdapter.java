@@ -24,8 +24,6 @@ import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -13,18 +13,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.sedadurmus.yenivavi.Adapter.FotografAdapter;
-import com.sedadurmus.yenivavi.Model.Gonderi;
+import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
+import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteMovieFragment extends Fragment {
 
-    RecyclerView recyclerViewFotograflar;
-    FotografAdapter movieAdapter;
-    List<Gonderi> movieList = new ArrayList<>();
+    RecyclerView recyclerViewFilmler;
+    MovieAdapter movieAdapter;
+    private List<Movie> movieList;
     Context mContext;
 
     private SwipeRefreshLayout refreshLayout;
@@ -52,14 +51,14 @@ public class FavoriteMovieFragment extends Fragment {
         profilId = prefs.getString("profileid", "none");
 
 //        //profilde paylaştıklarının görünmesi için
-//        recyclerViewFotograflar = view.findViewById(R.id.recyler_view_profilCercevesi);
-//        recyclerViewFotograflar.setHasFixedSize(true);
+//        recyclerViewFilmler = view.findViewById(R.id.recyler_view_profilCercevesi);
+//        recyclerViewFilmler.setHasFixedSize(true);
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerViewFotograflar.setLayoutManager(linearLayoutManager);
+//        recyclerViewFilmler.setLayoutManager(linearLayoutManager);
 //        movieList = new ArrayList<>();
 //        movieList.clear();
 //        movieAdapter =new MovieAdapter(getContext(), movieList);
-//        recyclerViewFotograflar.setAdapter(movieAdapter);
+//        recyclerViewFilmler.setAdapter(movieAdapter);
 
         return view;
 

@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -25,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +37,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -55,17 +52,9 @@ public class GonderiActivity extends AppCompatActivity {
     Uri resimUri, videoUri;
     String benimUrim = "";
     Intent videoIntent = new Intent();
-    String posterUrl;
-    ImageView filmPoster, filmposter2;
-    EditText hakkinda;
-    ConstraintLayout constraintMovie;
-
     VideoView videoView;
-
     StorageTask yuklemeGorevi;
     StorageReference resimYukleYolu;
-
-
     ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
     TextView txt_Gonder, txt_tema;
     EditText gonderi_hakkinda;
@@ -75,8 +64,6 @@ public class GonderiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gonderi);
-        posterUrl = getIntent().getExtras().getString("poster");
-        Log.e("posterUrl", posterUrl);
         Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
@@ -88,90 +75,11 @@ public class GonderiActivity extends AppCompatActivity {
             }
         });
 
-
-        filmPoster =findViewById(R.id.film_img);
-        //new DownLoadImageTask(filmPoster).execute( "https://image.tmdb.org/t/p/w500" +  posterUrl);
-        filmposter2=findViewById(R.id.film_poster);
-        hakkinda =findViewById(R.id.edit_movie_gonderi);
-        constraintMovie =findViewById(R.id.constraint_movie);
-
         btn_gonderiActivitye_git = findViewById(R.id.btn_gonderiActivitye_git);
-//        image_Kapat = findViewById(R.id.close_gonderi);
         image_Eklendi = findViewById(R.id.imageView_gonderi);
-
         txt_Gonder = findViewById(R.id.txt_gonder);
         gonderi_hakkinda = findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
-
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
-//        image_Kapat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this, R.style.AlertDialogTheme);
-//                View view = LayoutInflater.from(GonderiActivity.this).inflate(
-//                        R.layout.alert_dialog,
-//                        (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-//                );
-////                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this);
-//                builder.setCancelable(false);
-//                builder.setView(view);
-//                ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
-//                ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGonderiCikis));
-//                ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
-//                ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
-//                ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-////                builder.setTitle("Uyarı");
-////                builder.setMessage("Gönderiyi kaydetmeden çıkmak istediğinize emin misiniz?");
-//                final AlertDialog alertDialog1 = builder.create();
-//                view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(GonderiActivity.this, "Gönderi Paylaşılamadı!", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                        Intent ıntent = new Intent(GonderiActivity.this, MainActivity.class);
-//                        startActivity(ıntent);
-//                    }
-//                });
-//                view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        alertDialog1.cancel();
-//                    }
-//                });
-////                builder.setPositiveButton("EVET", new DialogInterface.OnClickListener() {
-////                    @Override
-////                    public void onClick(DialogInterface dialog, int which) {
-////                        // Evet'e basılınca yapılacak işlemleri yazınız
-////                        Toast.makeText(GonderiActivity.this, "Gönderiyi kaydetmediniz.", Toast.LENGTH_SHORT).show();
-////                        finish();
-////                        Intent ıntent = new Intent(GonderiActivity.this, MainActivity.class);
-////                        startActivity(ıntent);
-////                    }
-////                });
-////                builder.setNegativeButton("HAYIR", new DialogInterface.OnClickListener() {
-////                    @Override
-////                    public void onClick(DialogInterface dialog, int which) {
-////                        // Hayır'a baslınca yapılacak işmeleri yazınız
-////                        dialog.cancel();
-////                    }
-////                });
-//
-//                if (alertDialog1.getWindow() != null){
-//                    alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-//                }
-//                alertDialog1.show();
-//            }
-//        });
-
-
-        Intent intentThatStartedThisActivity = getIntent();
-
-            constraintMovie.setVisibility(View.VISIBLE);
-            String poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
-            String movieName = getIntent().getExtras().getString("title");
-
-            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmPoster);
-            Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
-
 
 
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
@@ -411,38 +319,9 @@ public class GonderiActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this, R.style.AlertDialogTheme);
-        View view = LayoutInflater.from(GonderiActivity.this).inflate(
-                R.layout.alert_dialog,
-                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-        );
-        builder.setCancelable(false);
-        builder.setView(view);
-        ((TextView)view.findViewById(R.id.textTitle)).setText(getResources().getString(R.string.alertTitle));
-        ((TextView)view.findViewById(R.id.textMessage)).setText(getResources().getString(R.string.alertMessageGonderiCikis));
-        ((Button)view.findViewById(R.id.buttonNo)).setText(getResources().getString(R.string.alertButtonNo));
-        ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
-        ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-        final AlertDialog alertDialog1 = builder.create();
-        view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(GonderiActivity.this, "Paylaşım yapmadınız..", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(GonderiActivity.this, MainActivity.class));
-            }
-        });
-        view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog1.cancel();
-            }
-        });
-        if (alertDialog1.getWindow() != null){
-            alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        }
-        alertDialog1.show();
-
+        super.onBackPressed();
     }
 }

@@ -23,13 +23,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/close_gonderi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_close_black"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/close_gonderi"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:src="@drawable/ic_close_black"/>-->
 
                 <TextView
                     android:id="@+id/txt_gonder"

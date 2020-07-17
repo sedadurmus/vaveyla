@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sedadurmus.yenivavi.PostActivity">
+    tools:context=".GonderiActivity">
+
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/bar_ayarlarCerceve"
+        android:id="@+id/bar_gonderi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_gonderi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            android:id="@+id/toolbar_movie">
+            android:background="?android:attr/windowBackground">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/close_gonderi"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_alignParentStart="true"-->
+                <!--                    android:layout_marginLeft="20dp"-->
+                <!--                    android:src="@drawable/ic_close_black"/>-->
 
                 <TextView
                     android:id="@+id/txt_gonder"
@@ -30,56 +43,127 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
                     android:text="Paylaş"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bar_ayarlarCerceve"
-        android:layout_marginTop="10dp"
-        tools:ignore="NotSibling"
-        android:padding="7dp">
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bar_gonderi"
+        tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/film_img"
+
+        <EditText
+            android:id="@+id/edit_gonderi_hakkinda_txtGonderiActivity"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/seffaf_siyah_yuzde_5"
+            android:hint="Gönderi Hakkında.."
+            android:imeOptions="actionDone"
+            android:lines="7"
+            android:padding="7dp" />
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/btn_gonderiActivitye_git"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:src="@drawable/ic_camera" />-->
+
+<!--            &lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:id="@+id/btn_video"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_width="30dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_height="30dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginLeft="16dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:src="@drawable/ic_videocam" />&ndash;&gt;-->
+<!--        </LinearLayout>-->
 
         <ImageView
-            android:id="@+id/film_poster"
-            android:layout_width="90dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:layout_marginStart="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/film_img"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/imageView_gonderi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_gonderiActivitye_git" />
+
+        <!--        <VideoView-->
+        <!--            android:id="@+id/videoView"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="300dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginLeft="16dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_marginRight="16dp"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/btn_video" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="7dp"
+            android:visibility="visible"
+            tools:ignore="MissingConstraints,NotSibling">
+
+            <ImageView
+                android:id="@+id/film_img"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/film_poster"
+                android:layout_width="90dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="15dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/film_img"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/edit_movie_gonderi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bar_ayarlarCerceve"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="190dp"
-        android:layout_marginRight="16dp"
-        android:hint="Gönderi Hakkında.."
-        android:imeOptions="actionDone"
-        android:padding="7dp" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
