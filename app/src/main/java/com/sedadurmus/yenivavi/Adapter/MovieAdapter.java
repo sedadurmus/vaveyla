@@ -58,12 +58,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 if (holder.favori.getTag().equals("ekle")) {
-                    FirebaseDatabase.getInstance().getReference().child("Favoriler").child(movie.getTitle())
-                            .child(mevcutFirebaseUser.getUid()).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
+                            .child(mevcutFirebaseUser.getUid()).child(movie.getTitle()).setValue(true);
 
                 } else {
-                    FirebaseDatabase.getInstance().getReference().child("Favoriler").child(movie.getTitle())
-                            .child(mevcutFirebaseUser.getUid()).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
+                            .child(mevcutFirebaseUser.getUid()).child(movie.getTitle()).removeValue();
                 }
             }
         });

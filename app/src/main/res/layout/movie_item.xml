@@ -55,14 +55,5 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/film_img"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="7dp"-->
-<!--                android:maxHeight="100dp"-->
-<!--                android:padding="5dp"-->
-<!--                android:src="@mipmap/ic_launcher" />-->
 
 </RelativeLayout>

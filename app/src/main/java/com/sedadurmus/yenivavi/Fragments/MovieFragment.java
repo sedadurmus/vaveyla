@@ -44,13 +44,10 @@ public class MovieFragment extends Fragment {
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(gridLayoutManager);
         bar=view.findViewById(R.id.progress_bar);
-
         loadMovies();
 
         movieAdapter =new MovieAdapter(getContext());
         recyclerView.setAdapter(movieAdapter);
-
-
 
         return view;
     }

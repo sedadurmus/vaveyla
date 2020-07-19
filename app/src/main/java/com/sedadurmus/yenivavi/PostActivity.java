@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,13 +56,13 @@ public class PostActivity extends AppCompatActivity {
     ImageView filmPoster, filmposter2;
     EditText hakkinda;
     ConstraintLayout constraintMovie;
-    VideoView videoView;
+
     StorageTask yuklemeGorevi;
     StorageReference resimYukleYolu;
 
 
     ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
-    TextView txt_Gonder, txt_tema;
+    TextView txt_Gonder, txt_tema, filmAdi;
     EditText gonderi_hakkinda;
     private Bundle savedInstanceState;
     @Override
@@ -84,6 +83,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+//        filmAdi =findViewById(R.id.movie_title_paylasim);
         filmPoster =findViewById(R.id.film_img);
         filmposter2=findViewById(R.id.film_poster);
         constraintMovie =findViewById(R.id.constraint_movie);
@@ -94,8 +94,8 @@ public class PostActivity extends AppCompatActivity {
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
 
         constraintMovie.setVisibility(View.VISIBLE);
-        String poster = Objects.requireNonNull(getIntent().getExtras()).getString("poster_path");
         String movieName = getIntent().getExtras().getString("title");
+//        filmAdi.setText(movieName);
         Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmPoster);
         Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
 
