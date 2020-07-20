@@ -25,6 +25,7 @@ import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
@@ -52,12 +53,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
 
-        favoriEklendi(movie.getTitle(), holder.favori);
+
         //beğeni resmi tıklama olayı
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.favori.getTag().equals("ekle")) {
+
+                    favoriEklendi(movie.getTitle(), movie.getPosterPath() , holder.favori);
+
                     FirebaseDatabase.getInstance().getReference().child("Favoriler")
                             .child(mevcutFirebaseUser.getUid()).child(movie.getTitle()).setValue(true);
 
@@ -111,19 +115,27 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
 
     //favori ekleme için yaptıklarım
-    private void favoriEklendi(String title, final ImageView imageView) {
+    private void favoriEklendi(final String title, final String posterPath, final ImageView imageView) {
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
-                .child("Favoriler").child(title);
+        final DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
+                .child("Favoriler");
 
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+
+                    hashMap.put("name", title);
+                    hashMap.put("img_url", posterPath);
+
+
+                    begeniVeriTabaniYolu.child(mevcutKullanici.getUid()).setValue(hashMap);
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
+
                 } else {
                     imageView.setImageResource(R.drawable.ic_add_circle);
                     imageView.setTag("ekle");
