@@ -56,12 +56,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
 
+
         favoriEklendi(movie.getId(), holder.favori);
+
+
+        //beğeni resmi tıklama olayı
 
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.favori.getTag().equals("ekle")) {
+
+
+//                    favoriEklendi(movie.getTitle(), movie.getPosterPath() , holder.favori);
 
 //                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
 //                            .child(mevcutFirebaseUser.getUid())
@@ -133,11 +140,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
 
     //favori ekleme için yaptıklarım
+
     private void favoriEklendi(final String id, final ImageView imageView) {
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
                 .child("Favoriler").child(id);
+
 
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
@@ -145,8 +154,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
                 assert mevcutKullanici != null;
                 if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+
+//                    hashMap.put("name", title);
+//                    hashMap.put("img_url", posterPath);
+//                    begeniVeriTabaniYolu.child(mevcutKullanici.getUid()).setValue(hashMap);
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
+
                 } else {
                     imageView.setImageResource(R.drawable.ic_add_circle);
                     imageView.setTag("ekle");

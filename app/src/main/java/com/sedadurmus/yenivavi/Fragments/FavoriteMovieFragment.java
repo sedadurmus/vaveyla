@@ -3,6 +3,7 @@ package com.sedadurmus.yenivavi.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class FavoriteMovieFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.e("MOVIE" , "" + snapshot.getValue(Movie.class));
                     Movie movie = snapshot.getValue(Movie.class);
 
                     movieList.add(movie);
