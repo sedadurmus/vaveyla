@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +28,7 @@ import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
@@ -47,23 +51,41 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Movie movie =mMovies.get(position);
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
 
-        favoriEklendi(movie.getTitle(), holder.favori);
-        //beğeni resmi tıklama olayı
+        favoriEklendi(movie.getId(), holder.favori);
+
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.favori.getTag().equals("ekle")) {
-                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
-                            .child(mevcutFirebaseUser.getUid()).child(movie.getTitle()).setValue(true);
 
-                } else {
-                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
-                            .child(mevcutFirebaseUser.getUid()).child(movie.getTitle()).removeValue();
+//                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
+//                            .child(mevcutFirebaseUser.getUid())
+//                            .setValue(true);
+
+                    favoriEkle(movie.getTitle(), movie.getPosterPath());
+
+
+                } else if (holder.favori.getTag().equals("eklendi")){
+//                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
+//                            .child(mevcutFirebaseUser.getUid())
+//                            .removeValue();
+
+                    FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
+                            .child(movie.getId()).removeValue()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful())
+                                    {
+                                        Toast.makeText(mContext, "favoriden çıkarıldı.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 }
             }
         });
@@ -111,16 +133,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
 
     //favori ekleme için yaptıklarım
-    private void favoriEklendi(String title, final ImageView imageView) {
+    private void favoriEklendi(final String id, final ImageView imageView) {
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
-                .child("Favoriler").child(title);
+                .child("Favoriler").child(id);
 
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                assert mevcutKullanici != null;
                 if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
@@ -133,6 +156,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void favoriEkle (final String title, final String posterPath){
+        final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
+        assert mevcutKullanici != null;
+        DatabaseReference favoriFire = FirebaseDatabase.getInstance().getReference("Favoriler")
+                .child(mevcutKullanici.getUid());
+
+        String id = favoriFire.push().getKey();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+        hashMap.put("name", title);
+        hashMap.put("img_url", posterPath);
+        favoriFire.child(id).setValue(hashMap);
+
     }
 
     public void addAll(List<Movie> videoModelList) {

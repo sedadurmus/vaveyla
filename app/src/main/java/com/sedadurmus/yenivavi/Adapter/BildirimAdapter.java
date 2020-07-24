@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ public class BildirimAdapter extends RecyclerView.Adapter<BildirimAdapter.ViewHo
     boolean isOkey;
     String simdikiTarih;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
@@ -70,7 +72,7 @@ public class BildirimAdapter extends RecyclerView.Adapter<BildirimAdapter.ViewHo
 
         viewHolder.txt_zaman.setText(bildirim.getTarih() != null ? bildirim.getTarih().toString() : " ");
         Date simdi = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
         Date tarih = null;
         try {

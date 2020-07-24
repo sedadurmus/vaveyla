@@ -81,9 +81,9 @@ public class FavoriteMovieFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Movie movie = snapshot.getValue(Movie.class);
-                    if (dataSnapshot.child(mevcutKullanici.getUid()).exists()){
+
                     movieList.add(movie);
-                    }
+
                 }
                 Collections.reverse(movieList);
                 movieAdapter.notifyDataSetChanged();

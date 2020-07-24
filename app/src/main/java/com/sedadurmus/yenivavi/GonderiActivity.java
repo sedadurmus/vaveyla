@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -156,7 +157,7 @@ public class GonderiActivity extends AppCompatActivity {
         progressDialog.show();
 
         Date simdi = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
 
         if (resimUri != null || videoUri != null) {

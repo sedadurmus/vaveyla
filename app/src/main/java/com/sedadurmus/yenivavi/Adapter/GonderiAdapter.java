@@ -73,7 +73,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
 
     String simdikiTarih;
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
@@ -328,6 +328,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         DatabaseReference yorumlariAlmaYolu = FirebaseDatabase.getInstance().getReference("Yorumlar").child(gonderiId);
 
         yorumlariAlmaYolu.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 yorumlar.setText(dataSnapshot.getChildrenCount() + " ");
@@ -351,6 +352,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                assert mevcutKullanici != null;
                 if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
                     imageView.setImageResource(R.drawable.hand_like_green);
                     imageView.setTag("beğenildi");
@@ -368,6 +370,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         DatabaseReference begeniSayisiVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
                 .child("Begeniler").child(gonderiId);
         begeniSayisiVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 begeniler.setText(dataSnapshot.getChildrenCount() + " ");

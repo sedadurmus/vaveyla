@@ -60,7 +60,9 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
         viewHolder.kullaniciadi.setText(kullanici.getKullaniciadi());
         viewHolder.ad.setText(kullanici.getAd());
         Glide.with(mContext).load(kullanici.getResimurl()).into(viewHolder.profil_resmi);
+
         takipEdiliyor(kullanici.getId(),viewHolder.btn_takipEt);
+
         if (kullanici.getId().equals(firebaseKullanici.getUid()))
         {
             viewHolder.btn_takipEt.setVisibility(View.GONE);
@@ -79,6 +81,7 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
             @Override
             public void onClick(View v) {
                 if (viewHolder.btn_takipEt.getText().toString().equals("Takip Et")) {
+
                     FirebaseDatabase.getInstance().getReference().child("Takip").child(firebaseKullanici.getUid())
                             .child("takipEdilenler").child(kullanici.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Takip").child(kullanici.getId())
@@ -98,7 +101,7 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
     private void bildirimleriEkle (String kullaniciId)
     {
         Date simdi = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
         DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(kullaniciId);
         HashMap<String, Object> hashMap =new HashMap<>();
@@ -134,7 +137,7 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
                 .child(firebaseKullanici.getUid()).child("takipEdilenler");
 
         takipYolu.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint({"ResourceAsColor", "SetTextI18n"})
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(kullaniciId).exists())
