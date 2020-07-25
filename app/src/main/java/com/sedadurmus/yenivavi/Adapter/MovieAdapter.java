@@ -60,28 +60,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         favoriEklendi(movie.getId(), holder.favori);
 
 
-        //beğeni resmi tıklama olayı
 
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.favori.getTag().equals("ekle")) {
 
-
-//                    favoriEklendi(movie.getTitle(), movie.getPosterPath() , holder.favori);
-
-//                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
-//                            .child(mevcutFirebaseUser.getUid())
-//                            .setValue(true);
-
                     favoriEkle(movie.getTitle(), movie.getPosterPath());
 
-
                 } else if (holder.favori.getTag().equals("eklendi")){
-//                    FirebaseDatabase.getInstance().getReference().child("Favoriler")
-//                            .child(mevcutFirebaseUser.getUid())
-//                            .removeValue();
-
                     FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
                             .child(movie.getId()).removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -146,19 +133,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
                 .child("Favoriler").child(id);
-
-
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 assert mevcutKullanici != null;
                 if (dataSnapshot.child(mevcutKullanici.getUid()).exists()) {
-                    HashMap<String, Object> hashMap = new HashMap<>();
-
-//                    hashMap.put("name", title);
-//                    hashMap.put("img_url", posterPath);
-//                    begeniVeriTabaniYolu.child(mevcutKullanici.getUid()).setValue(hashMap);
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
 

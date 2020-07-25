@@ -204,6 +204,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
                 }
             }
         });
+
 //        burdan sonraki viewHolder gönderiye yorum yapabilmek için
         viewHolder.yorumResmi.setOnClickListener(new View.OnClickListener() {
             @Override
