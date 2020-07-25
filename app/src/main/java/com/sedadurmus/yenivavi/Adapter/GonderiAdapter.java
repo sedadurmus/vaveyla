@@ -201,6 +201,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Begeniler").child(gonderi.getGonderiId())
                             .child(mevcutFirebaseUser.getUid()).removeValue();
+                    //bildirim kaldır ekle
                 }
             }
         });
