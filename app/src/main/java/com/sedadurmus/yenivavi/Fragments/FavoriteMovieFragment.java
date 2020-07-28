@@ -26,7 +26,6 @@ import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
 import com.sedadurmus.yenivavi.Api.ApiClient;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.Movie;
-import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.ArrayList;
@@ -68,6 +67,7 @@ public class FavoriteMovieFragment extends Fragment {
         SharedPreferences prefs = getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE);
         profilId = prefs.getString("profileid", "none");
 
+        refreshLayout = view.findViewById(R.id.refresh);
         recyclerViewFilmler =view.findViewById(R.id.recyler_view_filmCerceve);
         recyclerViewFilmler.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
@@ -77,9 +77,19 @@ public class FavoriteMovieFragment extends Fragment {
         recyclerViewFilmler.setAdapter(movieAdapter);
 
         loadFavorite();
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                movies.clear();
+                loadFavoriteRefresh();
+            }
+        });
         return view;
 
     }
+
+
 
     private void loadFavorite() {
 
@@ -119,10 +129,57 @@ public class FavoriteMovieFragment extends Fragment {
                                 }
                             }));
                         }
-
-
                 }
                 Collections.reverse(movies);
+                movieAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void loadFavoriteRefresh() {
+        final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
+        assert mevcutKullanici != null;
+        final DatabaseReference favoriYolu = FirebaseDatabase.getInstance()
+                .getReference("Favoriler")
+                .child(mevcutKullanici.getUid());
+        refreshLayout.setRefreshing(false);
+        favoriYolu.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                movies.clear();
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    final Movie movie = snapshot.getValue(Movie.class);
+                    Log.e("Movie", snapshot.getKey());
+                    assert movie != null;
+
+
+                    ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
+                    if (var10000 != null) {
+                        ApiInterface apiService = var10000;
+                        Call call = apiService.getMovie(
+                                "https://api.themoviedb.org/3/movie/" + snapshot.getKey() + "?api_key=b7ee738bdfe5a91a0cec31c619d58968&language=tr");
+                        call.enqueue((Callback) (new Callback() {
+                            public void onResponse(@NotNull Call call, @NotNull Response response) {
+
+                                Movie movie1 = (Movie) response.body();
+                                Log.e("Movie: ", movie1.getTitle());
+                                loadDataAction(movie1);
+                                movies.add(movie1);
+                            }
+
+                            public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+                                Log.e("MOVIES", "request fail");
+                            }
+                        }));
+                    }
+                }
+                Collections.reverse(movies);
+                refreshLayout.setRefreshing(false);
                 movieAdapter.notifyDataSetChanged();
             }
             @Override
@@ -140,7 +197,6 @@ public class FavoriteMovieFragment extends Fragment {
             Log.e("EKLEME", items.getTitle());
             Collections.reverse(models);
             movieAdapter.addAll(models);
-
             movieAdapter.notifyDataSetChanged();
 
         }

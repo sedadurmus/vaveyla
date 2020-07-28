@@ -136,7 +136,6 @@ public class SearchFragment extends Fragment {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new MovieFragment(), "Film");
         adapter.addFragment(new DukkanFragment(), "Kitap");
-//        adapter.addFragment(new ResultFragment(), "Bağış");
         viewPager.setAdapter(adapter);
     }
 
