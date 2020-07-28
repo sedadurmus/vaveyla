@@ -85,7 +85,9 @@ public class FavoriteMovieFragment extends Fragment {
 
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
         assert mevcutKullanici != null;
-        final DatabaseReference favoriYolu = FirebaseDatabase.getInstance().getReference("Favoriler");
+        final DatabaseReference favoriYolu = FirebaseDatabase.getInstance()
+                                                .getReference("Favoriler")
+                                                .child(mevcutKullanici.getUid());
 
         favoriYolu.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,33 +96,30 @@ public class FavoriteMovieFragment extends Fragment {
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     final Movie movie = snapshot.getValue(Movie.class);
+                    Log.e("Movie", snapshot.getKey());
                     assert movie != null;
 
-                    if (snapshot.child(mevcutKullanici.getUid()).child(movie.getId()).exists()) {
+
                         ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
                         if (var10000 != null) {
                             ApiInterface apiService = var10000;
-                            Call call = apiService.getMovies("https://api.themoviedb.org/3/movie/popular?api_key=b7ee738bdfe5a91a0cec31c619d58968&language=tr");
+                            Call call = apiService.getMovie(
+                                    "https://api.themoviedb.org/3/movie/" + snapshot.getKey() + "?api_key=b7ee738bdfe5a91a0cec31c619d58968&language=tr");
                             call.enqueue((Callback) (new Callback() {
                                 public void onResponse(@NotNull Call call, @NotNull Response response) {
 
-                                    TheMovieDB theMovieDB = (TheMovieDB) response.body();
-                                    movies = theMovieDB.getResults();
-                                    Integer len = movies.toArray().length;
-                                    loadDataAction(theMovieDB.getResults());
-                                    Log.e("TheMovieDB", len.toString());
-                                    movies.add(movie);
-
-
+                                    Movie movie1 = (Movie) response.body();
+                                    Log.e("Movie: ", movie1.getTitle());
+                                    loadDataAction(movie1);
+                                    movies.add(movie1);
                                 }
 
                                 public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-
                                     Log.e("MOVIES", "request fail");
                                 }
                             }));
                         }
-                    }
+
 
                 }
                 Collections.reverse(movies);
@@ -133,17 +132,16 @@ public class FavoriteMovieFragment extends Fragment {
         });
     }
 
-    private void loadDataAction( List<Movie> items) {
+    private void loadDataAction( Movie items) {
 
         if (items != null) {
-            List<Movie> models = items;
-            Log.e("EKLEME", models.toArray().toString());
-            Collections.reverse(items);
-            movieAdapter.addAll(items);
+            List<Movie> models = new ArrayList<>();
+            models.add(items);
+            Log.e("EKLEME", items.getTitle());
+            Collections.reverse(models);
+            movieAdapter.addAll(models);
 
             movieAdapter.notifyDataSetChanged();
-
-
 
         }
     }

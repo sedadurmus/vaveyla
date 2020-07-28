@@ -66,6 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
                             .child(movie.getId()).removeValue();
 
+
                 }
             }
         });
@@ -146,8 +147,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         String id = movie.getId();
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("name", movie.getTitle());
-        hashMap.put("img_url", movie.getPosterPath());
+        hashMap.put("title", movie.getTitle());
+        hashMap.put("poster_path", movie.getPosterPath());
         favoriFire.child(id).setValue(hashMap);
 
     }
@@ -156,6 +157,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public void addAll(List<Movie> videoModelList) {
         Log.e("NEWS","ADDALL");
+
         for (Movie videoModel : videoModelList) {
 
                 add(videoModel);
