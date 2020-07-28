@@ -21,18 +21,27 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
+import com.sedadurmus.yenivavi.Api.ApiClient;
+import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.Movie;
+import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FavoriteMovieFragment extends Fragment {
 
     RecyclerView recyclerViewFilmler;
     MovieAdapter movieAdapter;
-    private List<Movie> movieList;
+    private List<Movie> movies;
     Context mContext;
 
     private SwipeRefreshLayout refreshLayout;
@@ -63,6 +72,7 @@ public class FavoriteMovieFragment extends Fragment {
         recyclerViewFilmler.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
         recyclerViewFilmler.setLayoutManager(gridLayoutManager);
+        movies =new ArrayList<>();
         movieAdapter =new MovieAdapter(getContext());
         recyclerViewFilmler.setAdapter(movieAdapter);
 
@@ -74,20 +84,46 @@ public class FavoriteMovieFragment extends Fragment {
     private void loadFavorite() {
 
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
-        final DatabaseReference favoriYolu = FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutKullanici.getUid());
+        assert mevcutKullanici != null;
+        final DatabaseReference favoriYolu = FirebaseDatabase.getInstance().getReference("Favoriler");
 
         favoriYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                movies.clear();
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.e("MOVIE" , "" + snapshot.getValue(Movie.class));
-                    Movie movie = snapshot.getValue(Movie.class);
+                    final Movie movie = snapshot.getValue(Movie.class);
+                    assert movie != null;
 
-                    movieList.add(movie);
+                    if (snapshot.child(mevcutKullanici.getUid()).child(movie.getId()).exists()) {
+                        ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
+                        if (var10000 != null) {
+                            ApiInterface apiService = var10000;
+                            Call call = apiService.getMovies("https://api.themoviedb.org/3/movie/popular?api_key=b7ee738bdfe5a91a0cec31c619d58968&language=tr");
+                            call.enqueue((Callback) (new Callback() {
+                                public void onResponse(@NotNull Call call, @NotNull Response response) {
+
+                                    TheMovieDB theMovieDB = (TheMovieDB) response.body();
+                                    movies = theMovieDB.getResults();
+                                    Integer len = movies.toArray().length;
+                                    loadDataAction(theMovieDB.getResults());
+                                    Log.e("TheMovieDB", len.toString());
+                                    movies.add(movie);
+
+
+                                }
+
+                                public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+
+                                    Log.e("MOVIES", "request fail");
+                                }
+                            }));
+                        }
+                    }
 
                 }
-                Collections.reverse(movieList);
+                Collections.reverse(movies);
                 movieAdapter.notifyDataSetChanged();
             }
             @Override
@@ -96,4 +132,20 @@ public class FavoriteMovieFragment extends Fragment {
             }
         });
     }
+
+    private void loadDataAction( List<Movie> items) {
+
+        if (items != null) {
+            List<Movie> models = items;
+            Log.e("EKLEME", models.toArray().toString());
+            Collections.reverse(items);
+            movieAdapter.addAll(items);
+
+            movieAdapter.notifyDataSetChanged();
+
+
+
+        }
+    }
+
 }

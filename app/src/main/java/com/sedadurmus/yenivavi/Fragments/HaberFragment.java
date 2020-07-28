@@ -66,7 +66,7 @@ public class HaberFragment extends Fragment {
         return view;
     }
 
-    // bunları bildirim olan sayfaya ekleeeeeeeeeeeeeeeeeeeeee
+    // bunları bildirim olan sayfaya ekleeeeee
     private void bildirimleriOku() {
         FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference bildirimYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(mevcutKullanici.getUid());

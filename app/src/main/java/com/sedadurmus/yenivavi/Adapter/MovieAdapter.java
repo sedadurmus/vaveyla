@@ -8,13 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,8 +52,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         final Movie movie =mMovies.get(position);
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         new DownLoadImageTask(holder.filmGorsel).execute( "https://image.tmdb.org/t/p/w500/" +  mMovies.get(position).getPosterPath());
-//        holder.favori.setTag("ekle");
+
         favoriEklendi(movie, holder.favori);
+
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,16 +64,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     favoriEkle(movie);
                 } else if (holder.favori.getTag().equals("eklendi")){
                     FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
-                            .child(movie.getId()).removeValue()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful())
-                                    {
-                                        Toast.makeText(mContext, "favoriden çıkarıldı.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                            .child(movie.getId()).removeValue();
+
                 }
             }
         });
@@ -112,7 +102,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                         intent.putExtra("video",(mMovies.get(pos).getVideo()));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
-//                        Toast.makeText(view.getContext(), clickedDataItem.getTitle() + "  Tıkladınız" , Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -134,18 +123,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 assert mevcutKullanici != null;
-                if (dataSnapshot.child(mevcutKullanici.getUid()).child(movie.getId()).exists()) { //firebaste bu film favorilerde var mı
+                if (dataSnapshot.child(mevcutKullanici.getUid()).child(movie.getId()).exists()) {
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
-                    Log.e("favori", "eklendiye girdi");
 
                 } else {
                     imageView.setImageResource(R.drawable.ic_add_circle);
                     imageView.setTag("ekle");
-
-//                    favoriEkle(movie);
-                    Log.e("favori", "ekleye girdi");
-
                 }
             }
             @Override
@@ -167,6 +151,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         favoriFire.child(id).setValue(hashMap);
 
     }
+
+
 
     public void addAll(List<Movie> videoModelList) {
         Log.e("NEWS","ADDALL");

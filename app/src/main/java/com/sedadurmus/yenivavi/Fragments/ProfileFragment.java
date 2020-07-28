@@ -65,7 +65,6 @@ public class ProfileFragment extends Fragment {
     ImageView profil_resmi, ayarlar, mesaj, puan_resim;
 
     FirebaseUser mevcutKullanici;
-
     String profilId;
     String gonderiId;
     String gonderenId;

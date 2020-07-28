@@ -40,7 +40,6 @@ public class MovieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         recyclerView =view.findViewById(R.id.movie_list);
         recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(gridLayoutManager);
         bar=view.findViewById(R.id.progress_bar);

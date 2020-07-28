@@ -1,13 +1,12 @@
 package com.sedadurmus.yenivavi.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,26 +14,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
 import com.sedadurmus.yenivavi.Adapter.SectionPagerAdapter;
-import com.sedadurmus.yenivavi.Api.ApiClient;
-import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.Kullanici;
-import com.sedadurmus.yenivavi.Model.Movie;
-import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
+import com.sedadurmus.yenivavi.SearchActivity;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SearchFragment extends Fragment {
 
@@ -44,7 +30,8 @@ public class SearchFragment extends Fragment {
 
 
     private SwipeRefreshLayout refreshLayout;
-    EditText arama_bar;
+//    EditText arama_bar;
+    ImageView arama;
     View myFragment;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -95,6 +82,16 @@ public class SearchFragment extends Fragment {
 
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
+
+        arama=myFragment.findViewById(R.id.aramaya_git);
+        arama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), SearchActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
+
 
 //        recyclerView =myFragment.findViewById(R.id.recyler_view_Arama);
 //        recyclerView.setHasFixedSize(true);
@@ -193,54 +190,32 @@ public class SearchFragment extends Fragment {
 //
 //    }
 
-    private void kullanicileriOkuRefresh ()
-    {
-        DatabaseReference kullanicilerYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar");
-
-        refreshLayout.setRefreshing(false);
-
-        kullanicilerYolu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (arama_bar.getText().toString().equals(""))
-                {
-                    mKullaniciler.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                    {
-                        Kullanici kullanici =snapshot.getValue(Kullanici.class);
-                        mKullaniciler.add(kullanici);
-                    }
-                    kullaniciAdapter.notifyDataSetChanged();
-                    refreshLayout.setRefreshing(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private final void loadMovies() {
-        ApiInterface var10000 = (ApiInterface)ApiClient.createService(ApiInterface.class);
-        if (var10000 != null) {
-            ApiInterface apiService = var10000;
-            Call call = apiService.getMovies("https://api.themoviedb.org/3/movie/popular?api_key=b7ee738bdfe5a91a0cec31c619d58968");
-            call.enqueue((Callback)(new Callback() {
-                public void onResponse(@NotNull Call call, @NotNull Response response) {
-
-                    TheMovieDB theMovieDB = (TheMovieDB)response.body();
-                    List<Movie> movies = theMovieDB.getResults();
-                    Integer len = movies.toArray().length;
-                    Log.e("TheMovieDB", len.toString());
-                }
-
-                public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-
-                    Log.e("MOVIES", "request fail");
-                }
-            }));
-        }
-    }
+//    private void kullanicileriOkuRefresh ()
+//    {
+//        DatabaseReference kullanicilerYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar");
+//
+//        refreshLayout.setRefreshing(false);
+//
+//        kullanicilerYolu.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (arama_bar.getText().toString().equals(""))
+//                {
+//                    mKullaniciler.clear();
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
+//                    {
+//                        Kullanici kullanici =snapshot.getValue(Kullanici.class);
+//                        mKullaniciler.add(kullanici);
+//                    }
+//                    kullaniciAdapter.notifyDataSetChanged();
+//                    refreshLayout.setRefreshing(false);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }
