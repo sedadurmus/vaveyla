@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private BildirimAdapter bildirimAdapter;
     private List<Bildiren> bildirimListesi;
     public static FirebaseUser mevcutKullanici;
+    public static String searchWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

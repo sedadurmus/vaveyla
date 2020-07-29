@@ -58,6 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.favori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMovies.clear();
                 Log.e("FAVORİ",holder.favori.getTag().toString() );
                 if (holder.favori.getTag().equals("ekle")) {
 
@@ -78,7 +79,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView filmAdi, filmBegeni, filmHakkinda, txtTarih;
+
         ImageView filmGorsel, favori;
 
 
@@ -156,13 +157,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
 
     public void addAll(List<Movie> videoModelList) {
-        Log.e("NEWS","ADDALL");
+        Log.e("MOVIE","ADDALL");
 
         for (Movie videoModel : videoModelList) {
 
                 add(videoModel);
                 //Log.e("NEWS",videoModel.Title);
         }
+
     }
 
     public void add(Movie videoModel) {
