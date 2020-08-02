@@ -100,8 +100,9 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PostActivity.class);
                 intent.putExtra("poster", poster);
+                intent.putExtra("title",   getIntent().getExtras().getString("title"));
+                intent.putExtra("vote_average",   getIntent().getExtras().getString("vote_average"));
                 startActivity(intent);
-               // startActivity(new Intent(DetailActivity.this, GonderiActivity.class));
             }
         });
     }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,7 +92,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION){
-                        Movie clickedDataItem = mMovies.get(pos);
                         Intent intent = new Intent(mContext, DetailActivity.class);
                         intent.putExtra("title", mMovies.get(pos).getTitle());
                         intent.putExtra("poster_path", mMovies.get(pos).getPosterPath());

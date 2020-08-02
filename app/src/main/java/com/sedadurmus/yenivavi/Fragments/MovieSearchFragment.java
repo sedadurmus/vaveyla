@@ -53,41 +53,16 @@ public class MovieSearchFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-//        refreshLayout =findViewById(R.id.refresh);
         mKullaniciler = new ArrayList<>();
         kullaniciAdapter =new KullaniciAdapter(getContext(), mKullaniciler);
         recyclerView.setAdapter(kullaniciAdapter);
 
 //        kullanicileriOku();
 
-//        kullanıcıAra.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                kullaniciAra(s.toString().toLowerCase());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mKullaniciler.clear();
-//                kullanicileriOkuRefresh();
-//            }
-//        });
-
         return view;
     }
 
-    private void kullaniciAra (String s) {
+    private void kullaniciAra(String s) {
         Query sorgu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").orderByChild("kullaniciadi")
                 .startAt(s)
                 .endAt(s+"\uf8ff");
@@ -108,4 +83,33 @@ public class MovieSearchFragment extends Fragment {
             }
         });
     }
+
+
+//        private void kullanicileriOku (){
+//        DatabaseReference kullanicilerYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar");
+//
+//        kullanicilerYolu.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (arama_bar.getText().toString().equals(""))
+//                {
+//                    mKullaniciler.clear();
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
+//                    {
+//                        Kullanici kullanici =snapshot.getValue(Kullanici.class);
+//                        mKullaniciler.add(kullanici);
+//                    }
+//                    kullaniciAdapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
+
+
 }

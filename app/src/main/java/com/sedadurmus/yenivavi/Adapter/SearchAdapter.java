@@ -27,6 +27,8 @@ public class SearchAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 MovieSearchFragment movieSearchFragment = new MovieSearchFragment();
+
+
                 return movieSearchFragment;
             case 1:
                 DukkanFragment dukkanFragment = new DukkanFragment();

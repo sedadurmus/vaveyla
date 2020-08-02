@@ -62,7 +62,7 @@ public class PostActivity extends AppCompatActivity {
 
 
     ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
-    TextView txt_Gonder, txt_tema, filmAdi;
+    TextView txt_Gonder, txt_puan, filmAdi;
     EditText gonderi_hakkinda;
     private Bundle savedInstanceState;
     @Override
@@ -72,6 +72,7 @@ public class PostActivity extends AppCompatActivity {
 
         posterUrl = getIntent().getExtras().getString("poster");
         Log.e("posterUrl", posterUrl);
+
         Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
@@ -83,22 +84,21 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-//        filmAdi =findViewById(R.id.movie_title_paylasim);
-        filmPoster =findViewById(R.id.film_img);
+        filmAdi =findViewById(R.id.movie_title_paylasim);
         filmposter2=findViewById(R.id.film_poster);
         constraintMovie =findViewById(R.id.constraint_movie);
-
         txt_Gonder = findViewById(R.id.txt_gonder);
+        txt_puan = findViewById(R.id.puan_movie_paylasim);
         gonderi_hakkinda = findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
-//        image_Eklendi = findViewById(R.id.film_img);
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
 
         constraintMovie.setVisibility(View.VISIBLE);
-        String movieName = getIntent().getExtras().getString("title");
-//        filmAdi.setText(movieName);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmPoster);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
+        String filmname = getIntent().getExtras().getString("title");
+        String puanla = getIntent().getExtras().getString("vote_average");
 
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
+        filmAdi.setText(filmname);
+        txt_puan.setText(puanla);
 
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,8 +192,8 @@ public class PostActivity extends AppCompatActivity {
                         String gonderiId = veriYolu.push().getKey();
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("gonderiId", gonderiId);
-                        hashMap.put("gonderiResmi", benimUrim + posterUrl);
-                        hashMap.put("gonderiVideo",videoUri!=null? benimUrim:"");
+                        hashMap.put("gonderiResmi", "https://image.tmdb.org/t/p/w500/" + posterUrl);
+                        hashMap.put("gonderiVideo", "");
                         hashMap.put("gonderiHakkinda", gonderi_hakkinda.getText().toString());
                         hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("gorevmi", false);
@@ -242,7 +242,7 @@ public class PostActivity extends AppCompatActivity {
             HashMap<String, Object> hashMap = new HashMap<>();
 
             hashMap.put("gonderiId", gonderiId);
-            hashMap.put("gonderiResmi", "");
+            hashMap.put("gonderiResmi", "https://image.tmdb.org/t/p/w500/" + posterUrl);
             hashMap.put("gonderiVideo", "");
             hashMap.put("gonderiHakkinda", gonderi_hakkinda.getText().toString());
             hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());

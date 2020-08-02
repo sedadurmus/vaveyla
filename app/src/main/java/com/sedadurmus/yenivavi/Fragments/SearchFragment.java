@@ -79,11 +79,10 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myFragment = inflater.inflate(R.layout.fragment_moviebook, container, false);
-
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
-
         arama=myFragment.findViewById(R.id.aramaya_git);
+
         arama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +90,6 @@ public class SearchFragment extends Fragment {
                 getContext().startActivity(intent);
             }
         });
-
 
 //        recyclerView =myFragment.findViewById(R.id.recyler_view_Arama);
 //        recyclerView.setHasFixedSize(true);

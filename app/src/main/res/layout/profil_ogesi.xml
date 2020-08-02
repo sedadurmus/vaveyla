@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingTop="2dp"
     android:paddingBottom="2dp">
@@ -83,25 +84,69 @@
                     android:src="@drawable/ic_more" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txt_gonderiHakkinda_profil_ogesi"
-                android:text="Gönderi Hakkında"
-                android:layout_marginLeft="5dp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:typeface="serif"
-                android:layout_height="wrap_content"
-                android:maxLines="15" />
+<!--            <TextView-->
+<!--                android:id="@+id/txt_gonderiHakkinda_profil_ogesi"-->
+<!--                android:text="Gönderi Hakkında"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:typeface="serif"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:maxLines="15" />-->
 
-            <ImageView
-                android:id="@+id/gonderi_resmi_profil_ogesi"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="7dp"
-                android:maxHeight="100dp"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_marginTop="5dp"
+                android:padding="7dp"
+                android:visibility="visible"
+                tools:ignore="MissingConstraints,NotSibling">
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/film_img"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent" />-->
+                <TextView
+                    android:id="@+id/txt_gonderiHakkinda_profil_ogesi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="gönderi hakkinda"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"
+                    app:layout_constraintTop_toTopOf="@+id/gonderi_resmi_profil_ogesi" />
+
+                <ImageView
+                    android:id="@+id/gonderi_resmi_profil_ogesi"
+                    android:layout_width="90dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@+id/film_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/gonderi_resmi_profil_ogesi"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="7dp"-->
+<!--                android:maxHeight="100dp"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@mipmap/ic_launcher" />-->
 <!--            <VideoView-->
 <!--                android:id="@+id/video_profil_ogesi"-->
 <!--                android:layout_width="match_parent"-->
