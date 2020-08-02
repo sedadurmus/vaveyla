@@ -11,6 +11,7 @@ public class Gonderi {
     private String gonderiResmi;
     private String gonderiVideo;
     private String gonderiHakkinda;
+    private String gonderiTuru;
     private String gonderen;
     private String gonderiTarihi;
     private String gonderiUid;
@@ -87,6 +88,14 @@ public class Gonderi {
     public void setGonderiHakkinda(String gonderiHakkinda) {
         this.gonderiHakkinda = gonderiHakkinda;
     }
+    public String getGonderiTuru() {
+        return gonderiTuru;
+    }
+
+    public void setGonderiTuru(String gonderiTuru) {
+        this.gonderiTuru = gonderiTuru;
+    }
+
 
     public String getGonderen() {
         return gonderen;

@@ -197,6 +197,7 @@ public class GonderiActivity extends AppCompatActivity {
                         hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
+                        hashMap.put("gonderiTuru", "");
                         hashMap.put("onaydurumu", false);
 
 
@@ -247,6 +248,7 @@ public class GonderiActivity extends AppCompatActivity {
             hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
             hashMap.put("gorevmi", false);
             hashMap.put("gonderiTarihi", simdikiTarih);
+            hashMap.put("gonderiTuru", "");
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);
 

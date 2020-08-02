@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     String simdikiTarih;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final MessageAdapter.ViewHolder viewHolder, final int position) {
 
@@ -75,7 +77,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
         viewHolder.txt_zaman.setText(chat.getMessageTarihi() != null ? chat.getMessageTarihi().toString() : " ");
         Date simdi = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
         Date tarih = null;
         try {

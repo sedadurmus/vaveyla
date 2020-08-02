@@ -48,8 +48,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
     String profilId;
     Uri uri;
 
-    String gonderiId;
-
     private Context mContext;
     private List<Gonderi> mGonderiler;
 
@@ -62,19 +60,31 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
-        return new FotografAdapter.ViewHolder(view);
+    public FotografAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+//        View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
+//        return new FotografAdapter.ViewHolder(view);
+        mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final Gonderi gonderi = mGonderiler.get(viewType);
+
+        if (gonderi.getGonderiTuru().equals("film")) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
+            return new FotografAdapter.ViewHolder(view);
+        } else  {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.dene_profil_ogesi, viewGroup, false);
+            return new FotografAdapter.ViewHolder(view);
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         final Gonderi gonderi = mGonderiler.get(i);
         Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
+
 
         if (gonderi.getGonderiHakkinda().equals("")) {
             viewHolder.txt_gonderi_hakkinda.setVisibility(View.GONE);
@@ -301,6 +311,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
             profil_resmi = itemView.findViewById(R.id.profil_resmi_profil_ogesi);
             gonderiResmi = itemView.findViewById(R.id.gonderi_resmi_profil_ogesi);
+
             begeniResmi = itemView.findViewById(R.id.begeni_profil_ogesi);
             yorumResmi = itemView.findViewById(R.id.yorum_profil_ogesi);
 //            silResmi = itemView.findViewById(R.id.sil_profil_ogesi);
@@ -531,5 +542,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             }
         });
     }
+
 
 }

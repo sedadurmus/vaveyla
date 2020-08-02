@@ -198,6 +198,7 @@ public class PostActivity extends AppCompatActivity {
                         hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
+                        hashMap.put("gonderiTuru", "film");
                         hashMap.put("onaydurumu", false);
 
 
@@ -248,6 +249,7 @@ public class PostActivity extends AppCompatActivity {
             hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
             hashMap.put("gorevmi", false);
             hashMap.put("gonderiTarihi", simdikiTarih);
+            hashMap.put("gonderiTuru", "film");
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);
 
