@@ -15,7 +15,6 @@
         app:contentPadding="15dp"
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
-
         app:cardElevation="4dp" >
 
 
@@ -101,7 +100,17 @@
                 android:layout_marginTop="7dp"
                 android:maxHeight="100dp"
                 android:padding="5dp"
+                android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher" />
+            <ImageView
+                android:id="@+id/film_poster2"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
             <!--            <VideoView-->
             <!--                android:id="@+id/video_profil_ogesi"-->
             <!--                android:layout_width="match_parent"-->

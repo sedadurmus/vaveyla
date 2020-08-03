@@ -82,26 +82,44 @@
                     android:src="@drawable/ic_more" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/txt_gonderiHakkinda_profil_ogesi"
+                android:text="Gönderi Hakkında"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:typeface="serif"
+                android:layout_height="wrap_content"
+                android:maxLines="15" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:padding="7dp"
                 android:visibility="visible"
                 tools:ignore="MissingConstraints,NotSibling">
 
-                <TextView
-                    android:id="@+id/txt_gonderiHakkinda_profil_ogesi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="15"
-                    android:text="Gönderi Hakkında"
-                    android:textColor="@color/black"
-                    android:typeface="serif"
-                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"
-                    tools:layout_editor_absoluteY="7dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_gonderiHakkinda_profil_ogesi"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:maxLines="15"-->
+<!--                    android:layout_marginLeft="8dp"-->
+<!--                    android:text="Gönderi Hakkında"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:typeface="serif"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"-->
+<!--                    tools:layout_editor_absoluteY="7dp" />-->
+                <ImageView
+                    android:id="@+id/film_poster2"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintEnd_toEndOf="@+id/constraint_movie"
+                    app:layout_constraintStart_toStartOf="@+id/constraint_movie"
+                    app:layout_constraintTop_toTopOf="@+id/constraint_movie" />
 
             <ImageView
                 android:id="@+id/gonderi_resmi_profil_ogesi"
@@ -111,7 +129,9 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <!--            <ImageView-->
 <!--                android:id="@+id/gonderi_resmi_profil_ogesi"-->
