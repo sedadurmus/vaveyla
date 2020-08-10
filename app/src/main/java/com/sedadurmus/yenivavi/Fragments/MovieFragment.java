@@ -82,11 +82,7 @@ public class MovieFragment extends Fragment {
             Log.e("EKLEME", models.toArray().toString());
             Collections.reverse(items);
             movieAdapter.addAll(items);
-
             movieAdapter.notifyDataSetChanged();
-
-
-
         }
     }
 }

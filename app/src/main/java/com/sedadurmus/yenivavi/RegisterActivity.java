@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,25 +55,25 @@ public class RegisterActivity extends AppCompatActivity {
         edt_Ad = (EditText) findViewById(R.id.edt_Ad);
         edt_Email = (EditText) findViewById(R.id.edt_email);
         edt_Sifre = (EditText) findViewById(R.id.edt_sifre);
-        edt_Tarih = (EditText) findViewById(R.id.edt_Tarih);
+//        edt_Tarih = (EditText) findViewById(R.id.edt_Tarih);
 
-        edt_Tarih.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar = Calendar.getInstance();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                datePickerDialog = new DatePickerDialog(RegisterActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                edt_Tarih.setText(day + "/" + (month+1) + "/" + year);
-                            }
-                        }, year, month, dayOfMonth);
-                datePickerDialog.show();
-            }
-        });
+//        edt_Tarih.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                calendar = Calendar.getInstance();
+//                year = calendar.get(Calendar.YEAR);
+//                month = calendar.get(Calendar.MONTH);
+//                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+//                datePickerDialog = new DatePickerDialog(RegisterActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+//                                edt_Tarih.setText(day + "/" + (month+1) + "/" + year);
+//                            }
+//                        }, year, month, dayOfMonth);
+//                datePickerDialog.show();
+//            }
+//        });
 
         btn_Kaydol= findViewById(R.id.btn_kaydol_activity);
 

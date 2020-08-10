@@ -80,7 +80,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 //        View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
 //        return new FotografAdapter.ViewHolder(view);
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Gonderi gonderi = mGonderiler.get(viewType);
+//        final Gonderi gonderi = mGonderiler.get(viewType);
 
         if (viewType == gonderi_turu_film) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.dene_profil_ogesi, viewGroup, false);
@@ -199,6 +199,8 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
                 } else {
                     FirebaseDatabase.getInstance().getReference().child("Begeniler").child(gonderi.getGonderiId())
                             .child(mevcutFirebaseUser.getUid()).removeValue();
+
+                    bildirimleriKaldir(gonderi.getGonderen(), gonderi.getGonderiId());
                 }
             }
         });
@@ -491,13 +493,30 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
         DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(kullaniciId);
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("kullaniciid", mevcutFirebaseUser.getUid());
         hashMap.put("text", "Gönderini Beğendi");
         hashMap.put("gonderiid", gonderiId);
         hashMap.put("ispost", true);
         hashMap.put("bildirimTarihi", simdikiTarih);
-        bildirimEklemeYolu.push().setValue(hashMap);
+        bildirimEklemeYolu.child(gonderiId).setValue(hashMap);
+    }
+
+    private void bildirimleriKaldir(String kullaniciId, String gonderiId) {
+
+        DatabaseReference bildirimKaldirmaYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+                .child(kullaniciId)
+                .child(gonderiId);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("kullaniciid", mevcutFirebaseUser.getUid());
+        hashMap.put("text", "Gönderini Beğendi");
+        hashMap.put("gonderiid", gonderiId);
+        hashMap.put("ispost", true);
+        hashMap.put("bildirimTarihi", simdikiTarih);
+
+        bildirimKaldirmaYolu.removeValue();
     }
 
     @SuppressLint("SetTextI18n")

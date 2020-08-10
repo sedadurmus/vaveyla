@@ -202,6 +202,8 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
                     FirebaseDatabase.getInstance().getReference().child("Begeniler").child(gonderi.getGonderiId())
                             .child(mevcutFirebaseUser.getUid()).removeValue();
                     //bildirim kaldır ekle
+
+                    bildirimleriKaldir(gonderi.getGonderen(), gonderi.getGonderiId());
                 }
             }
         });
@@ -281,6 +283,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         });
 
     }
+
 
     View.OnClickListener profilegit = new View.OnClickListener() {
         @Override
@@ -409,6 +412,21 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
     private void bildirimleriEkle(String kullaniciId, String gonderiId) {
 
         DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(kullaniciId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("kullaniciid", mevcutFirebaseUser.getUid());
+        hashMap.put("text", "Gönderini Beğendi");
+        hashMap.put("gonderiid", gonderiId);
+        hashMap.put("ispost", true);
+        hashMap.put("bildirimTarihi", simdikiTarih);
+
+        bildirimEklemeYolu.child(gonderiId).setValue(hashMap);
+    }
+
+    private void bildirimleriKaldir(String kullaniciId, String gonderiId) {
+
+        DatabaseReference bildirimKaldirmaYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+                .child(kullaniciId)
+                .child(gonderiId);
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("kullaniciid", mevcutFirebaseUser.getUid());
@@ -417,8 +435,9 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         hashMap.put("ispost", true);
         hashMap.put("bildirimTarihi", simdikiTarih);
 
-        bildirimEklemeYolu.push().setValue(hashMap);
+        bildirimKaldirmaYolu.removeValue();
     }
+
 
     private void editPost(final String gonderiId){
         AlertDialog.Builder alertdialog =new AlertDialog.Builder(mContext);

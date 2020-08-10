@@ -93,6 +93,8 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
                             .child("takipEdilenler").child(kullanici.getId()).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Takip").child(kullanici.getId())
                             .child("takipciler").child(firebaseKullanici.getUid()).removeValue();
+
+                    bildirimleriKaldir(kullanici.getId());
                 }
             }
         });
@@ -105,13 +107,32 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
         simdikiTarih = dateFormat.format(simdi);
         DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(kullaniciId);
         HashMap<String, Object> hashMap =new HashMap<>();
+
         hashMap.put("kullaniciid", firebaseKullanici.getUid());
         hashMap.put("text", "Takibe başladı");
         hashMap.put("gonderiid", "");
         hashMap.put("ispost", false);
         hashMap.put("bildirimTarihi", simdikiTarih);
 
-        bildirimEklemeYolu.push().setValue(hashMap);
+        bildirimEklemeYolu.child(firebaseKullanici.getUid()).setValue(hashMap);
+    }
+
+
+    private void bildirimleriKaldir(String kullaniciId) {
+
+        DatabaseReference bildirimKaldirmaYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+                .child(kullaniciId)
+                .child(firebaseKullanici.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("kullaniciid", firebaseKullanici.getUid());
+        hashMap.put("text", "Takibe başladı");
+        hashMap.put("gonderiid", "");
+        hashMap.put("ispost", false);
+        hashMap.put("bildirimTarihi", simdikiTarih);
+
+        bildirimKaldirmaYolu.removeValue();
     }
     @Override
     public int getItemCount() {
@@ -158,4 +179,6 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
             }
         });
     }
+
+
 }
