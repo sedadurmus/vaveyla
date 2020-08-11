@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.Adapter.YorumAdapter;
+import com.sedadurmus.yenivavi.Model.Gonderi;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.Model.Yorum;
 
@@ -51,6 +52,7 @@ public class YorumlarActivity extends AppCompatActivity {
     String gonderiSahibi;
     FirebaseUser mevcutKullanici;
 
+    Gonderi gonderi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,6 @@ public class YorumlarActivity extends AppCompatActivity {
         profil_resmi = findViewById(R.id.profil_resmi_yorumlarActicity);
         txt_gonder = findViewById(R.id.txt_gonder_yorumlarActivity);
         mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
-
-
 
 // Toolbar ayarları
         Toolbar toolbar = findViewById(R.id.toolbar_yorumlarActivity);
@@ -127,15 +127,17 @@ public class YorumlarActivity extends AppCompatActivity {
         hashMap.put("gonderen", mevcutKullanici.getUid());
         hashMap.put("yorumid", yorumUid);
 
+        assert yorumUid != null;
         yorumlarYolu.child(yorumUid).setValue(hashMap);
         edt_yorum_ekle.setText("");
 
 //      Yorum ekle Bildirimleri ekle
         bildirimleriEkle();
 
-
-
     }
+
+
+
 
     private void resimAl() {
 
@@ -146,7 +148,6 @@ public class YorumlarActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Kullanici kullanici = dataSnapshot.getValue(Kullanici.class);
-
                 Glide.with(getApplicationContext()).load(kullanici.getResimurl()).into(profil_resmi);
             }
 
@@ -171,7 +172,6 @@ public class YorumlarActivity extends AppCompatActivity {
                     Yorum yorum = snapshot.getValue(Yorum.class);
                     yorum.setYorumUid(snapshot.getKey());
                     yorum.setYorumGonderi(gonderiId);
-
                     yorumListesi.add(yorum);
                 }
                 yorumAdapter=new YorumAdapter(YorumlarActivity.this,yorumListesi,gonderenId,gonderiSahibi);
@@ -194,17 +194,46 @@ public class YorumlarActivity extends AppCompatActivity {
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simdikiTarih = dateFormat.format(simdi);
 
-        DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler").child(gonderenId);
+        DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+                .child(gonderenId);
+        String yorumBilidirimiUid = bildirimEklemeYolu.push().getKey();
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("kullaniciid", mevcutKullanici.getUid());
         hashMap.put("text", "Yorum yaptı: " + edt_yorum_ekle.getText().toString());
         hashMap.put("gonderiid", gonderiId);
         hashMap.put("ispost", true);
         hashMap.put("bildirimTarihi", simdikiTarih);
+        hashMap.put("yorumBildirimUid", yorumBilidirimiUid);
 
-        bildirimEklemeYolu.push().setValue(hashMap);
+
+        assert yorumBilidirimiUid != null;
+        bildirimEklemeYolu.child(yorumBilidirimiUid).setValue(hashMap);
 
     }
+
+//   public void bildirimleriKaldir() {
+//
+//        Date simdi = new Date();
+//        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        simdikiTarih = dateFormat.format(simdi);
+//
+//        DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+//                .child(gonderenId);
+//
+//        String yorumBilidirimiUid = bildirimEklemeYolu.push().getKey();
+//
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("kullaniciid", mevcutKullanici);
+//        hashMap.put("text", "Yorum yaptı: " + edt_yorum_ekle.getText().toString());
+//        hashMap.put("gonderiid", gonderiId);
+//        hashMap.put("ispost", true);
+//        hashMap.put("bildirimTarihi", simdikiTarih);
+//        hashMap.put("yorumBildirimUid", yorumBilidirimiUid);
+//        assert yorumBilidirimiUid != null;
+//        bildirimEklemeYolu.child(yorumBilidirimiUid).removeValue();
+//
+//    }
 
 //    private void yorumTelefon ()
 //    {

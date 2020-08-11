@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,10 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.MainActivity;
+import com.sedadurmus.yenivavi.Model.Gonderi;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.Model.Yorum;
 import com.sedadurmus.yenivavi.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> {
@@ -38,7 +44,8 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
     private List<Yorum> mYorumListesi;
     String GonderiId;
     String gonderiSahibi;
-
+//    String gonderenId;
+    Gonderi gonderi;
     FirebaseUser firebaseUser;
 
     public YorumAdapter(Context mContext, List<Yorum> mYorumListesi, String AGonderiId, String AgonderiSahibi) {
@@ -52,7 +59,7 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.yorum_ogesi, viewGroup, false);
-        return new YorumAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -64,6 +71,7 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
         kullaniciBilgisiAl(viewHolder.profil_resmi, viewHolder.txt_kullanici_adi, yorum.getGonderen());
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
 //        viewHolder.yorumCercevesi.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -135,6 +143,8 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
                                             if (task.isSuccessful())
                                             {
                                                 Toast.makeText(mContext, "Yorum başarıyla silindi!", Toast.LENGTH_SHORT).show();
+                                                yorumKaldir();
+//                                                bildirimleriKaldir();
                                             }
                                         }
                                     });
@@ -155,7 +165,7 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
 
 //    yorum_ogesinde recyeler view kullanacağım için adapter olmalı
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView profil_resmi;
         public TextView txt_kullanici_adi, txt_yorum;
@@ -188,6 +198,45 @@ public class YorumAdapter extends RecyclerView.Adapter<YorumAdapter.ViewHolder> 
 
             }
         });
+
+    }
+    private void yorumKaldir() {
+
+        DatabaseReference yorumlarYolu = FirebaseDatabase.getInstance().getReference("Yorumlar")
+                .child(GonderiId);
+
+        String yorumUid = yorumlarYolu.push().getKey();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("yorum", "");
+        hashMap.put("gonderen", firebaseUser);
+        hashMap.put("yorumid", yorumUid);
+
+        yorumlarYolu.child(yorumUid).removeValue();
+
+
+    }
+
+    String simdikiTarih;
+    private void bildirimleriKaldir() {
+
+        Date simdi = new Date();
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        simdikiTarih = dateFormat.format(simdi);
+
+        DatabaseReference bildirimEklemeYolu = FirebaseDatabase.getInstance().getReference("Bildirimler")
+                .child(gonderi.getGonderen());
+
+        String yorumBilidirimiUid = bildirimEklemeYolu.push().getKey();
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("kullaniciid", firebaseUser);
+        hashMap.put("text", "Yorum yaptı: ");
+        hashMap.put("gonderiid", GonderiId);
+        hashMap.put("ispost", true);
+        hashMap.put("bildirimTarihi", simdikiTarih);
+        hashMap.put("yorumBildirimUid", yorumBilidirimiUid);
+        assert yorumBilidirimiUid != null;
+        bildirimEklemeYolu.child(yorumBilidirimiUid).removeValue();
 
     }
 }
