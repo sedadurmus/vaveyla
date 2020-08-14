@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         //        google la oturum açma ile ilgili
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.google_sign_in_api_key))
                 .requestEmail()
                 .build();
 
