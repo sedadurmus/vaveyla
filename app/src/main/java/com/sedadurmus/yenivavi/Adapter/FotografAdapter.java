@@ -61,18 +61,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         this.mGonderiler = mGonderiler;
     }
 
-    @Override
-    public int getItemViewType(int position) {
 
-        mevcutFirebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        final Gonderi gonderi = mGonderiler.get(position);
-
-        if (gonderi.getGonderiTuru().equals("film")){
-            return gonderi_turu_film;
-        }else {
-            return gonderi_turu_bos;
-        }
-    }
 
     @NonNull
     @Override
@@ -110,7 +99,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         }
 
 //        görev olunca profilde ve anasayfada bi simge çıksın yanındaaaa
-        if(gonderi.isOnayDurumu() == true){
+        if(gonderi.isOnayDurumu()){
             viewHolder.gorevMi.setVisibility(View.VISIBLE);
         }else {
             viewHolder.gorevMi.setVisibility(View.GONE);
@@ -119,10 +108,10 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
         if (i == gonderi_turu_film) {
           viewHolder.posterArka.setVisibility(View.VISIBLE);
-        } else  {
-            viewHolder.posterArka.setVisibility(View.GONE);
-
         }
+
+
+
 
 
         viewHolder.gorevMi.setOnClickListener(new View.OnClickListener() {
@@ -160,10 +149,12 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
         if (gonderi.getGonderiResmi().length() < 0) {
             viewHolder.gonderiResmi.setVisibility(View.GONE);
+            viewHolder.posterArka.setVisibility(View.GONE);
 
         } else {
             viewHolder.gonderiResmi.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
+            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
         }
 //
 //        if (gonderi.getGonderiVideo() != null){
@@ -587,5 +578,17 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         });
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        mevcutFirebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        final Gonderi gonderi = mGonderiler.get(position);
+
+        if (gonderi.getGonderiTuru().equals("film")){
+            return gonderi_turu_film;
+        }else {
+            return gonderi_turu_bos;
+        }
+    }
 
 }

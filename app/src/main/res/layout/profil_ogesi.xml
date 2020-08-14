@@ -91,17 +91,6 @@
                 android:typeface="serif"
                 android:layout_height="wrap_content"
                 android:maxLines="15" />
-
-            <ImageView
-                android:id="@+id/gonderi_resmi_profil_ogesi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="7dp"
-                android:maxHeight="100dp"
-                android:padding="5dp"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/ic_launcher" />
             <ImageView
                 android:id="@+id/film_poster2"
                 android:layout_width="match_parent"
@@ -111,6 +100,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/gonderi_resmi_profil_ogesi"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:layout_marginTop="7dp"
+                android:maxHeight="100dp"
+                android:padding="5dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_launcher" />
+
             <!--            <VideoView-->
             <!--                android:id="@+id/video_profil_ogesi"-->
             <!--                android:layout_width="match_parent"-->
