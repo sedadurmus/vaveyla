@@ -1,7 +1,10 @@
 package com.sedadurmus.yenivavi.Api;
 
+import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.Model.TheMovieDB;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,6 +15,8 @@ public interface ApiInterface {
     Call<TheMovieDB> getMovies(@Url String url);
     @GET
     Call<Movie> getMovie(@Url String url);
+    @GET
+    Call<List<AllBookCategory>> getCategories(@Url String url);
 //    @GET
 //    Call<List<ProductModel>> getProducts(@Url String url);
 //    @GET

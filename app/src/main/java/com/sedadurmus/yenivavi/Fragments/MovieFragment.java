@@ -38,6 +38,7 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
+
         recyclerView =view.findViewById(R.id.movie_list);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);

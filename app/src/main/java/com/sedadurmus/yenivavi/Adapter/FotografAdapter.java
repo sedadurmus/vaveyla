@@ -153,8 +153,9 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
         } else {
             viewHolder.gonderiResmi.setVisibility(View.VISIBLE);
+
             Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
-            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
+//            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
         }
 //
 //        if (gonderi.getGonderiVideo() != null){
