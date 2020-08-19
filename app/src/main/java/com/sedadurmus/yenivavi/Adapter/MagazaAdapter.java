@@ -75,6 +75,13 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
         viewHolder.shop_point.setText("Puan: " +(int) magazaFire.getMagazaPuani());
         Glide.with(mContext).load(magazaFire.getMagazaResmi()).into(viewHolder.resim_magaza);
         viewHolder.shop_biletAdeti.setText("Bilet Adedi: " + (int)magazaFire.getMagazaAdet());
+
+        if (magazaFire.getMagazaAdet() == 0){
+            viewHolder.tukendiResim.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.tukendiResim.setVisibility(View.GONE);
+        }
+
         viewHolder.content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,12 +205,13 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView resim_magaza;
+        public ImageView resim_magaza, tukendiResim;
         public TextView shop_baslik, shop_tanim, shop_point, shop_biletAdeti;
 RelativeLayout content;
         public ViewHolder(View itemView) {
             super(itemView);
             resim_magaza = itemView.findViewById(R.id.resim_magaza);
+            tukendiResim = itemView.findViewById(R.id.tukendi);
             shop_baslik = itemView.findViewById(R.id.shop_title);
             shop_tanim = itemView.findViewById(R.id.shop_description);
             shop_point = itemView.findViewById(R.id.shop_point);

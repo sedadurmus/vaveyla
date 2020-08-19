@@ -1,5 +1,7 @@
 package com.sedadurmus.yenivavi.Model;
 
+import android.annotation.SuppressLint;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -106,7 +108,7 @@ public class Gonderi {
     }
 
     public Date getTarih() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dtt = null;
         try {
             if (gonderiTarihi != null)

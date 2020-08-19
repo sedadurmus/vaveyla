@@ -171,6 +171,8 @@ public class DukkanFragment extends Fragment {
                 LoadMissionsRefresh();
             }
         });
+
+
         return view;
     }
 
@@ -204,9 +206,9 @@ public class DukkanFragment extends Fragment {
                     magaza.setMagazaPuani(((Long) snapshot.child("magazaPuani").getValue()));
                     magaza.setMagazaResmi(((String) snapshot.child("magazaResmi").getValue()));
 
-                    if (magaza.isMagazaDurumu() && magaza.getMagazaAdet() > 0) {
+//                    if (magaza.isMagazaDurumu() && magaza.getMagazaAdet() < 0) {
                         shopList.add(magaza);
-                    }
+//                    }
                 }
                 magazaAdapter = new MagazaAdapter(getContext(), shopList);
                 profileListView.setAdapter(magazaAdapter);
@@ -237,9 +239,9 @@ public class DukkanFragment extends Fragment {
                     magaza.setMagazaPuani(((Long) snapshot.child("magazaPuani").getValue()));
                     magaza.setMagazaResmi(((String) snapshot.child("magazaResmi").getValue()));
 
-                    if (magaza.isMagazaDurumu() && magaza.getMagazaAdet() > 0) {
+//                    if (magaza.isMagazaDurumu() && magaza.getMagazaAdet() > 0) {
                         shopList.add(magaza);
-                    }
+//                    }
                 }
                 magazaAdapter = new MagazaAdapter(getContext(), shopList);
                 profileListView.setAdapter(magazaAdapter);

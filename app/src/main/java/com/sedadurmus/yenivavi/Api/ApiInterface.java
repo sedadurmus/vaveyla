@@ -15,6 +15,7 @@ public interface ApiInterface {
     Call<TheMovieDB> getMovies(@Url String url);
     @GET
     Call<Movie> getMovie(@Url String url);
+
     @GET
     Call<List<AllBookCategory>> getCategories(@Url String url);
 //    @GET

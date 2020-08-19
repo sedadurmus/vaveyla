@@ -21,6 +21,7 @@ public class AllBookCategory implements Serializable {
     public List<Book> getBooks(){
         return this.books;
     }
+
     public String getName() {
         return this.name;
     }

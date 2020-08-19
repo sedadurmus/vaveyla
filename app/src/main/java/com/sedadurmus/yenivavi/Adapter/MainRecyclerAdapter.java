@@ -21,11 +21,11 @@ import java.util.List;
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
 
     private Context context;
-    private List<AllBookCategory> allBookCategories;
+    private List<AllBookCategory> allBookCategoryList;
 
-    public MainRecyclerAdapter(Context context, List<AllBookCategory> allBookCategories) {
+    public MainRecyclerAdapter(Context context, List<AllBookCategory> allBookCategoryList) {
         this.context = context;
-        this.allBookCategories = allBookCategories;
+        this.allBookCategoryList = allBookCategoryList;
     }
 
     @NonNull
@@ -37,9 +37,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-         holder.categoryTitle.setText(allBookCategories.get(position).getName());
+         holder.categoryTitle.setText(allBookCategoryList.get(position).getName());
 
-        BookAdapter bookAdapter = new BookAdapter(holder.itemRecycler.getContext(), allBookCategories.get(position).getBooks());
+        BookAdapter bookAdapter = new BookAdapter(holder.itemRecycler.getContext(), allBookCategoryList.get(position).getBooks());
         holder.itemRecycler.setLayoutManager(new LinearLayoutManager(holder.itemRecycler.getContext(), RecyclerView.HORIZONTAL, false));
         holder.itemRecycler.setAdapter(bookAdapter);
 //         holder.books = allBookCategories.get(position).getBooks();
@@ -48,7 +48,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     @Override
     public int getItemCount() {
-        return allBookCategories.toArray().length;
+        return allBookCategoryList.size();
     }
 
     public static final class MainViewHolder extends RecyclerView.ViewHolder{
@@ -88,7 +88,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     }
 
     public void add(AllBookCategory videoModel) {
-        allBookCategories.add(videoModel);
+        allBookCategoryList.add(videoModel);
         //notifyItemInserted(Items.size() - 1);
         notifyDataSetChanged();
     }

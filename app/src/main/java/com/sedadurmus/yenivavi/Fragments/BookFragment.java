@@ -53,13 +53,8 @@ public class BookFragment extends Fragment {
 
         mainRecyclerAdapter = new MainRecyclerAdapter(getContext(), allBookCategoryList);
         mainCategoryRecycler.setAdapter(mainRecyclerAdapter);
-
-
-
         return view;
     }
-
-
 
 
     private void loadPopularBooks() {
@@ -67,7 +62,7 @@ public class BookFragment extends Fragment {
         Log.e("BookCategoryresponse", "loadpopularbooks");
         if (var10000 != null) {
             ApiInterface apiService = var10000;
-            Call call = apiService.getCategories("https://kitap.vaveyla.app/api/categories?with=books");
+            Call call = apiService.getCategories("http://kitap.bildirimler.com/api/categories?with=books");
             call.enqueue((Callback)(new Callback() {
                 public void onResponse(@NotNull Call call, @NotNull Response response) {
                     Log.e("BookCategoryresponse", response.body().toString());

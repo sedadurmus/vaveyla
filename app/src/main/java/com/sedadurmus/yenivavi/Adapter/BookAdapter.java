@@ -42,18 +42,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Book book =bookList.get(position);
-
         new DownLoadImageTask(holder.bookImg).execute(bookList.get(position).getImg_url());
         holder.bookTitle.setText(bookList.get(position).getName());
-
-
 
     }
 
     @Override
     public int getItemCount() {
-        return bookList.toArray().length;
+        return bookList.size();
     }
     private void setCatItemRecycler(RecyclerView recyclerView, ArrayList<Book> bookList){
         BookAdapter bookAdapter = new BookAdapter(recyclerView.getContext(), bookList);
