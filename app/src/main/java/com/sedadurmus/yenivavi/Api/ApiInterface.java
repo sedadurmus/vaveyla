@@ -18,6 +18,9 @@ public interface ApiInterface {
 
     @GET
     Call<List<AllBookCategory>> getCategories(@Url String url);
+
+    @GET
+    Call<AllBookCategory> getCategory(@Url String url);
 //    @GET
 //    Call<List<ProductModel>> getProducts(@Url String url);
 //    @GET
