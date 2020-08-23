@@ -38,6 +38,9 @@ public class Book implements Serializable {
     @SerializedName("published_year")
     Integer published_year;
 
+
+
+
     public String getName() {
         return this.name;
     }

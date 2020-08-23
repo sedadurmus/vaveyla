@@ -20,7 +20,7 @@ public interface ApiInterface {
     Call<List<AllBookCategory>> getCategories(@Url String url);
 
     @GET
-    Call<AllBookCategory> getCategory(@Url String url);
+    Call<AllBookCategory> getBook(@Url String url);
 //    @GET
 //    Call<List<ProductModel>> getProducts(@Url String url);
 //    @GET

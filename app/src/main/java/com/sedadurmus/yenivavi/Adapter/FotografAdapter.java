@@ -88,8 +88,9 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         final Gonderi gonderi = mGonderiler.get(i);
-        Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
-        Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
+//        Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
+//        Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
+
 
         if (gonderi.getGonderiHakkinda().equals("")) {
             viewHolder.txt_gonderi_hakkinda.setVisibility(View.GONE);
@@ -105,10 +106,14 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             viewHolder.gorevMi.setVisibility(View.GONE);
         }
 
-
-        if (i == gonderi_turu_film) {
-          viewHolder.posterArka.setVisibility(View.VISIBLE);
+        if (i != gonderi_turu_film) {
+            if (gonderi.getGonderiResmi().length()>0) {
+                viewHolder.posterArka.setVisibility(View.VISIBLE);
+                Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
+                Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
+            }
         }
+
 
 
         viewHolder.gorevMi.setOnClickListener(new View.OnClickListener() {
@@ -144,16 +149,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             viewHolder.txt_zaman.setVisibility(View.VISIBLE);
         }
 
-        if (gonderi.getGonderiResmi().length() < 0) {
-            viewHolder.gonderiResmi.setVisibility(View.GONE);
-            viewHolder.posterArka.setVisibility(View.GONE);
-
-        } else {
-            viewHolder.gonderiResmi.setVisibility(View.VISIBLE);
-
-            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
-//            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
-        }
 //
 //        if (gonderi.getGonderiVideo() != null){
 //            viewHolder.videoView.setVisibility(View.VISIBLE);
@@ -510,26 +505,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
     @SuppressLint("SetTextI18n")
     private void editPost(final String gonderiId){
-
-//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-//        LayoutInflater factory = LayoutInflater.from(mContext);
-//        @SuppressLint("InflateParams") final View view = factory.inflate(R.layout.alert_dialog, null);
-//        builder.setView(view);
-//        builder.setCancelable(false);
-//        ((TextView)view.findViewById(R.id.textTitle)).setText("Gönderiyi Düzenle");
-//        ((Button)view.findViewById(R.id.buttonNo)).setText("KAPAT");
-//        ((Button)view.findViewById(R.id.buttonYes)).setText("KAYDET");
-//        ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-//        final EditText editText = new EditText(mContext);
-//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.MATCH_PARENT
-//        );
-//
-//        final AlertDialog alertdialog = builder.create();
-//        editText.setLayoutParams(lp);
-//        alertdialog.setView(editText);
-//        getText(gonderiId,editText);
 
 
         AlertDialog.Builder alertdialog =new AlertDialog.Builder(mContext);

@@ -51,7 +51,7 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
     String message;
     String subject;
     private static final String username="vaveylayardim@gmail.com";
-    private static final String password ="sedat4825";
+    private static final String password ="48254513Aa..";
 
     public MagazaAdapter(Context mContext, List<MagazaFire> shopList) {
         this.mContext = mContext;
@@ -103,6 +103,7 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
                     public void onClick(View view) {
                         alertDialog.cancel();
                         if (seciliUrun == null) return;
+
                         if (LoginActivity.getKullanici().getProfilPuan() >= seciliUrun.getMagazaPuani()) {
                             kullaniciYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             kullaniciYolu.addValueEventListener(new ValueEventListener() {
@@ -133,7 +134,7 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            MailSender mail = new MailSender("vaveylayardim@gmail.com", "sedat4825",email.replace("-",""),subject,message);
+                                            MailSender mail = new MailSender("vaveylayardim@gmail.com", "48254513Aa..",email.replace("-",""),subject,message);
                                             try {
                                                 mail.createEmailMessage(mContext);
                                                 mail.sendEmail();
@@ -170,8 +171,12 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
                                 }
                             });
                             Toast.makeText(mContext, "Tebrikler! Hemen mail adresine bakmalısın!", Toast.LENGTH_LONG).show();
+                        }
+                        else if (magazaFire.getMagazaAdet() == 0){
+                            Toast.makeText(mContext, "Maalesef ürünümüz tükenmiştir. Senin için acele edeceğiz.", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(mContext, "Puanın yetersiz! \n Görevleri gözden geçirmeye ne dersin?", Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(mContext, "Puanın yetersiz! \nGörevleri gözden geçirmeye ne dersin?", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -52,24 +52,6 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
         new DownLoadImageTask(holder.bookImg).execute(mBooks.get(position).getImg_url());
         holder.bookTitle.setText(mBooks.get(position).getName());
 
-//        favoriEklendi(book, holder.favori);
-
-//        holder.favori.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mBooks.clear();
-//                Log.e("FAVORİ",holder.favori.getTag().toString() );
-//                if (holder.favori.getTag().equals("ekle")) {
-//
-//                    favoriEkle(book);
-//                } else if (holder.favori.getTag().equals("eklendi")){
-//                    FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
-//                            .child(book.getId()).removeValue();
-//
-//
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -87,25 +69,6 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
             super(itemView);
             bookImg = itemView.findViewById(R.id.book_resim);
             bookTitle = itemView.findViewById(R.id.book_title);
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION){
-//                        Intent intent = new Intent(mContext, DetailActivity.class);
-//                        intent.putExtra("title", mMovies.get(pos).getTitle());
-//                        intent.putExtra("poster_path", mMovies.get(pos).getPosterPath());
-//                        intent.putExtra("overview", mMovies.get(pos).getOverview());
-//                        intent.putExtra("release_date", mMovies.get(pos).getRelease_date());
-//                        intent.putExtra("vote_average", Double.toString(mMovies.get(pos).getVote_average()));
-//                        intent.putExtra("vote_count", Integer.toString(mMovies.get(pos).getVote_count()));
-//                        intent.putExtra("video",(mMovies.get(pos).getVideo()));
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                    }
-//                }
-//            });
 
 
         }

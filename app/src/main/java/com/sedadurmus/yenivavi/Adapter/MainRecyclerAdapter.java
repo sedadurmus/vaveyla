@@ -39,7 +39,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
          holder.categoryTitle.setText(allBookCategoryList.get(position).getName());
 
-        BookAdapter bookAdapter = new BookAdapter(holder.itemRecycler.getContext(), allBookCategoryList.get(position).getBooks());
+        BookAdapter bookAdapter = new BookAdapter(holder.itemRecycler.getContext(), allBookCategoryList.get(position).getResults());
         holder.itemRecycler.setLayoutManager(new LinearLayoutManager(holder.itemRecycler.getContext(), RecyclerView.HORIZONTAL, false));
         holder.itemRecycler.setAdapter(bookAdapter);
 //         holder.books = allBookCategories.get(position).getBooks();
