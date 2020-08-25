@@ -1,6 +1,5 @@
 package com.sedadurmus.yenivavi.Fragments;
 
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,18 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.MainRecyclerAdapter;
-import com.sedadurmus.yenivavi.Api.ApiClient;
-import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.R;
-import com.squareup.okhttp.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,9 +51,6 @@ public class BookFragment extends Fragment {
 
 
     private void loadPopularBooks() {
-
-
-
        /* ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
         Log.e("BookCategoryresponse", "loadpopularbooks");
         if (var10000 != null) {

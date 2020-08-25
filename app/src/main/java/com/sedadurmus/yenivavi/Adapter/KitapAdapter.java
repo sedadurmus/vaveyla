@@ -51,6 +51,7 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
         final Book book =mBooks.get(position);
         new DownLoadImageTask(holder.bookImg).execute(mBooks.get(position).getImg_url());
         holder.bookTitle.setText(mBooks.get(position).getName());
+        holder.bookAuthor.setText(mBooks.get(position).getAuthor());
 
     }
 
@@ -62,13 +63,14 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView bookTitle;
+        TextView bookTitle, bookAuthor;
         ImageView bookImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bookImg = itemView.findViewById(R.id.book_resim);
             bookTitle = itemView.findViewById(R.id.book_title);
+            bookAuthor = itemView.findViewById(R.id.book_author);
 
 
         }

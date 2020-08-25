@@ -17,7 +17,6 @@
             android:id="@+id/movie_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             tools:layoutManager="GridLayoutManager"
             tools:listitem="@layout/movie_item"/>
 

@@ -35,6 +35,18 @@
                 android:textSize="12dp"/>
 
 
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/book_title"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:textSize="12dp"/>
+
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
