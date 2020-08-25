@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
 
-    public static final String BASE_URL = "http://kitap.bildirimler.com/api/books";
+    public static final String BASE_URL = "http://kitap.bildirimler.com";
     public static Retrofit retrofit = null;
 
 

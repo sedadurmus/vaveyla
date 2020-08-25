@@ -15,11 +15,11 @@ public class AllBookCategory implements Serializable {
     @SerializedName("slug")
     String slug;
 
-    @SerializedName("results")
-    List<Book> results;
+    @SerializedName("books")
+    List<Book> books;
 
-    public List<Book> getResults(){
-        return this.results;
+    public List<Book> getBooks(){
+        return this.books;
     }
 
     public String getName() {
@@ -27,5 +27,8 @@ public class AllBookCategory implements Serializable {
     }
     public Integer getId() {
         return this.id;
+    }
+    public String getSlug() {
+        return this.slug;
     }
 }

@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Fragments;
 
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,20 +12,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.MainRecyclerAdapter;
 import com.sedadurmus.yenivavi.Api.ApiClient;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.R;
+import com.squareup.okhttp.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BookFragment extends Fragment {
 
@@ -58,11 +61,15 @@ public class BookFragment extends Fragment {
 
 
     private void loadPopularBooks() {
-        ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
+
+
+
+       /* ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
         Log.e("BookCategoryresponse", "loadpopularbooks");
         if (var10000 != null) {
+            Log.e("BookCategoryresponse", "loadpopularbooks");
             ApiInterface apiService = var10000;
-            Call call = apiService.getCategories("http://kitap.bildirimler.com/api/categories?with=books");
+            Call call = apiService.getCategories("https://kitap.bildirimler.com/api/categories?with=books");
             call.enqueue((Callback)(new Callback() {
                 public void onResponse(@NotNull Call call, @NotNull Response response) {
                     Log.e("BookCategoryresponse", response.body().toString());
@@ -79,7 +86,7 @@ public class BookFragment extends Fragment {
                     Log.e("BookCategory", "request fail");
                 }
             }));
-        }
+        }*/
     }
 
     private void loadDataAction( List<AllBookCategory> items) {
