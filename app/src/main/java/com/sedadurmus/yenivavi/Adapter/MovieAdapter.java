@@ -71,7 +71,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
                     favoriEkle(movie);
                 } else if (holder.favori.getTag().equals("eklendi")){
-                    FirebaseDatabase.getInstance().getReference("Favoriler").child(mevcutFirebaseUser.getUid())
+                    FirebaseDatabase.getInstance().getReference("Favoriler")
+                            .child("FilmFavorisi")
+                            .child(mevcutFirebaseUser.getUid())
                             .child(movie.getId()).removeValue();
 
 
@@ -125,7 +127,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
-                .child("Favoriler");
+                .child("Favoriler").child("FilmFavorisi");
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -149,7 +151,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void favoriEkle (final Movie movie){
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
         assert mevcutKullanici != null;
-        DatabaseReference favoriFire = FirebaseDatabase.getInstance().getReference("Favoriler")
+        DatabaseReference favoriFire = FirebaseDatabase.getInstance().getReference("Favoriler").child("FilmFavorisi")
                 .child(mevcutKullanici.getUid());
 
         String id = movie.getId();

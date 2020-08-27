@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
                         return ;
                     case 1:
                         Ara.setHint("Film Ara");
-                        movieAdapter = new MovieAdapter();
+                        movieAdapter = new MovieAdapter(getApplicationContext());
                         Ara.addTextChangedListener(new TextWatcher() {
                             @Override
                             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

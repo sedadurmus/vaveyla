@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -20,15 +19,11 @@ import com.android.volley.toolbox.Volley;
 import com.sedadurmus.yenivavi.Adapter.KitapAdapter;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Api.Client;
-import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.Model.Book;
-import com.sedadurmus.yenivavi.Model.Movie;
-import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +42,7 @@ public class KitapFragment extends Fragment {
       View view=  inflater.inflate(R.layout.fragment_kitap, container, false);
             recyclerView =view.findViewById(R.id.first_recycler_view);
             recyclerView.setHasFixedSize(true);
-            GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL , false);
+            GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL , false);
             recyclerView.setLayoutManager(gridLayoutManager);
 ////            loadBooks();
         loadPopular();
@@ -95,7 +90,7 @@ public class KitapFragment extends Fragment {
 
     private void loadPopular(){
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url ="http://kitap.bildirimler.com/api/categories?with=books";
+        String url ="http://kitap.bildirimler.com/api/books";
         Log.e("BURASI", "response");
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

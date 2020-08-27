@@ -41,7 +41,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         new DownLoadImageTask(holder.bookImg).execute(bookList.get(position).getImg_url());
-        holder.bookTitle.setText(bookList.get(position).getName());
+//        holder.bookTitle.setText(bookList.get(position).getName());
 
     }
 
@@ -62,7 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             super(itemView);
 
             bookImg = itemView.findViewById(R.id.book_resim);
-            bookTitle = itemView.findViewById(R.id.book_title);
+//            bookTitle = itemView.findViewById(R.id.book_title);
         }
     }
 }

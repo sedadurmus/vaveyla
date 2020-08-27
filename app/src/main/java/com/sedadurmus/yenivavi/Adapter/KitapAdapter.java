@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.Model.Book;
 import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
-import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.ArrayList;
@@ -59,8 +56,30 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Book book =mBooks.get(position);
         new DownLoadImageTask(holder.bookImg).execute(mBooks.get(position).getImg_url());
-        holder.bookTitle.setText(mBooks.get(position).getName());
-        holder.bookAuthor.setText(mBooks.get(position).getAuthor());
+//        holder.bookTitle.setText(mBooks.get(position).getName());
+//        holder.bookAuthor.setText(mBooks.get(position).getAuthor());
+
+
+        kitapFavoriEklendi(book, holder.favori);
+
+        holder.favori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBooks.clear();
+                Log.e("FAVORİ",holder.favori.getTag().toString() );
+                if (holder.favori.getTag().equals("ekle")) {
+
+                    kitapFavoriEkle(book);
+                } else if (holder.favori.getTag().equals("eklendi")){
+                    FirebaseDatabase.getInstance().getReference("Favoriler")
+                            .child("KitapFavorisi")
+                            .child(mevcutFirebaseUser.getUid())
+                            .child(mBooks.toString()).removeValue();
+
+
+                }
+            }
+        });
 
     }
 
@@ -72,14 +91,15 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView bookTitle, bookAuthor;
-        ImageView bookImg;
+//        TextView bookTitle, bookAuthor;
+        ImageView bookImg, favori;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bookImg = itemView.findViewById(R.id.book_resim);
-            bookTitle = itemView.findViewById(R.id.book_title);
-            bookAuthor = itemView.findViewById(R.id.book_author);
+            favori= itemView.findViewById(R.id.kitapfavoriEkle);
+//            bookTitle = itemView.findViewById(R.id.book_title);
+//            bookAuthor = itemView.findViewById(R.id.book_author);
 
 
         }
@@ -88,17 +108,17 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
 
     //favori ekleme için yaptıklarım
 
-    private void favoriEklendi(final Movie movie,  final ImageView imageView) {
+    private void kitapFavoriEklendi(final Book book,  final ImageView imageView) {
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference begeniVeriTabaniYolu = FirebaseDatabase.getInstance().getReference()
-                .child("Favoriler");
+                .child("Favoriler").child("KitapFavorisi");
         begeniVeriTabaniYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 assert mevcutKullanici != null;
-                if (dataSnapshot.child(mevcutKullanici.getUid()).child(movie.getId()).exists()) {
+                if (dataSnapshot.child(mevcutKullanici.getUid()).child(book.getName()).exists()) {
                     imageView.setImageResource(R.drawable.ic_check_circle);
                     imageView.setTag("eklendi");
 
@@ -113,16 +133,18 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
         });
     }
 
-    public void favoriEkle (final Movie movie){
+    public void kitapFavoriEkle (final Book book){
         final FirebaseUser mevcutKullanici = FirebaseAuth.getInstance().getCurrentUser();
         assert mevcutKullanici != null;
         DatabaseReference favoriFire = FirebaseDatabase.getInstance().getReference("Favoriler")
+                .child("KitapFavorisi")
                 .child(mevcutKullanici.getUid());
 
-        String id = movie.getId();
+        String id = book.getName();
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("title", movie.getTitle());
-        hashMap.put("poster_path", movie.getPosterPath());
+        hashMap.put("title", book.getName());
+        hashMap.put("author", book.getAuthor());
+        hashMap.put("poster_path", book.getImg_url());
         favoriFire.child(id).setValue(hashMap);
 
     }

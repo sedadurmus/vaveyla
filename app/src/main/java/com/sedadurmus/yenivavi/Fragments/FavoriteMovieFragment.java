@@ -97,6 +97,7 @@ public class FavoriteMovieFragment extends Fragment {
         assert mevcutKullanici != null;
         final DatabaseReference favoriYolu = FirebaseDatabase.getInstance()
                                                 .getReference("Favoriler")
+                                                .child("FilmFavorisi")
                                                 .child(mevcutKullanici.getUid());
 
         favoriYolu.addValueEventListener(new ValueEventListener() {
