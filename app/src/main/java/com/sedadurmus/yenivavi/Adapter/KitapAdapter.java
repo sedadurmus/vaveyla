@@ -46,7 +46,15 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item, parent, false);
         return new ViewHolder(view);
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Book book =mBooks.get(position);
