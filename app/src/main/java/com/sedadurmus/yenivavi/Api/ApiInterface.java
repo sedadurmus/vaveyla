@@ -14,6 +14,8 @@ import retrofit2.http.Url;
 public interface ApiInterface {
     @GET
     Call<TheMovieDB> getMovies(@Url String url);
+
+
     @GET
     Call<Movie> getMovie(@Url String url);
 

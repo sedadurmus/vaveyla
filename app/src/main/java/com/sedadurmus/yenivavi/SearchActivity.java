@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,18 +19,30 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
+import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
 import com.sedadurmus.yenivavi.Adapter.SearchAdapter;
+import com.sedadurmus.yenivavi.Api.ApiClient;
+import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Model.Kullanici;
+import com.sedadurmus.yenivavi.Model.Movie;
+import com.sedadurmus.yenivavi.Model.TheMovieDB;
 
+import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity {
 
     private KullaniciAdapter kullaniciAdapter;
     private List<Kullanici> mKullaniciler;
     EditText Ara;
-
+    private MovieAdapter movieAdapter;
+    private List<Movie> movies;
     ViewPager viewPager;
     TabLayout tabLayout;
     @SuppressLint("SetTextI18n")
@@ -93,6 +106,25 @@ public class SearchActivity extends AppCompatActivity {
                         return ;
                     case 1:
                         Ara.setHint("Film Ara");
+                        movieAdapter = new MovieAdapter();
+                        Ara.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                String search = charSequence.toString().toLowerCase();
+                                Log.e("ARAMA", search);
+                                filmAra(search);
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable editable) {
+
+                            }
+                        });
 
                         return ;
                     case 2:
@@ -137,6 +169,42 @@ public class SearchActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private final void filmAra(String search) {
+        Log.e("ARAMA", search);
+        Log.e("ARAMA", search);
+        ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
+        if (var10000 != null) {
+            ApiInterface apiService = var10000;
+            Call call = apiService.getMovies("https://api.themoviedb.org/3/search/movie?api_key=b7ee738bdfe5a91a0cec31c619d58968&query=" + search + "&language=tr");
+            call.enqueue((Callback)(new Callback() {
+                public void onResponse(@NotNull Call call, @NotNull Response response) {
+
+                    TheMovieDB theMovieDB = (TheMovieDB)response.body();
+                    movies = theMovieDB.getResults();
+                    Integer len = movies.toArray().length;
+                    movieAdapter.notifyDataSetChanged();
+                    loadDataAction(theMovieDB.getResults());
+                    Log.e("TheMovieDB", len.toString());
+                }
+
+                public void onFailure(@NotNull Call call, @NotNull Throwable t) {
+
+                    Log.e("MOVIES", "request fail");
+                }
+            }));
+        }
+    }
+    private void loadDataAction( List<Movie> items) {
+
+        if (items != null) {
+            List<Movie> models = items;
+            Log.e("EKLEME", models.toArray().toString());
+            Collections.reverse(items);
+            movieAdapter.addAll(items);
+            movieAdapter.notifyDataSetChanged();
+        }
     }
 
 }

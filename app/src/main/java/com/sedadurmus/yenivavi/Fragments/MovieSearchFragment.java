@@ -17,7 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
+import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
 import com.sedadurmus.yenivavi.Model.Kullanici;
+import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
 import java.util.ArrayList;
@@ -26,8 +28,8 @@ import java.util.List;
 
 public class MovieSearchFragment extends Fragment {
     private RecyclerView recyclerView;
-    private KullaniciAdapter kullaniciAdapter;
-    private List<Kullanici> mKullaniciler;
+    private MovieAdapter movieAdapter;
+    private List<Movie> mMovies;
     EditText kullanıcıAra;
 
     public MovieSearchFragment() {
@@ -48,41 +50,20 @@ public class MovieSearchFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_movie_search, container, false);
 
 //        kullanıcıAra=view.findViewById(R.id.edit_kullanici_arama_bar);
-        recyclerView =view.findViewById(R.id.reycler_view_kullanici_ara);
+        recyclerView =view.findViewById(R.id.reycler_view_movie_ara);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mKullaniciler = new ArrayList<>();
-        kullaniciAdapter =new KullaniciAdapter(getContext(), mKullaniciler);
-        recyclerView.setAdapter(kullaniciAdapter);
+
+        movieAdapter =new MovieAdapter(getContext());
+        recyclerView.setAdapter(movieAdapter);
 
 //        kullanicileriOku();
 
         return view;
     }
 
-    private void kullaniciAra(String s) {
-        Query sorgu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").orderByChild("kullaniciadi")
-                .startAt(s)
-                .endAt(s+"\uf8ff");
-
-        sorgu.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mKullaniciler.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    Kullanici kullanici = snapshot.getValue(Kullanici.class);
-                    mKullaniciler.add(kullanici);
-                }
-                kullaniciAdapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
 
 
 //        private void kullanicileriOku (){

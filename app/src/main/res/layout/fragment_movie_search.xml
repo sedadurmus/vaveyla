@@ -29,7 +29,7 @@
 <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reycler_view_kullanici_ara"
+        android:id="@+id/reycler_view_movie_ara"
         android:layout_below="@+id/bar_searchCerceve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

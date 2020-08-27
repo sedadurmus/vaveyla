@@ -26,13 +26,12 @@ public class SearchAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                MovieSearchFragment movieSearchFragment = new MovieSearchFragment();
-
-
-                return movieSearchFragment;
-            case 1:
                 DukkanFragment dukkanFragment = new DukkanFragment();
                 return dukkanFragment;
+            case 1:
+
+            MovieSearchFragment movieSearchFragment = new MovieSearchFragment();
+            return movieSearchFragment;
             case 2:
                 GorevFragment gorevFragment = new GorevFragment();
                 return gorevFragment;
