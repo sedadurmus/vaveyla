@@ -1,6 +1,7 @@
 package com.sedadurmus.yenivavi.Api;
 
 import com.sedadurmus.yenivavi.Model.AllBookCategory;
+import com.sedadurmus.yenivavi.Model.Book;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.Model.TheMovieDB;
 
@@ -20,7 +21,7 @@ public interface ApiInterface {
     Call<List<AllBookCategory>> getCategories(@Url String url);
 
     @GET
-    Call<AllBookCategory> getBook(@Url String url);
+    Call<List<Book>> getBooks(@Url String url);
 //    @GET
 //    Call<List<ProductModel>> getProducts(@Url String url);
 //    @GET

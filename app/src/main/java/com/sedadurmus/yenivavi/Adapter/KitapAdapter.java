@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.Model.Book;
 import com.sedadurmus.yenivavi.Model.DownLoadImageTask;
 import com.sedadurmus.yenivavi.Model.Movie;
@@ -121,7 +122,7 @@ public class KitapAdapter extends RecyclerView.Adapter<KitapAdapter.ViewHolder> 
 
 
     public void addAll(List<Book> videoModelList) {
-        Log.e("MOVIE","ADDALL");
+        Log.e("BOOK","ADDALL");
 
         for (Book videoModel : videoModelList) {
 

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -21,9 +22,13 @@ import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Api.Client;
 import com.sedadurmus.yenivavi.Model.AllBookCategory;
 import com.sedadurmus.yenivavi.Model.Book;
+import com.sedadurmus.yenivavi.Model.Movie;
+import com.sedadurmus.yenivavi.Model.TheMovieDB;
 import com.sedadurmus.yenivavi.R;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,31 +120,26 @@ public class KitapFragment extends Fragment {
             Log.e("BURASI", "loadpopularbooks");
             Client Client = new Client();
             ApiInterface apiService = Client.getClient().create(ApiInterface.class);
-            Call<List<AllBookCategory>> call = apiService.getCategories("http://kitap.bildirimler.com/api/categories?with=books");
-            call.enqueue(new Callback<List<AllBookCategory>>() {
+            Call<List<Book>> call = apiService.getBooks("http://kitap.bildirimler.com/api/books");
+            call.enqueue(new Callback<List<Book>>() {
                 @Override
-                public void onResponse(Call<List<AllBookCategory>> call, Response<List<AllBookCategory>> response) {
-                    List<AllBookCategory> categories = (List<AllBookCategory>)response.body();
+                public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                    List<Book> books = (List<Book>)response.body();
 //                    AllBookCategory category = categories.get(0);
-                    Log.e("BURASI", categories.get(0).getSlug());
-                    Log.e("BURASI", categories.get(0).getId().toString());
+                    Log.e("BURASI", books.get(0).getSlug());
+                    Log.e("BURASI", books.get(0).getId().toString());
 
-//                  if (response.isSuccessful()){
-//                        if (response.body() != null){
-//                            KitapAdapter firstAdapter = new KitapAdapter(getContext());
-//                            RecyclerView firstRecyclerView = Objects.requireNonNull(getView()).findViewById(R.id.first_recycler_view);
-//                            LinearLayoutManager firstManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-//                            firstRecyclerView.setLayoutManager(firstManager);
-//                            firstRecyclerView.setAdapter(firstAdapter);
-//                        }
-//                    }
+                    Integer len = books.toArray().length;
+                    loadDataAction(books);
+                    kitapAdapter.notifyDataSetChanged();
+
+                    Log.e("TheMovieDB", len.toString());
                 }
 
                 @Override
-                public void onFailure(Call<List<AllBookCategory>> call, Throwable t) {
+                public void onFailure(Call<List<Book>> call, Throwable t) {
                     Log.d("BURASI", t.getMessage());
                     Toast.makeText(getContext(), "Error fetching trailer data", Toast.LENGTH_SHORT).show();
-
                 }
             });
 
@@ -148,6 +148,15 @@ public class KitapFragment extends Fragment {
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
+    private void loadDataAction( List<Book> items) {
 
+        if (items != null) {
+            List<Book> models = items;
+            Log.e("EKLEME", models.toArray().toString());
+            Collections.reverse(items);
+            kitapAdapter.addAll(items);
+            kitapAdapter.notifyDataSetChanged();
+        }
+    }
 
 }
