@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.sedadurmus.yenivavi.Fragments.DukkanFragment;
 import com.sedadurmus.yenivavi.Fragments.GorevFragment;
 import com.sedadurmus.yenivavi.Fragments.MovieSearchFragment;
+import com.sedadurmus.yenivavi.Model.Movie;
+
+import java.util.List;
 
 public class SearchAdapter extends FragmentPagerAdapter {
     public SearchAdapter(@NonNull Context context, FragmentManager fm, int totalTabs) {
@@ -20,7 +23,9 @@ public class SearchAdapter extends FragmentPagerAdapter {
 
     private Context myContext;
     int totalTabs;
-
+    MovieAdapter movieAdapter;
+    String searchWord;
+    private List<Movie> mMovies;
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -29,9 +34,8 @@ public class SearchAdapter extends FragmentPagerAdapter {
                 DukkanFragment dukkanFragment = new DukkanFragment();
                 return dukkanFragment;
             case 1:
-
-            MovieSearchFragment movieSearchFragment = new MovieSearchFragment();
-            return movieSearchFragment;
+                MovieSearchFragment movieSearchFragment = new MovieSearchFragment(movieAdapter, searchWord, mMovies);
+                return movieSearchFragment;
             case 2:
                 GorevFragment gorevFragment = new GorevFragment();
                 return gorevFragment;

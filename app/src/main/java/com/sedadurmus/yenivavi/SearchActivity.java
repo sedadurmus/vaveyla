@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -25,12 +26,17 @@ import com.sedadurmus.yenivavi.Adapter.MovieAdapter;
 import com.sedadurmus.yenivavi.Adapter.SearchAdapter;
 import com.sedadurmus.yenivavi.Api.ApiClient;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
+import com.sedadurmus.yenivavi.Fragments.MovieSearchFragment;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.Model.TheMovieDB;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     private List<Kullanici> mKullaniciler;
     EditText Ara;
     private MovieAdapter movieAdapter;
-    private List<Movie> movies;
+    private List<Movie> mMovies;
     ViewPager viewPager;
     TabLayout tabLayout;
     @SuppressLint("SetTextI18n")
@@ -50,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        mMovies = new ArrayList<>();
 
         Toolbar toolbar =findViewById(R.id.toolbar_search);
         setSupportActionBar(toolbar);
@@ -66,6 +72,7 @@ public class SearchActivity extends AppCompatActivity {
 
         viewPager =findViewById(R.id.viewPager);
         tabLayout =findViewById(R.id.tabLayout);
+
         tabLayout.addTab(tabLayout.newTab().setText("Kişi"));
         tabLayout.addTab(tabLayout.newTab().setText("Film"));
         tabLayout.addTab(tabLayout.newTab().setText("Kitap"));
@@ -171,26 +178,26 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private final void filmAra(String search) {
+    public void filmAra(String search) {
         Log.e("ARAMA", search);
         Log.e("ARAMA", search);
-        ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
-        if (var10000 != null) {
-            ApiInterface apiService = var10000;
+        if(search.isEmpty())
+            return;
+        ApiInterface apiService = (ApiInterface) ApiClient.createService(ApiInterface.class);
+        if (apiService != null) {
             Call call = apiService.getMovies("https://api.themoviedb.org/3/search/movie?api_key=b7ee738bdfe5a91a0cec31c619d58968&query=" + search + "&language=tr");
             call.enqueue((Callback)(new Callback() {
                 public void onResponse(@NotNull Call call, @NotNull Response response) {
 
                     TheMovieDB theMovieDB = (TheMovieDB)response.body();
-                    movies = theMovieDB.getResults();
-                    Integer len = movies.toArray().length;
+                    mMovies = theMovieDB.getResults();
+                    Integer len = mMovies.toArray().length;
                     movieAdapter.notifyDataSetChanged();
                     loadDataAction(theMovieDB.getResults());
                     Log.e("TheMovieDB", len.toString());
                 }
 
                 public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-
                     Log.e("MOVIES", "request fail");
                 }
             }));
@@ -206,5 +213,7 @@ public class SearchActivity extends AppCompatActivity {
             movieAdapter.notifyDataSetChanged();
         }
     }
+
+
 
 }

@@ -45,7 +45,7 @@ public class KitapFragment extends Fragment {
             GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL , false);
             recyclerView.setLayoutManager(gridLayoutManager);
 ////            loadBooks();
-        loadPopular();
+            loadPopular();
             kitapAdapter =new KitapAdapter(getContext());
             recyclerView.setAdapter(kitapAdapter);
             return view;
