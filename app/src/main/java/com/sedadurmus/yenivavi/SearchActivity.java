@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private KullaniciAdapter kullaniciAdapter;
     private List<Kullanici> mKullaniciler;
-    EditText Ara;
+    SearchView Ara;
 //    private MovieAdapter movieAdapter;
 //    private List<Movie> mMovies;
     ViewPager viewPager;
@@ -86,25 +87,27 @@ public class SearchActivity extends AppCompatActivity {
 
         kullanicileriOku();
 //        loadMovies();
-        Ara.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        Ara.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // collapse the view ?
+                //menu.findItem(R.id.menu_search).collapseActionView();
+                Log.e("queryText",query);
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                kullaniciAra(s.toString().toLowerCase());
-//                search();
-
+            public boolean onQueryTextChange(String newText) {
+                // search goes here !!
+                // listAdapter.getFilter().filter(query);
+                kullaniciAra(newText);
+                Log.e("queryText",newText);
+                return false;
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
 
-            }
         });
-
 
 
 
@@ -290,7 +293,7 @@ public class SearchActivity extends AppCompatActivity {
         kullanicilerYolu.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (Ara.getText().toString().equals(""))
+                if (Ara.getQuery().toString().equals(""))
                 {
                     mKullaniciler.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren())
@@ -401,7 +404,7 @@ public class SearchActivity extends AppCompatActivity {
     }
     private void search()
     {
-        String search_query = Ara.getText().toString();
+        String search_query = Ara.getQuery().toString();
 
         boolean is_connected = Read_network_state(this);
         if(!is_connected)
