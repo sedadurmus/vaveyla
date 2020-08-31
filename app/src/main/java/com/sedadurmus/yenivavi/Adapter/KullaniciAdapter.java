@@ -54,8 +54,10 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
+
         firebaseKullanici = FirebaseAuth.getInstance().getCurrentUser();
         final Kullanici kullanici =mKullanicilar.get(i);
+
         viewHolder.btn_takipEt.setVisibility(View.VISIBLE);
         viewHolder.kullaniciadi.setText(kullanici.getKullaniciadi());
         viewHolder.ad.setText(kullanici.getAd());
@@ -67,14 +69,17 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
         {
             viewHolder.btn_takipEt.setVisibility(View.GONE);
         }
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                     editor.putString("profileid", kullanici.getId());
                     editor.apply();
-                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, new ProfileFragment()).commit();
+
+                ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+
             }
         });
         viewHolder.btn_takipEt.setOnClickListener(new View.OnClickListener() {
