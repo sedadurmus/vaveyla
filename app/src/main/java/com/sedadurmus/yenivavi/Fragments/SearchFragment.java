@@ -1,11 +1,12 @@
 package com.sedadurmus.yenivavi.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,6 @@ import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
 import com.sedadurmus.yenivavi.Adapter.SectionPagerAdapter;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.R;
-import com.sedadurmus.yenivavi.SearchActivity;
 
 import java.util.List;
 
@@ -27,15 +27,14 @@ public class SearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private KullaniciAdapter kullaniciAdapter;
     private List<Kullanici> mKullaniciler;
-
-
     private SwipeRefreshLayout refreshLayout;
 //    EditText arama_bar;
     ImageView arama;
     View myFragment;
     ViewPager viewPager;
     TabLayout tabLayout;
-
+    SearchView searchView ;
+    TextView kesfetTxt;
 
 //    APİ - tmdb den aldığım apiiiiiiiii keeey
 //     b7ee738bdfe5a91a0cec31c619d58968
@@ -82,12 +81,18 @@ public class SearchFragment extends Fragment {
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         arama=myFragment.findViewById(R.id.aramaya_git);
+        searchView = myFragment.findViewById(R.id.searchView);
+        kesfetTxt= myFragment.findViewById(R.id.kesfet);
 
         arama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), SearchActivity.class);
-                getContext().startActivity(intent);
+//                Intent intent = new Intent(getContext(), SearchActivity.class);
+//                getContext().startActivity(intent);
+                arama.setVisibility(View.GONE);
+                searchView.setVisibility(View.VISIBLE);
+                kesfetTxt.setVisibility(View.GONE);
+
             }
         });
 

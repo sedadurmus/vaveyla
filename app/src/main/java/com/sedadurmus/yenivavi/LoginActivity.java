@@ -171,36 +171,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showRecoverPasswordDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        View view = LayoutInflater.from(LoginActivity.this).inflate(
-//                R.layout.alert_dialog,
-//                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
-//        );
-//        builder.setView(view);
-//        ((TextView)view.findViewById(R.id.textTitle)).setText("Şifre Sıfırlama");
-//        ((EditText)view.findViewById(R.id.textMessage)).setHint("Email");
-//        ((Button)view.findViewById(R.id.buttonNo)).setText("Kapat");
-//        ((Button)view.findViewById(R.id.buttonYes)).setText("Sıfırla");
-//        ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
-//        final AlertDialog alertDialog1 = builder.create();
-//        view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String email = ((EditText)view).getText().toString().trim();
-//                beginRecovery(email);
-//                finish();
-//            }
-//        });
-//        view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                alertDialog1.cancel();
-//            }
-//        });
-//        if (alertDialog1.getWindow() != null){
-//            alertDialog1.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-//        }
-//        alertDialog1.show();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Şifre Sıfırlama");

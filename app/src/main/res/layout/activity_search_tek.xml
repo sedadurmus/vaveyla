@@ -20,7 +20,7 @@
         <SearchView
             android:id="@+id/edit_kullanici_arama_bar"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"></SearchView>
+            android:layout_height="match_parent"/>
     </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>
 
