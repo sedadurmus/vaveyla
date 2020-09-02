@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sedadurmus.yenivavi.Fragments.ProfileFragment;
+import com.sedadurmus.yenivavi.Fragments.ProfilPaylasimFragment;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.R;
 
@@ -78,7 +78,7 @@ public class KullaniciAdapter extends RecyclerView.Adapter<KullaniciAdapter.View
                     editor.apply();
 
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new ProfilPaylasimFragment()).commit();
 
             }
         });

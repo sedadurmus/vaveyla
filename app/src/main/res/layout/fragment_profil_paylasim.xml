@@ -20,10 +20,17 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/geri_profil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_geri_black"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
                 android:textSize="18sp"
                 android:maxLines="1"
                 android:textStyle="bold"

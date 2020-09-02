@@ -14,6 +14,7 @@ public class Gonderi {
     private String gonderiVideo;
     private String gonderiHakkinda;
     private String gonderiTuru;
+    private String gonderiAdi;
     private String gonderen;
     private String gonderiTarihi;
     private String gonderiUid;
@@ -30,6 +31,13 @@ public class Gonderi {
     public Gonderi() {
     }
 
+    public String getGonderiAdi() {
+        return gonderiAdi;
+    }
+
+    public void setGonderiAdi(String gonderiAdi) {
+        this.gonderiAdi = gonderiAdi;
+    }
 
     public boolean isGorevmi() {
         return gorevmi;
@@ -39,11 +47,13 @@ public class Gonderi {
         this.gorevmi = gorevmi;
     }
 
-    public Gonderi(String gonderiId, String gonderiResmi, String gonderiVideo, String gonderiHakkinda, String gonderen, String gonderiTarihi, boolean gorevmi, boolean onayDurumu) {
+    public Gonderi(String gonderiId, String gonderiResmi, String gonderiVideo, String gonderiHakkinda,
+                   String gonderen, String gonderiTarihi, boolean gorevmi, boolean onayDurumu, String gonderiAdi) {
         this.gonderiId = gonderiId;
         this.gonderiResmi = gonderiResmi;
         this.gonderiVideo= gonderiVideo;
         this.gonderiHakkinda = gonderiHakkinda;
+        this.gonderiAdi = gonderiAdi;
         this.gonderen = gonderen;
         this.gonderiTarihi = gonderiTarihi;
         this.gorevmi = gorevmi;

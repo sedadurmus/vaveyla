@@ -115,8 +115,8 @@
                 <ImageView
                     android:id="@+id/film_poster2"
                     android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    android:scaleType="centerInside"
+                    android:layout_height="150dp"
+                    android:scaleType="matrix"
                     android:src="@mipmap/ic_launcher"
                     android:adjustViewBounds="true"
                     android:visibility="gone"
@@ -133,6 +133,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/gonderi_ad"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#fff"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/film_poster2"
+                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"
+                   />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -232,7 +244,8 @@
                     android:text="10dk"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:typeface="serif" />
+                    android:typeface="serif"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </LinearLayout>

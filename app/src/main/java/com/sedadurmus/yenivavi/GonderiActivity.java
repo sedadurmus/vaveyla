@@ -198,6 +198,7 @@ public class GonderiActivity extends AppCompatActivity {
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
                         hashMap.put("gonderiTuru", "gonderi");
+                        hashMap.put("gonderiAdi", "");
                         hashMap.put("onaydurumu", false);
 
 
@@ -249,6 +250,7 @@ public class GonderiActivity extends AppCompatActivity {
             hashMap.put("gorevmi", false);
             hashMap.put("gonderiTarihi", simdikiTarih);
             hashMap.put("gonderiTuru", "gonderi");
+            hashMap.put("gonderiAdi", "");
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);
 

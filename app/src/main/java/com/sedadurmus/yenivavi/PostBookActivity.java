@@ -189,6 +189,7 @@ public class PostBookActivity extends AppCompatActivity {
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
                         hashMap.put("gonderiTuru", "kitap");
+                        hashMap.put("gonderiAdi", kitapAdi.getText().toString());
                         hashMap.put("onaydurumu", false);
 
                         veriYolu.child(gonderiId).setValue(hashMap);
@@ -239,6 +240,7 @@ public class PostBookActivity extends AppCompatActivity {
             hashMap.put("gorevmi", false);
             hashMap.put("gonderiTarihi", simdikiTarih);
             hashMap.put("gonderiTuru", "kitap");
+            hashMap.put("gonderiAdi", kitapAdi.getText().toString());
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);
 

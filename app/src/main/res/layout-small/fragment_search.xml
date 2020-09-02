@@ -17,21 +17,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground">
+            <!--            <ImageView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:src="@drawable/ic_search"/>-->
+
             <ImageView
+                android:id="@+id/geri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_search"/>
+                android:src="@drawable/ic_geri_black"/>
 
-            <EditText
-                android:id="@+id/edit_arama_bar"
-                android:background="@android:color/transparent"
-                android:text=""
-                android:hint="Arama"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="10dp"
+
+            <SearchView
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:queryHint="Kullanıcı Ara"
+                android:layoutDirection="rtl" />
 
         </androidx.appcompat.widget.Toolbar>
 

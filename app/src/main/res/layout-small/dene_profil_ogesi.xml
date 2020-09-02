@@ -99,35 +99,39 @@
                 android:visibility="visible"
                 tools:ignore="MissingConstraints,NotSibling">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/txt_gonderiHakkinda_profil_ogesi"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:maxLines="15"-->
-<!--                    android:layout_marginLeft="8dp"-->
-<!--                    android:text="Gönderi Hakkında"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:typeface="serif"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"-->
-<!--                    tools:layout_editor_absoluteY="7dp" />-->
                 <ImageView
                     android:id="@+id/film_poster2"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
-                    android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
+                    android:scaleType="matrix"
                     app:layout_constraintEnd_toEndOf="@+id/constraint_movie"
                     app:layout_constraintStart_toStartOf="@+id/constraint_movie"
                     app:layout_constraintTop_toTopOf="@+id/constraint_movie" />
 
-            <ImageView
-                android:id="@+id/gonderi_resmi_profil_ogesi"
-                android:layout_width="90dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="15dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/gonderi_resmi_profil_ogesi"
+                    android:layout_width="90dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="15dp"
+                    android:scaleType="matrix"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/gonderi_ad"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/browser_actions_divider_color"
+                    android:textColor="#fff"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/film_poster2"
+                    app:layout_constraintStart_toEndOf="@+id/gonderi_resmi_profil_ogesi"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -196,7 +200,8 @@
                     android:text="10dk"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:typeface="serif" />
+                    android:typeface="serif"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </LinearLayout>

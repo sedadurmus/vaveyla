@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -56,7 +57,7 @@ public class ProfilPaylasimFragment extends Fragment {
     private SwipeRefreshLayout refreshLayout;
     FirebaseUser mevcutKullanici;
     private Button btn_profili_düzenle;
-    ImageView profil_resmi, ayarlar, mesaj, puan_resim;
+    ImageView profil_resmi, ayarlar, mesaj, puan_resim, geri;
     String profilId;
 
     public ProfilPaylasimFragment (){
@@ -80,6 +81,7 @@ public class ProfilPaylasimFragment extends Fragment {
         profil_resmi = view.findViewById(R.id.profil_resmi_profilCercevesi);
         puan_resim = view.findViewById(R.id.txt_puan_resim);
         ayarlar = view.findViewById(R.id.profil_ayarlar);
+        geri = view.findViewById(R.id.geri_profil);
         mesaj = view.findViewById(R.id.profil_message);
         txt_gonderiler = view.findViewById(R.id.txt_gonderiler_profilCercevesi);
         txt_takipciler = view.findViewById(R.id.txt_takipciler_profilCercevesi);
@@ -119,6 +121,14 @@ public class ProfilPaylasimFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), AyarlarActivity.class));
+            }
+        });
+
+        geri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SearchFragment()).commit();
             }
         });
 
@@ -193,8 +203,10 @@ public class ProfilPaylasimFragment extends Fragment {
         }
         if (profilId.equals(mevcutKullanici.getUid())){
             mesaj.setVisibility(View.INVISIBLE);
+            geri.setVisibility(View.INVISIBLE);
         }else {
             mesaj.setVisibility(View.VISIBLE);
+            geri.setVisibility(View.VISIBLE);
         }
         mesaj.setOnClickListener(new View.OnClickListener() {
             @Override

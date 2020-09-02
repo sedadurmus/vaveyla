@@ -40,9 +40,6 @@ import com.sedadurmus.yenivavi.R;
 import com.sedadurmus.yenivavi.TakipcilerActivity;
 import com.sedadurmus.yenivavi.YorumlarActivity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -153,6 +150,12 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
             Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
             Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
         }
+        if (gonderi.getGonderiAdi().equals("")){
+            viewHolder.gonderiAd.setVisibility(View.GONE);
+        }else {
+            viewHolder.gonderiAd.setVisibility(View.VISIBLE);
+            viewHolder.gonderiAd.setText(gonderi.getGonderiAdi());
+        }
 
 
 
@@ -163,34 +166,34 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
             }
         });
 
-        viewHolder.txt_zaman.setText(gonderi.getTarih() != null ? gonderi.getTarih().toString() : "");
-        Date simdi = new Date();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat;
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        simdikiTarih = dateFormat.format(simdi);
-        Date tarih = null;
-        try {
-            tarih = (gonderi.getTarih());
-        } catch (Exception e) {
-        }
-        if (tarih != null) {
-            int fark = (int) (simdi.getTime() - tarih.getTime());
-            int gun = fark / (1000 * 60 * 60 * 24);
-            int saat = fark / (1000 * 60 * 60);
-            int dakika = fark / (1000 * 60);
-            int saniye = fark / (1000);
-            if (saniye == 0)
-                viewHolder.txt_zaman.setText("şimdi");
-            if (saniye > 0 && dakika == 0)
-                viewHolder.txt_zaman.setText(saniye + "sn");
-            if (dakika > 0 && saat == 0)
-                viewHolder.txt_zaman.setText(dakika + "dk");
-            if (saat > 0 && gun == 0)
-                viewHolder.txt_zaman.setText(saat + "sa");
-            if (gun > 0)
-                viewHolder.txt_zaman.setText(gun + "g");
-            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
-        }
+//        viewHolder.txt_zaman.setText(gonderi.getTarih() != null ? gonderi.getTarih().toString() : "");
+//        Date simdi = new Date();
+//        @SuppressLint("SimpleDateFormat") DateFormat dateFormat;
+//        dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        simdikiTarih = dateFormat.format(simdi);
+//        Date tarih = null;
+//        try {
+//            tarih = (gonderi.getTarih());
+//        } catch (Exception e) {
+//        }
+//        if (tarih != null) {
+//            int fark = (int) (simdi.getTime() - tarih.getTime());
+//            int gun = fark / (1000 * 60 * 60 * 24);
+//            int saat = fark / (1000 * 60 * 60);
+//            int dakika = fark / (1000 * 60);
+//            int saniye = fark / (1000);
+//            if (saniye == 0)
+//                viewHolder.txt_zaman.setText("şimdi");
+//            if (saniye > 0 && dakika == 0)
+//                viewHolder.txt_zaman.setText(saniye + "sn");
+//            if (dakika > 0 && saat == 0)
+//                viewHolder.txt_zaman.setText(dakika + "dk");
+//            if (saat > 0 && gun == 0)
+//                viewHolder.txt_zaman.setText(saat + "sa");
+//            if (gun > 0)
+//                viewHolder.txt_zaman.setText(gun + "g");
+//            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
+//        }
 
 //        Metotları çağırmak için
         gonderenBilgileri(viewHolder.profil_resmi, viewHolder.txt_kullanici_adi, viewHolder.txt_gonderen, gonderi.getGonderen());
@@ -335,7 +338,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView profil_resmi, gonderiResmi, begeniResmi, yorumResmi, kaydetmeResmi, silResmi, more, gorevMi, posterArka;
-        public TextView txt_kullanici_adi, txt_begeni, txt_gonderen, txt_gonderi_hakkinda, txt_yorumlar, txt_zaman;
+        public TextView txt_kullanici_adi, txt_begeni, txt_gonderen, txt_gonderi_hakkinda, txt_yorumlar, txt_zaman, gonderiAd;
         CardView cardView;
 //        public VideoView videoView;
 
@@ -370,7 +373,8 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
             txt_begeni = itemView.findViewById(R.id.txt_begeniler_profil_ogesi);
             txt_gonderi_hakkinda = itemView.findViewById(R.id.txt_gonderiHakkinda_profil_ogesi);
             txt_yorumlar = itemView.findViewById(R.id.txt_yorum_profil_ogesi);
-            txt_zaman = itemView.findViewById(R.id.txt_zaman);
+            gonderiAd = itemView.findViewById(R.id.gonderi_ad);
+//            txt_zaman = itemView.findViewById(R.id.txt_zaman);
         }
     }
 

@@ -142,7 +142,12 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             }
 //        }
 
-
+        if (gonderi.getGonderiAdi().equals("")){
+            viewHolder.gonderiAd.setVisibility(View.GONE);
+        }else {
+            viewHolder.gonderiAd.setVisibility(View.VISIBLE);
+            viewHolder.gonderiAd.setText(gonderi.getGonderiAdi());
+        }
 
 
         viewHolder.gorevMi.setOnClickListener(new View.OnClickListener() {
@@ -152,31 +157,31 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             }
         });
 
-        Date simdi = new Date();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date tarih = null;
-        try {
-            tarih = gonderi.getTarih();
-        } catch (Exception e) {
-        }
-        if (tarih != null) {
-            int fark = (int) (simdi.getTime() - tarih.getTime());
-            int gun = fark / (1000 * 60 * 60 * 24);
-            int saat = fark / (1000 * 60 * 60);
-            int dakika = fark / (1000 * 60);
-            int saniye = fark / (1000);
-            if (saniye == 0)
-                viewHolder.txt_zaman.setText("şimdi");
-            if (saniye > 0 && dakika == 0)
-                viewHolder.txt_zaman.setText(saniye + "s");
-            if (dakika > 0 && saat == 0)
-                viewHolder.txt_zaman.setText(dakika + "dk");
-            if (saat > 0 && gun == 0)
-                viewHolder.txt_zaman.setText(saat + "sa");
-            if (gun > 0)
-                viewHolder.txt_zaman.setText(gun + "g");
-            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
-        }
+//        Date simdi = new Date();
+//        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        Date tarih = null;
+//        try {
+//            tarih = gonderi.getTarih();
+//        } catch (Exception e) {
+//        }
+//        if (tarih != null) {
+//            int fark = (int) (simdi.getTime() - tarih.getTime());
+//            int gun = fark / (1000 * 60 * 60 * 24);
+//            int saat = fark / (1000 * 60 * 60);
+//            int dakika = fark / (1000 * 60);
+//            int saniye = fark / (1000);
+//            if (saniye == 0)
+//                viewHolder.txt_zaman.setText("şimdi");
+//            if (saniye > 0 && dakika == 0)
+//                viewHolder.txt_zaman.setText(saniye + "s");
+//            if (dakika > 0 && saat == 0)
+//                viewHolder.txt_zaman.setText(dakika + "dk");
+//            if (saat > 0 && gun == 0)
+//                viewHolder.txt_zaman.setText(saat + "sa");
+//            if (gun > 0)
+//                viewHolder.txt_zaman.setText(gun + "g");
+//            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
+//        }
 
         gonderenBilgileri(viewHolder.profil_resmi, viewHolder.txt_kullanici_adi, viewHolder.txt_gonderen, gonderi.getGonderen());
         begenildi(gonderi.getGonderiId(), viewHolder.begeniResmi);
@@ -324,7 +329,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView profil_resmi, gonderiResmi, begeniResmi, yorumResmi, silResmi,more, gorevMi, posterArka;
-        public TextView txt_kullanici_adi, txt_begeni, txt_gonderen, txt_gonderi_hakkinda, txt_yorumlar, txt_zaman;
+        public TextView txt_kullanici_adi, txt_begeni, txt_gonderen, txt_gonderi_hakkinda, txt_yorumlar, txt_zaman, gonderiAd;
         CardView cardView;
         public VideoView videoView;
 
@@ -349,6 +354,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             txt_gonderi_hakkinda = itemView.findViewById(R.id.txt_gonderiHakkinda_profil_ogesi);
             txt_yorumlar = itemView.findViewById(R.id.txt_yorum_profil_ogesi);
             txt_zaman = itemView.findViewById(R.id.txt_zaman);
+            gonderiAd = itemView.findViewById(R.id.gonderi_ad);
 //            videoView = itemView.findViewById(R.id.video_profil_ogesi);
         }
 

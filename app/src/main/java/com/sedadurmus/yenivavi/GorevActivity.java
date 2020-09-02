@@ -172,6 +172,7 @@ public class GorevActivity extends AppCompatActivity {
                         hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("gonderiTarihi",simdikiTarih);
                         hashMap.put("gonderiTuru", "gonderi");
+                        hashMap.put("gonderiAdi", "");
                         hashMap.put("gorevmi", true);
                         hashMap.put("onaydurumu", false);
                         veriYolu.child(gonderiId).setValue(hashMap);
@@ -202,6 +203,7 @@ public class GorevActivity extends AppCompatActivity {
             hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
             hashMap.put("gonderiTarihi",simdikiTarih);
             hashMap.put("gonderiTuru", "gonderi");
+            hashMap.put("gonderiAdi", "");
             hashMap.put("gorevmi", true);
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);

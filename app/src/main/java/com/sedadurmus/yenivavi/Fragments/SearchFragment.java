@@ -98,7 +98,7 @@ public class SearchFragment extends Fragment {
 //                kesfetTxt.setVisibility(View.GONE);
 
                 ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new AramaBarFragment()).commit();
 
             }
         });
