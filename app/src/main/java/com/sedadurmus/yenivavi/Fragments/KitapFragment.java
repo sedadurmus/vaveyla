@@ -51,43 +51,6 @@ public class KitapFragment extends Fragment {
             return view;
     }
 
-//    private final void loadBooks() {
-//        Log.e("Boooks", "len.toString()");
-//        ApiInterface var10000 = (ApiInterface) ApiClient.createService(ApiInterface.class);
-//        if (var10000 != null) {
-//            ApiInterface apiService = var10000;
-//            Call call = apiService.getBook("https://kitap.bildirimler.com/api/books");
-//            call.enqueue((Callback)(new Callback() {
-//                public void onResponse(@NotNull Call call, @NotNull Response response) {
-//
-//                    AllBookCategory allBookCategory = (AllBookCategory) response.body();
-//                    assert allBookCategory != null;
-//                    books = allBookCategory.getBooks();
-//                    Integer len = books.toArray().length;
-//                    kitapAdapter.notifyDataSetChanged();
-//                    loadDataAction(allBookCategory.getBooks());
-//                    Log.e("Boooks", len.toString());
-//                }
-//
-//                public void onFailure(@NotNull Call call, @NotNull Throwable t) {
-//
-//                    Log.e("KITAPFRAGMENT", "request fail");
-//                }
-//            }));
-//        }
-//    }
-//    private void loadDataAction( List<Book> items) {
-//
-//        if (items != null) {
-//            List<Book> models = items;
-//            Log.e("EKLEME", models.toArray().toString());
-//            Collections.reverse(items);
-//            kitapAdapter.addAll(items);
-//            kitapAdapter.notifyDataSetChanged();
-//        }
-//    }
-
-
     private void loadPopular(){
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url ="http://kitap.bildirimler.com/api/books";

@@ -30,14 +30,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/favoriEkle"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                tools:ignore="MissingConstraints"
-                android:src="@drawable/ic_add_circle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+<!--            <ImageView-->
+<!--                android:id="@+id/favoriEkle"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                tools:ignore="MissingConstraints"-->
+<!--                android:src="@drawable/ic_add_circle"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

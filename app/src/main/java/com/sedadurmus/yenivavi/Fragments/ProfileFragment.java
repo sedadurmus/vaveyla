@@ -40,7 +40,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import static com.sedadurmus.yenivavi.LoginActivity.kullanici;
 
@@ -55,11 +54,7 @@ public class ProfileFragment extends Fragment {
     TabLayout tabLayout;
 
     private TextView txt_gonderiler, txt_takipciler, txt_takipEdilenler, txt_Ad, txt_bio, txt_kullaniciAdi, txt_puan;
-
     private Button btn_profili_düzenle;
-
-    private List<String> kaydettiklerim;
-
     private SwipeRefreshLayout refreshLayout;
 
     ImageView profil_resmi, ayarlar, mesaj, puan_resim;
@@ -257,7 +252,7 @@ public class ProfileFragment extends Fragment {
     private void setUpViewPager(ViewPager viewPager) {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new ProfilPaylasimFragment(), "Başlıca");
-        adapter.addFragment(new FavoriteMovieFragment(), "Film");
+//        adapter.addFragment(new FavoriteMovieFragment(), "Film");
         viewPager.setAdapter(adapter);
     }
 

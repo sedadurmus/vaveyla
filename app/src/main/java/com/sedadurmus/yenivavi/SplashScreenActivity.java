@@ -40,6 +40,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+
         if (firebaseUser != null) { // check user session
             MainActivity.mevcutKullanici = firebaseUser;
             final DatabaseReference yolGiris = FirebaseDatabase.getInstance().getReference().child("Kullanıcılar")

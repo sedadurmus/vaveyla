@@ -17,7 +17,7 @@ import com.sedadurmus.yenivavi.Adapter.BildirimAdapter;
 import com.sedadurmus.yenivavi.Fragments.BildirimFragment;
 import com.sedadurmus.yenivavi.Fragments.DashboardFragment;
 import com.sedadurmus.yenivavi.Fragments.HomeFragment;
-import com.sedadurmus.yenivavi.Fragments.ProfileFragment;
+import com.sedadurmus.yenivavi.Fragments.ProfilPaylasimFragment;
 import com.sedadurmus.yenivavi.Fragments.SearchFragment;
 import com.sedadurmus.yenivavi.Model.Bildiren;
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences("PREFS",MODE_PRIVATE).edit();
                     editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
                     editor.apply();
-                    selectedFragment = new ProfileFragment();
+                    selectedFragment = new ProfilPaylasimFragment();
                     break;
                 case R.id.search:
                     selectedFragment = new SearchFragment();

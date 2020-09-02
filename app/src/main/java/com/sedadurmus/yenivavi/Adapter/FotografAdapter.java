@@ -49,7 +49,8 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
     Uri uri;
 
     public static final int gonderi_turu_film=0;
-    public static final int gonderi_turu_bos=1;
+    public static final int gonderi_turu_kitap=2;
+    public static final int gonderi_turu_gonderi=1;
 
     private Context mContext;
     private List<Gonderi> mGonderiler;
@@ -61,6 +62,23 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         this.mGonderiler = mGonderiler;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        mevcutFirebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        final Gonderi gonderi = mGonderiler.get(position);
+
+        switch (gonderi.getGonderiTuru()) {
+            case "film":
+                return gonderi_turu_film;
+            case "kitap":
+                return gonderi_turu_kitap;
+            case "gonderi":
+                return gonderi_turu_gonderi;
+        }
+
+        return position;
+    }
 
 
     @NonNull
@@ -71,15 +89,25 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 //        final Gonderi gonderi = mGonderiler.get(viewType);
 
-        if (viewType == gonderi_turu_film) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.dene_profil_ogesi, viewGroup, false);
-            return new FotografAdapter.ViewHolder(view);
-        } else  {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
-            return new FotografAdapter.ViewHolder(view);
+        switch (viewType) {
+            case gonderi_turu_film: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.dene_profil_ogesi, viewGroup, false);
+                return new ViewHolder(view);
+            }
+            case gonderi_turu_kitap: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.book_profil_ogesi, viewGroup, false);
+                return new ViewHolder(view);
+            }
+            case gonderi_turu_gonderi: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
+                return new ViewHolder(view);
+            }
         }
 
+        return null;
     }
+
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -106,13 +134,13 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
             viewHolder.gorevMi.setVisibility(View.GONE);
         }
 
-        if (i != gonderi_turu_film) {
+//        if (i != gonderi_turu_film) {
             if (gonderi.getGonderiResmi().length()>0) {
                 viewHolder.posterArka.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
                 Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
             }
-        }
+//        }
 
 
 
@@ -148,24 +176,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
                 viewHolder.txt_zaman.setText(gun + "g");
             viewHolder.txt_zaman.setVisibility(View.VISIBLE);
         }
-
-//
-//        if (gonderi.getGonderiVideo() != null){
-//            viewHolder.videoView.setVisibility(View.VISIBLE);
-//            MediaController media = new MediaController(mContext);
-//            viewHolder.videoView.setMediaController(media);
-//          //  viewHolder.videoView.setVideoURI(Uri.parse(gonderi.getGonderiVideo()));
-//            viewHolder.setVideo(Uri.parse(String.valueOf(uri)),gonderi.getGonderiVideo());
-//        }else {
-//            viewHolder.videoView.setVisibility(View.GONE);
-//        }
-
-//        if (gonderi.getGonderiVideo().length() > 0) {
-//            viewHolder.videoView.setVisibility(View.GONE);
-//            MediaController media = new MediaController(mContext);
-//            viewHolder.videoView.setMediaController(media);
-//            viewHolder.videoView.setVideoURI(Uri.parse(gonderi.getGonderiVideo()));
-//        }
 
         gonderenBilgileri(viewHolder.profil_resmi, viewHolder.txt_kullanici_adi, viewHolder.txt_gonderen, gonderi.getGonderen());
         begenildi(gonderi.getGonderiId(), viewHolder.begeniResmi);
@@ -341,44 +351,9 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 //            videoView = itemView.findViewById(R.id.video_profil_ogesi);
         }
 
-//        public void   setVideo(Uri parse, final String video){
-//            DatabaseReference videoYolu = FirebaseDatabase.getInstance().getReference("Gonderiler").child("gonderiVideo");
-//            videoYolu.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    Uri uri=Uri.parse(dataSnapshot.child(video).child("gonderiVideo").getValue(true).toString());
-//                    videoView.setVideoURI(uri);
-//                    videoView.requestFocus();
-//                    videoView.start();
-//
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
     }
 
-//    public void   setVideo (final String video){
-//        DatabaseReference videoYolu = FirebaseDatabase.getInstance().getReference("Gonderiler").child("gonderiVideo");
-//        videoYolu.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Uri uri=Uri.parse(dataSnapshot.child(video).child("gonderiVideo").getValue(true).toString());
-//                videoView.setVideoURI(uri);
-//                videoView.requestFocus();
-//                videoView.start();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+
 
 
     //    yorum için metot
@@ -551,17 +526,6 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
         });
     }
 
-    @Override
-    public int getItemViewType(int position) {
 
-        mevcutFirebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        final Gonderi gonderi = mGonderiler.get(position);
-
-        if (gonderi.getGonderiTuru().equals("film")){
-            return gonderi_turu_film;
-        }else {
-            return gonderi_turu_bos;
-        }
-    }
 
 }

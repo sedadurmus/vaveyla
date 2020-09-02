@@ -18,13 +18,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,7 +39,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.sedadurmus.yenivavi.Model.Kullanici;
-import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,24 +46,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class GonderiActivity extends AppCompatActivity {
-
+public class PostBookActivity extends AppCompatActivity {
     private static final int REQUEST_TAKE_GALLERY_VIDEO = 111;
     Uri resimUri, videoUri;
-    String benimUrim = "";
+    String benimUrim = "http://kitap.bildirimler.com/api/books";
     Intent videoIntent = new Intent();
-    VideoView videoView;
+    String posterUrl;
+    ImageView filmPoster, filmposter2;
+    EditText hakkinda;
+    ConstraintLayout constraintMovie;
     StorageTask yuklemeGorevi;
     StorageReference resimYukleYolu;
-    ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
-    TextView txt_Gonder, txt_tema;
+    TextView txt_Gonder, yazarAd, kitapAdi;
     EditText gonderi_hakkinda;
-    private Bundle savedInstanceState;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gonderi);
+        setContentView(R.layout.activity_post_book);
+
+        posterUrl = getIntent().getExtras().getString("img_url");
         Toolbar toolbar =findViewById(R.id.toolbar_gonderi);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Gönderi Oluştur");
@@ -76,19 +76,28 @@ public class GonderiActivity extends AppCompatActivity {
             }
         });
 
-        btn_gonderiActivitye_git = findViewById(R.id.btn_gonderiActivitye_git);
-        image_Eklendi = findViewById(R.id.imageView_gonderi);
+        kitapAdi =findViewById(R.id.book_title_paylasim);
+        filmposter2=findViewById(R.id.book_poster);
+        constraintMovie =findViewById(R.id.constraint_movie);
         txt_Gonder = findViewById(R.id.txt_gonder);
+        yazarAd = findViewById(R.id.yazar_kitap_paylasim);
         gonderi_hakkinda = findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
 
+        constraintMovie.setVisibility(View.VISIBLE);
+        String kitapname = getIntent().getExtras().getString("name");
+        String yazar = getIntent().getExtras().getString("author");
+
+        Glide.with(this).load( posterUrl).into(filmposter2);
+        kitapAdi.setText(kitapname);
+        yazarAd.setText(yazar);
 
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(GonderiActivity.this, R.style.AlertDialogTheme);
-                View view = LayoutInflater.from(GonderiActivity.this).inflate(
+                AlertDialog.Builder builder = new AlertDialog.Builder(PostBookActivity.this, R.style.AlertDialogTheme);
+                View view = LayoutInflater.from(PostBookActivity.this).inflate(
                         R.layout.alert_dialog,
                         (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
                 );
@@ -100,8 +109,6 @@ public class GonderiActivity extends AppCompatActivity {
                 ((Button)view.findViewById(R.id.buttonYes)).setText(getResources().getString(R.string.alertButtonYes));
                 ((ImageView)view.findViewById(R.id.imageicon)).setImageResource(R.drawable.ic_info);
                 builder.setCancelable(false);
-//                builder.setTitle("Uyarı");
-//                builder.setMessage("Gönderiyi paylaşmak istediğinize emin misiniz?");
                 final AlertDialog alertDialog = builder.create();
                 view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -113,7 +120,7 @@ public class GonderiActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         alertDialog.cancel();
-                        Toast.makeText(GonderiActivity.this, "Gönderi Paylaşılamadı!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostBookActivity.this, "Gönderi Paylaşılamadı!", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -124,19 +131,7 @@ public class GonderiActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-
-        btn_gonderiActivitye_git.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CropImage.activity(resimUri)
-                        .setAspectRatio(1, 1)
-                        .start(GonderiActivity.this);
-
-            }
-        });
-
     }
-
     boolean isOkey = true;
 
     private String dosyaUzantisiAl(Uri uri) {
@@ -152,7 +147,7 @@ public class GonderiActivity extends AppCompatActivity {
         isOkey = true;
 
         //resim yükle kodları
-        final ProgressDialog progressDialog = new ProgressDialog(GonderiActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(PostBookActivity.this);
         progressDialog.setMessage("Gönderiliyor..");
         progressDialog.show();
 
@@ -182,24 +177,19 @@ public class GonderiActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         Uri indirmeUrisi = task.getResult();
-                        benimUrim = indirmeUrisi.toString();
-
+//                        benimUrim = indirmeUrisi.toString();
                         DatabaseReference veriYolu = FirebaseDatabase.getInstance().getReference("Gonderiler");
-
                         String gonderiId = veriYolu.push().getKey();
-
                         HashMap<String, Object> hashMap = new HashMap<>();
-
                         hashMap.put("gonderiId", gonderiId);
-                        hashMap.put("gonderiResmi",resimUri!=null? benimUrim:"");
-                        hashMap.put("gonderiVideo",videoUri!=null? benimUrim:"");
+                        hashMap.put("gonderiResmi", posterUrl);
+                        hashMap.put("gonderiVideo", "");
                         hashMap.put("gonderiHakkinda", gonderi_hakkinda.getText().toString());
                         hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         hashMap.put("gorevmi", false);
                         hashMap.put("gonderiTarihi", simdikiTarih);
-                        hashMap.put("gonderiTuru", "gonderi");
+                        hashMap.put("gonderiTuru", "kitap");
                         hashMap.put("onaydurumu", false);
-
 
                         veriYolu.child(gonderiId).setValue(hashMap);
                         final DatabaseReference kullaniciYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -222,16 +212,16 @@ public class GonderiActivity extends AppCompatActivity {
                         });
                         resimUri=null;
                         videoUri=null;
-                        startActivity(new Intent(GonderiActivity.this, MainActivity.class));
+                        startActivity(new Intent(PostBookActivity.this, MainActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(GonderiActivity.this, "Gönderme başarısız!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostBookActivity.this, "Gönderme başarısız!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(GonderiActivity.this, " Seçilen resim yok.." + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostBookActivity.this, " Seçilen resim yok.." + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -242,13 +232,13 @@ public class GonderiActivity extends AppCompatActivity {
             HashMap<String, Object> hashMap = new HashMap<>();
 
             hashMap.put("gonderiId", gonderiId);
-            hashMap.put("gonderiResmi", "");
+            hashMap.put("gonderiResmi", posterUrl);
             hashMap.put("gonderiVideo", "");
             hashMap.put("gonderiHakkinda", gonderi_hakkinda.getText().toString());
             hashMap.put("gonderen", FirebaseAuth.getInstance().getCurrentUser().getUid());
             hashMap.put("gorevmi", false);
             hashMap.put("gonderiTarihi", simdikiTarih);
-            hashMap.put("gonderiTuru", "gonderi");
+            hashMap.put("gonderiTuru", "kitap");
             hashMap.put("onaydurumu", false);
             veriYolu.child(gonderiId).setValue(hashMap);
 
@@ -272,7 +262,7 @@ public class GonderiActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
-            startActivity(new Intent(GonderiActivity.this, MainActivity.class));
+            startActivity(new Intent(PostBookActivity.this, MainActivity.class));
             finish();
         }
 
@@ -290,36 +280,6 @@ public class GonderiActivity extends AppCompatActivity {
             return cursor.getString(column_index);
         } else
             return null;
-    }
-
-    String filemanagerstring;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK) {
-//            if (requestCode == REQUEST_TAKE_GALLERY_VIDEO) {
-//                Uri selectedImageUri = data.getData();
-//
-//                // OI FILE Manager
-//                filemanagerstring = selectedImageUri.getPath();
-//                videoUri=selectedImageUri;
-//                videoView.setVisibility(View.VISIBLE);
-//                videoView.setVideoURI(selectedImageUri);
-//                videoView.start();
-//                MediaController mediaController = new MediaController(this);
-//                videoView.setMediaController(mediaController);
-//            }
-//        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            resimUri = result.getUri();
-            image_Eklendi.setImageURI(resimUri);
-        } else if (requestCode != REQUEST_TAKE_GALLERY_VIDEO) {
-            Toast.makeText(this, "Resim seçilemedi!", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
 
