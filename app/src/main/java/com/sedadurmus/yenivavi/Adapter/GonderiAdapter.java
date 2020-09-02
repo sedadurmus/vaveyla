@@ -52,6 +52,9 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
     public Context mContext;
     public List<Gonderi> mGonderi;
 
+    public static final int gonderi_turu_film=0;
+    public static final int gonderi_turu_kitap=2;
+    public static final int gonderi_turu_gonderi=1;
 
     private FirebaseUser mevcutFirebaseUser;
 
@@ -60,26 +63,75 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         this.mGonderi = mGonderi;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        mevcutFirebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        final Gonderi gonderi = mGonderi.get(position);
+
+        switch (gonderi.getGonderiTuru()) {
+            case "film":
+                return gonderi_turu_film;
+            case "kitap":
+                return gonderi_turu_kitap;
+            case "gonderi":
+                return gonderi_turu_gonderi;
+        }
+
+        return position;
+    }
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.post_home, viewGroup, false);
-        return new GonderiAdapter.ViewHolder(view);
+//        View view = LayoutInflater.from(mContext).inflate(R.layout.post_home, viewGroup, false);
 
+        mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        final Gonderi gonderi = mGonderi.get(viewType);
+
+
+        switch (viewType) {
+            case gonderi_turu_film: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.dene_profil_ogesi, viewGroup, false);
+                return new GonderiAdapter.ViewHolder(view);
+
+            }
+            case gonderi_turu_kitap: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.book_profil_ogesi, viewGroup, false);
+                return new GonderiAdapter.ViewHolder(view);
+            }
+            case gonderi_turu_gonderi: {
+                View view = LayoutInflater.from(mContext).inflate(R.layout.profil_ogesi, viewGroup, false);
+
+                return new GonderiAdapter.ViewHolder(view);
+            }
+        }
+        return null;
     }
 
     boolean isOkey;
-
     String simdikiTarih;
-
     @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
         mevcutFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
         final Gonderi gonderi = mGonderi.get(i);
+
+//        if (gonderi.getGonderiHakkinda().equals("")) {
+//            viewHolder.txt_gonderi_hakkinda.setVisibility(View.GONE);
+//        } else {
+//            viewHolder.txt_gonderi_hakkinda.setVisibility(View.VISIBLE);
+//            viewHolder.txt_gonderi_hakkinda.setText(gonderi.getGonderiHakkinda());
+//        }
+//
+//        if (gonderi.getGonderiResmi().length() < 0) {
+//            viewHolder.gonderiResmi.setVisibility(View.GONE);
+//        } else {
+//            viewHolder.gonderiResmi.setVisibility(View.VISIBLE);
+//            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
+//        }
 
         if (gonderi.getGonderiHakkinda().equals("")) {
             viewHolder.txt_gonderi_hakkinda.setVisibility(View.GONE);
@@ -88,19 +140,22 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
             viewHolder.txt_gonderi_hakkinda.setText(gonderi.getGonderiHakkinda());
         }
 
-        if (gonderi.getGonderiResmi().length() < 0) {
-            viewHolder.gonderiResmi.setVisibility(View.GONE);
+//        görev olunca profilde ve anasayfada bi simge çıksın yanındaaaa
+        if (gonderi.isOnayDurumu()) {
+            viewHolder.gorevMi.setVisibility(View.VISIBLE);
         } else {
-            viewHolder.gonderiResmi.setVisibility(View.VISIBLE);
+            viewHolder.gorevMi.setVisibility(View.GONE);
+        }
+
+
+        if (gonderi.getGonderiResmi().length() > 0) {
+            viewHolder.posterArka.setVisibility(View.VISIBLE);
+            Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.posterArka);
             Glide.with(mContext).load(gonderi.getGonderiResmi()).into(viewHolder.gonderiResmi);
         }
 
-        //        görev olunca profilde ve anasayfada bi simge çıksın yanındaaaa
-        if(gonderi.isOnayDurumu() == true){
-            viewHolder.gorevMi.setVisibility(View.VISIBLE);
-        }else {
-            viewHolder.gorevMi.setVisibility(View.GONE);
-        }
+
+
         viewHolder.gorevMi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,26 +208,6 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
                 ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new ProfilPaylasimFragment()).commit();
 
-//                Query sorgu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").orderByChild("id");
-//                sorgu.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        if (!isOkey) return;
-//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                            Kullanici kullanici = snapshot.getValue(Kullanici.class);
-//                            if (kullanici.getId().equals(gonderi.getGonderen())) {
-//                                BaskaProfilActivity.kullanici = kullanici;
-//                                Intent intent = new Intent(mContext, BaskaProfilActivity.class);
-//                                intent.putExtra("baslik", "Profil");
-//                                mContext.startActivity(intent);
-//                            }
-//                        }
-//                        isOkey = false;
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    }
-//                });
             }
         });
 
@@ -299,7 +334,7 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView profil_resmi, gonderiResmi, begeniResmi, yorumResmi, kaydetmeResmi, silResmi, more, gorevMi;
+        public ImageView profil_resmi, gonderiResmi, begeniResmi, yorumResmi, kaydetmeResmi, silResmi, more, gorevMi, posterArka;
         public TextView txt_kullanici_adi, txt_begeni, txt_gonderen, txt_gonderi_hakkinda, txt_yorumlar, txt_zaman;
         CardView cardView;
 //        public VideoView videoView;
@@ -307,21 +342,34 @@ public class GonderiAdapter extends RecyclerView.Adapter<GonderiAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
 //           videoView = itemView.findViewById(R.id.videoView);
-            profil_resmi = itemView.findViewById(R.id.profil_resmi_txtGonderiActivity);
-            gonderiResmi = itemView.findViewById(R.id.image_textGonderiActivity);
-            begeniResmi = itemView.findViewById(R.id.begeni_txtGonderiActivity);
-            yorumResmi = itemView.findViewById(R.id.yorum_txtGonderiActivity);
+//            profil_resmi = itemView.findViewById(R.id.profil_resmi_txtGonderiActivity);
+//            gonderiResmi = itemView.findViewById(R.id.image_textGonderiActivity);
+//            begeniResmi = itemView.findViewById(R.id.begeni_txtGonderiActivity);
+//            yorumResmi = itemView.findViewById(R.id.yorum_txtGonderiActivity);
+//            cardView = itemView.findViewById(R.id.card_view);
+//            gorevMi = itemView.findViewById(R.id.buBirGorev);
+//            cardView.setBackgroundResource(R.drawable.backrground_post);
+//            more = itemView.findViewById(R.id.more);
+//            txt_kullanici_adi = itemView.findViewById(R.id.txt_kullaniciadi_txtGonderiActivity);
+//            txt_begeni = itemView.findViewById(R.id.txt_begeniler_txtGonderiActivity);
+//            txt_gonderi_hakkinda = itemView.findViewById(R.id.txt_gonderiHakkinda_txtGonderiActivity);
+//            txt_yorumlar = itemView.findViewById(R.id.txt_yorum_txtGonderiActivity);
+//            txt_zaman = itemView.findViewById(R.id.txt_zaman);
+
+
+            profil_resmi = itemView.findViewById(R.id.profil_resmi_profil_ogesi);
+            gonderiResmi = itemView.findViewById(R.id.gonderi_resmi_profil_ogesi);
+            posterArka = itemView.findViewById(R.id.film_poster2);
+            begeniResmi = itemView.findViewById(R.id.begeni_profil_ogesi);
+            yorumResmi = itemView.findViewById(R.id.yorum_profil_ogesi);
+            gorevMi= itemView.findViewById(R.id.buBirGorev);
             cardView = itemView.findViewById(R.id.card_view);
-            gorevMi = itemView.findViewById(R.id.buBirGorev);
-
             cardView.setBackgroundResource(R.drawable.backrground_post);
-
             more = itemView.findViewById(R.id.more);
-
-            txt_kullanici_adi = itemView.findViewById(R.id.txt_kullaniciadi_txtGonderiActivity);
-            txt_begeni = itemView.findViewById(R.id.txt_begeniler_txtGonderiActivity);
-            txt_gonderi_hakkinda = itemView.findViewById(R.id.txt_gonderiHakkinda_txtGonderiActivity);
-            txt_yorumlar = itemView.findViewById(R.id.txt_yorum_txtGonderiActivity);
+            txt_kullanici_adi = itemView.findViewById(R.id.txt_kullaniciadi_profil_ogesi);
+            txt_begeni = itemView.findViewById(R.id.txt_begeniler_profil_ogesi);
+            txt_gonderi_hakkinda = itemView.findViewById(R.id.txt_gonderiHakkinda_profil_ogesi);
+            txt_yorumlar = itemView.findViewById(R.id.txt_yorum_profil_ogesi);
             txt_zaman = itemView.findViewById(R.id.txt_zaman);
         }
     }

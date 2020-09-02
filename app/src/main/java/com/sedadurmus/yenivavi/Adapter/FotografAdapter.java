@@ -144,6 +144,7 @@ public class FotografAdapter extends RecyclerView.Adapter<FotografAdapter.ViewHo
 
 
 
+
         viewHolder.gorevMi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

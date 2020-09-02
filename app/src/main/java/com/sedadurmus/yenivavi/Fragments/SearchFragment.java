@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -35,6 +37,7 @@ public class SearchFragment extends Fragment {
     TabLayout tabLayout;
     SearchView searchView ;
     TextView kesfetTxt;
+    Context context;
 
 //    APİ - tmdb den aldığım apiiiiiiiii keeey
 //     b7ee738bdfe5a91a0cec31c619d58968
@@ -89,9 +92,13 @@ public class SearchFragment extends Fragment {
             public void onClick(View view) {
 //                Intent intent = new Intent(getContext(), SearchActivity.class);
 //                getContext().startActivity(intent);
-                arama.setVisibility(View.GONE);
-                searchView.setVisibility(View.VISIBLE);
-                kesfetTxt.setVisibility(View.GONE);
+
+//                arama.setVisibility(View.GONE);
+//                searchView.setVisibility(View.VISIBLE);
+//                kesfetTxt.setVisibility(View.GONE);
+
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
 
             }
         });
