@@ -63,7 +63,7 @@ public class BookDetailActivity extends AppCompatActivity {
             tCevirmen.setText(cevirmen);
             txtTarih.setText(tarih);
         }else {
-            Toast.makeText(this, "Api bulunamadı", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bulunamadı", Toast.LENGTH_SHORT).show();
         }
 
 

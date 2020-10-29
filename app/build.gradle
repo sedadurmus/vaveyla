@@ -14,8 +14,8 @@ android {
         applicationId "com.sedadurmus.vaveyla"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.2.3"
+        versionCode 16
+        versionName "1.2.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

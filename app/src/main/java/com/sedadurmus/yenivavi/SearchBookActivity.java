@@ -112,8 +112,6 @@ public class SearchBookActivity extends AppCompatActivity {
                                 JSONObject item = items.getJSONObject(i);
                                 JSONObject volumeInfo = item.getJSONObject("volumeInfo");
 
-
-
                                 try{
                                     title = volumeInfo.getString("title");
 
@@ -124,11 +122,8 @@ public class SearchBookActivity extends AppCompatActivity {
                                         author = authors.getString(0) + "|" +authors.getString(1);
                                     }
 
-
                                     publishedDate = volumeInfo.getString("publishedDate");
                                     pageCount = volumeInfo.getInt("pageCount");
-
-
 
                                     JSONObject saleInfo = item.getJSONObject("saleInfo");
                                     JSONObject listPrice = saleInfo.getJSONObject("listPrice");
@@ -192,12 +187,9 @@ public class SearchBookActivity extends AppCompatActivity {
             return;
         }
 
-        //  Log.d("QUERY",search_query);
-
-
         if(search_query.equals(""))
         {
-            Toast.makeText(this,"Please enter your query",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Lütfen bir harf giriniz.",Toast.LENGTH_SHORT).show();
             return;
         }
         String final_query=search_query.replace(" ","+");

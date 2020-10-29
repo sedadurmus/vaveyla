@@ -92,15 +92,15 @@ public class SearchBookDetailActivity extends AppCompatActivity {
 
 
         //        gönderide paylaştırabilmek için
+//        final String finalThumbnail = thumbnail;
+        final String finalThumbnail = thumbnail;
         post_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PostBookActivity.class);
-                intent.putExtra("book_thumbnail", poster);
-                intent.putExtra("name",   getIntent().getExtras().getString("name"));
-                intent.putExtra("author",   getIntent().getExtras().getString("author"));
-                startActivity(intent);
-
+                Intent intent = new Intent(getApplicationContext(), Post_Book_SearchActivity.class);
+                intent.putExtra("mThumbnail", finalThumbnail);
+                intent.putExtra("mTitle",   getIntent().getExtras().getString("book_title"));
+                intent.putExtra("mAuthors",   getIntent().getExtras().getString("book_author"));
                 startActivity(intent);
             }
         });

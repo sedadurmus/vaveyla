@@ -46,7 +46,7 @@
             android:id="@+id/message_display"
             android:visibility="invisible"
             android:layout_centerHorizontal="true"
-            tools:text="Failed to get Data"
+            tools:text="Kitap Bulunamadı"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

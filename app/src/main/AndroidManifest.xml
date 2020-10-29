@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchBookDetailActivity"></activity>
+        <activity android:name=".Post_Book_SearchActivity"></activity>
+        <activity android:name=".SearchBookDetailActivity" />
         <activity android:name=".SearchBookActivity" />
         <activity android:name=".PostBookActivity" />
         <activity android:name=".BookDetailActivity" />
