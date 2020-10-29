@@ -19,12 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -50,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txt_kayitSayfasina_git, mRecoverPassTv;
 
     SignInButton mGoogleLoginBtn;
-    private static final int RC_SIGN_IN = 100;
+//    private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
     private String TAG;
 
@@ -90,24 +87,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //        google la oturum açma ile ilgili
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_sign_in_api_key))
-                .requestEmail()
-                .build();
+//        //        google la oturum açma ile ilgili
+//        // Configure Google Sign In
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.google_sign_in_api_key))
+//                .requestEmail()
+//                .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
-
-        mGoogleLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
+//
+//        mGoogleLoginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+//                startActivityForResult(signInIntent, RC_SIGN_IN);
+//            }
+//        });
 
         txt_kayitSayfasina_git.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,20 +236,20 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount acct = task.getResult(ApiException.class);
-                assert acct != null;
-                firebaseAuthWithGoogle(acct);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, "Hata" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                // ...
-            }
-        }
+//        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+//        if (requestCode == RC_SIGN_IN) {
+//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            try {
+//                // Google Sign In was successful, authenticate with Firebase
+//                GoogleSignInAccount acct = task.getResult(ApiException.class);
+//                assert acct != null;
+//                firebaseAuthWithGoogle(acct);
+//            } catch (ApiException e) {
+//                // Google Sign In failed, update UI appropriately
+//                Toast.makeText(this, "Hata" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                // ...
+//            }
+//        }
     }
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {

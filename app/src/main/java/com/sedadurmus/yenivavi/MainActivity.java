@@ -14,8 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sedadurmus.yenivavi.Adapter.BildirimAdapter;
-import com.sedadurmus.yenivavi.Fragments.BildirimFragment;
 import com.sedadurmus.yenivavi.Fragments.DashboardFragment;
+import com.sedadurmus.yenivavi.Fragments.HaberFragment;
 import com.sedadurmus.yenivavi.Fragments.HomeFragment;
 import com.sedadurmus.yenivavi.Fragments.ProfilPaylasimFragment;
 import com.sedadurmus.yenivavi.Fragments.SearchFragment;
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 //                    BadgeDrawable badge_notification = binding.botomNavigation.getBadge(R.id.notification);
 //                    badge_notification.clearNumber();
 //                    badge_notification.setVisible(false);
-                    selectedFragment = new BildirimFragment();
+                    selectedFragment = new HaberFragment();
                     break;
             }
             if (selectedFragment!= null){

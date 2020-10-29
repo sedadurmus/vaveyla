@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="250dp">
+            android:layout_marginTop="190sp">
             <EditText
                 android:id="@+id/edt_kullaniciAdi"
                 android:inputType="text"
@@ -100,6 +100,13 @@
             android:background="@drawable/btn_login"
             android:text="Kaydol"
             android:textColor="#fff"/>
+        <!--        <TextView-->
+        <!--            android:id="@+id/txt_girisSayfasina_git"-->
+        <!--            android:text="Mevcut hesabın var mı? Giriş Yap.."-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textColor="#000"-->
+        <!--            android:gravity="center" />-->
 
     </LinearLayout>
     <TextView
@@ -108,8 +115,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        android:layout_gravity="bottom"
         android:gravity="center"
-        android:layout_alignParentBottom="true"/>
-    <!--    </androidx.cardview.widget.CardView>-->
+        android:layout_alignParentBottom="true" />
+
+
 </RelativeLayout>

@@ -17,7 +17,6 @@
         android:layout_toStartOf="@+id/gonderi_resmi_bildirimOgesi"
         android:orientation="vertical"
         android:layout_toEndOf="@+id/profil_resmi_bildirim_ogesi">
-
         <TextView
             android:id="@+id/txt_kullaniciadi_bildirimOgesi"
             android:layout_width="wrap_content"
@@ -36,17 +35,17 @@
             android:maxLines="5"
             android:text="yorum"/>
 
-        <TextView
-        android:id="@+id/txt_zaman"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_weight="1"
-        android:gravity="right"
-        android:text="10dk"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
+<!--        <TextView-->
+<!--        android:id="@+id/txt_zaman"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:gravity="right"-->
+<!--        android:text="10dk"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
     </LinearLayout>
     </LinearLayout>
 

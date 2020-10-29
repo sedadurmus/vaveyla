@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sedadurmus.yenivavi.Adapter.KitapAdapter;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Api.Client;
 import com.sedadurmus.yenivavi.Model.Book;
 import com.sedadurmus.yenivavi.R;
+import com.sedadurmus.yenivavi.SearchBookActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,12 +37,15 @@ public class KitapFragment extends Fragment {
     private RecyclerView recyclerView;
     private KitapAdapter kitapAdapter;
     private List<Book> books;
+    private FloatingActionButton fabBook;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
       View view=  inflater.inflate(R.layout.fragment_kitap, container, false);
+
+            fabBook =view.findViewById(R.id.fabBook);
             recyclerView =view.findViewById(R.id.first_recycler_view);
             recyclerView.setHasFixedSize(true);
             GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL , false);
@@ -48,6 +54,15 @@ public class KitapFragment extends Fragment {
             loadPopular();
             kitapAdapter =new KitapAdapter(getContext());
             recyclerView.setAdapter(kitapAdapter);
+
+            fabBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), SearchBookActivity.class));
+                }
+            });
+
+
             return view;
     }
 

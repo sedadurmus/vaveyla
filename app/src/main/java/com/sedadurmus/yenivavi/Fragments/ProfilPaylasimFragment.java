@@ -29,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.Adapter.FotografAdapter;
 import com.sedadurmus.yenivavi.AyarlarActivity;
-import com.sedadurmus.yenivavi.MessageActivity;
 import com.sedadurmus.yenivavi.Model.Gonderi;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.ProfilDuzenleActivity;
@@ -44,8 +43,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.sedadurmus.yenivavi.LoginActivity.kullanici;
-
 
 public class ProfilPaylasimFragment extends Fragment {
     //    fotoğrafları profilde görme reyclerı
@@ -59,6 +56,7 @@ public class ProfilPaylasimFragment extends Fragment {
     private Button btn_profili_düzenle;
     ImageView profil_resmi, ayarlar, mesaj, puan_resim, geri;
     String profilId;
+    TextView yazi;
 
     public ProfilPaylasimFragment (){
     }
@@ -82,7 +80,7 @@ public class ProfilPaylasimFragment extends Fragment {
         puan_resim = view.findViewById(R.id.txt_puan_resim);
         ayarlar = view.findViewById(R.id.profil_ayarlar);
         geri = view.findViewById(R.id.geri_profil);
-        mesaj = view.findViewById(R.id.profil_message);
+//        mesaj = view.findViewById(R.id.profil_message);
         txt_gonderiler = view.findViewById(R.id.txt_gonderiler_profilCercevesi);
         txt_takipciler = view.findViewById(R.id.txt_takipciler_profilCercevesi);
         txt_takipEdilenler = view.findViewById(R.id.txt_takip_profilCercevesi);
@@ -202,20 +200,20 @@ public class ProfilPaylasimFragment extends Fragment {
             ayarlar.setVisibility(View.INVISIBLE);
         }
         if (profilId.equals(mevcutKullanici.getUid())){
-            mesaj.setVisibility(View.INVISIBLE);
+//            mesaj.setVisibility(View.INVISIBLE);
             geri.setVisibility(View.INVISIBLE);
         }else {
-            mesaj.setVisibility(View.VISIBLE);
+//            mesaj.setVisibility(View.VISIBLE);
             geri.setVisibility(View.VISIBLE);
         }
-        mesaj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MessageActivity.class);
-                intent.putExtra("profileid", kullanici.getId());
-                startActivity(intent);
-            }
-        });
+//        mesaj.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getContext(), MessageActivity.class);
+//                intent.putExtra("profileid", kullanici.getId());
+//                startActivity(intent);
+//            }
+//        });
 
 
 
@@ -332,7 +330,6 @@ public class ProfilPaylasimFragment extends Fragment {
                     if (gonderi != null && gonderi.getGonderen().equals(profilId)) {
                         gonderi.setGonderiUid(snapshot.getKey());
                         Object tarih = snapshot.child("gonderiTarihi").getValue();
-
                         gonderi.setTarih(tarih != null ? tarih.toString() : "");
                         Object onay = snapshot.child("onaydurumu").getValue();
 //                        Uri uri=Uri.parse(dataSnapshot.child("gonderiVideo").getValue(true).toString());

@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +34,7 @@ public class GonderiDetayiFragment extends Fragment {
     private RecyclerView recyclerView;
     private GonderiAdapter gonderiAdapter;
     private List<Gonderi> gonderiListesi;
-
+    ImageView geri;
     String gonderiId;
 
     public GonderiDetayiFragment() {
@@ -57,8 +59,17 @@ public class GonderiDetayiFragment extends Fragment {
         gonderiListesi =new ArrayList<>();
         gonderiAdapter= new GonderiAdapter(getContext(),gonderiListesi);
         recyclerView.setAdapter(gonderiAdapter);
+        geri = view.findViewById(R.id.geri_detay);
 
         gonderiOku();
+
+        geri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new HaberFragment()).commit();
+            }
+        });
 
         return view;
     }

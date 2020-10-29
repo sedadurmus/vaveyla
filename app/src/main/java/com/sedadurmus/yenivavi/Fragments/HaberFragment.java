@@ -76,7 +76,7 @@ public class HaberFragment extends Fragment {
                 bildirimListesi.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Bildiren bildirim = snapshot.getValue(Bildiren.class);
-                    bildirim.setTarih(snapshot.child("bildirimTarihi").getValue().toString());
+//                    bildirim.setTarih(snapshot.child("bildirimTarihi").getValue().toString());
                     bildirimListesi.add(bildirim);
                 }
                 Collections.reverse(bildirimListesi);
@@ -100,7 +100,7 @@ public class HaberFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     Bildiren bildirim = snapshot.getValue(Bildiren.class);
-                    bildirim.setTarih(snapshot.child("bildirimTarihi").getValue().toString());
+//                    bildirim.setTarih(snapshot.child("bildirimTarihi").getValue().toString());
                     bildirimListesi.add(bildirim);
                 }
                 Collections.reverse(bildirimListesi);

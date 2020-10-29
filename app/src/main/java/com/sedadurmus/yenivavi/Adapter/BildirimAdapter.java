@@ -20,15 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sedadurmus.yenivavi.Fragments.GonderiDetayiFragment;
-import com.sedadurmus.yenivavi.Fragments.ProfileFragment;
+import com.sedadurmus.yenivavi.Fragments.ProfilPaylasimFragment;
 import com.sedadurmus.yenivavi.Model.Bildiren;
 import com.sedadurmus.yenivavi.Model.Gonderi;
 import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -70,33 +67,33 @@ public class BildirimAdapter extends RecyclerView.Adapter<BildirimAdapter.ViewHo
             viewHolder.gonderi_resmi.setVisibility(GONE);
         }
 
-        viewHolder.txt_zaman.setText(bildirim.getTarih() != null ? bildirim.getTarih().toString() : " ");
-        Date simdi = new Date();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        simdikiTarih = dateFormat.format(simdi);
-        Date tarih = null;
-        try {
-            tarih = bildirim.getTarih();
-        } catch (Exception e) {
-        }
-        if (tarih != null) {
-            int fark = (int) (simdi.getTime() - tarih.getTime());
-            int gun = fark / (1000 * 60 * 60 * 24);
-            int saat = fark / (1000 * 60 * 60);
-            int dakika = fark / (1000 * 60);
-            int saniye = fark / (1000);
-            if (saniye == 0)
-                viewHolder.txt_zaman.setText("şimdi");
-            if (saniye > 0 && dakika == 0)
-                viewHolder.txt_zaman.setText(saniye + "s");
-            if (dakika > 0 && saat == 0)
-                viewHolder.txt_zaman.setText(dakika + "dk");
-            if (saat > 0 && gun == 0)
-                viewHolder.txt_zaman.setText(saat + "sa");
-            if (gun > 0)
-                viewHolder.txt_zaman.setText(gun + "g");
-            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
-        }
+//        viewHolder.txt_zaman.setText(bildirim.getTarih() != null ? bildirim.getTarih().toString() : " ");
+//        Date simdi = new Date();
+//        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        simdikiTarih = dateFormat.format(simdi);
+//        Date tarih = null;
+//        try {
+//            tarih = bildirim.getTarih();
+//        } catch (Exception e) {
+//        }
+//        if (tarih != null) {
+//            int fark = (int) (simdi.getTime() - tarih.getTime());
+//            int gun = fark / (1000 * 60 * 60 * 24);
+//            int saat = fark / (1000 * 60 * 60);
+//            int dakika = fark / (1000 * 60);
+//            int saniye = fark / (1000);
+//            if (saniye == 0)
+//                viewHolder.txt_zaman.setText("şimdi");
+//            if (saniye > 0 && dakika == 0)
+//                viewHolder.txt_zaman.setText(saniye + "s");
+//            if (dakika > 0 && saat == 0)
+//                viewHolder.txt_zaman.setText(dakika + "dk");
+//            if (saat > 0 && gun == 0)
+//                viewHolder.txt_zaman.setText(saat + "sa");
+//            if (gun > 0)
+//                viewHolder.txt_zaman.setText(gun + "g");
+//            viewHolder.txt_zaman.setVisibility(View.VISIBLE);
+//        }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +111,7 @@ public class BildirimAdapter extends RecyclerView.Adapter<BildirimAdapter.ViewHo
                     editor.apply();
 
                     ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ProfileFragment()).commit();
+                            new ProfilPaylasimFragment()).commit();
                 }
             }
         });
@@ -149,7 +146,7 @@ public class BildirimAdapter extends RecyclerView.Adapter<BildirimAdapter.ViewHo
 
             txt_kullaniciadi = itemView.findViewById(R.id.txt_kullaniciadi_bildirimOgesi);
             txt_yorum = itemView.findViewById(R.id.txt_yorum_bildirimOgesi);
-            txt_zaman = itemView.findViewById(R.id.txt_zaman);
+//            txt_zaman = itemView.findViewById(R.id.txt_zaman);
 
         }
     }

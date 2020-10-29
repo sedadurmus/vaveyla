@@ -45,14 +45,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"/>
 
-            <ImageView
-                android:id="@+id/profil_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_message_black"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
-                android:visibility="gone" />
+<!--            <ImageView-->
+<!--                android:id="@+id/profil_message"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_message_black"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:visibility="gone" />-->
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -232,4 +232,6 @@
     </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
+
 </RelativeLayout>
