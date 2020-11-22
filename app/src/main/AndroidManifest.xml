@@ -22,7 +22,6 @@
         <activity android:name=".SearchBookActivity" />
         <activity android:name=".PostBookActivity" />
         <activity android:name=".BookDetailActivity" />
-        <activity android:name=".SearchActivity" />
         <activity android:name=".PostActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".ReklamActivity" />
@@ -53,15 +52,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".StartActivity"
-            android:theme="@style/SplashTheme">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".SplashScreenActivity"

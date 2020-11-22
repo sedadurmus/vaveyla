@@ -90,12 +90,7 @@ public class SearchFragment extends Fragment {
         arama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getContext(), SearchActivity.class);
-//                getContext().startActivity(intent);
 
-//                arama.setVisibility(View.GONE);
-//                searchView.setVisibility(View.VISIBLE);
-//                kesfetTxt.setVisibility(View.GONE);
 
                 ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AramaBarFragment()).commit();
@@ -103,42 +98,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-//        recyclerView =myFragment.findViewById(R.id.recyler_view_Arama);
-//        recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//
-//        refreshLayout =myFragment.findViewById(R.id.refresh);
-//        arama_bar =myFragment.findViewById(R.id.edit_arama_bar);
-//        mKullaniciler = new ArrayList<>();
-//        kullaniciAdapter =new KullaniciAdapter(getContext(), mKullaniciler);
-//        recyclerView.setAdapter(kullaniciAdapter);
 
-//        kullanicileriOku();
-//        loadMovies();
-//        arama_bar.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                kullaniciAra(s.toString().toLowerCase());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mKullaniciler.clear();
-//                kullanicileriOkuRefresh();
-//            }
-//        });
 
         return myFragment;
     }
