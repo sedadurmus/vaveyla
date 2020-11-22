@@ -248,7 +248,7 @@ public class GorevFragment extends Fragment implements RewardedVideoAdListener {
                 assert kullanici != null;
                 kullaniciGuncelleHashMap.put("profilPuan", kullanici.getProfilPuan() + 5);
                 adsYol.updateChildren(kullaniciGuncelleHashMap);
-                startActivity(new Intent(getContext(), ProfileFragment.class));
+                startActivity(new Intent(getContext(), ProfilPaylasimFragment.class));
                 isOkey=false;
             }
             @Override
