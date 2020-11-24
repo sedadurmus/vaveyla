@@ -12,24 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.sedadurmus.yenivavi.Adapter.KullaniciAdapter;
 import com.sedadurmus.yenivavi.Adapter.SectionPagerAdapter;
-import com.sedadurmus.yenivavi.Model.Kullanici;
 import com.sedadurmus.yenivavi.R;
-
-import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private KullaniciAdapter kullaniciAdapter;
-    private List<Kullanici> mKullaniciler;
-    private SwipeRefreshLayout refreshLayout;
 //    EditText arama_bar;
     ImageView arama;
     View myFragment;
@@ -98,93 +88,14 @@ public class SearchFragment extends Fragment {
             }
         });
 
-
-
         return myFragment;
     }
     private void setUpViewPager(ViewPager viewPager) {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new MovieFragment(), "Film");
+        adapter.addFragment(new FragmentMovie(),  "Film");
         adapter.addFragment(new KitapFragment(), "Kitap");
         viewPager.setAdapter(adapter);
     }
 
-//    private void kullaniciAra (String s)
-//    {
-//        Query sorgu = FirebaseDatabase.getInstance().getReference("Kullanıcılar").orderByChild("kullaniciadi")
-//                .startAt(s)
-//                .endAt(s+"\uf8ff");
-//
-//        sorgu.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                mKullaniciler.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-//                {
-//                    Kullanici kullanici = snapshot.getValue(Kullanici.class);
-//                    mKullaniciler.add(kullanici);
-//                }
-//                kullaniciAdapter.notifyDataSetChanged();
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
-//    }
-//
-//    private void kullanicileriOku ()
-//    {
-//        DatabaseReference kullanicilerYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar");
-//
-//        kullanicilerYolu.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (arama_bar.getText().toString().equals(""))
-//                {
-//                    mKullaniciler.clear();
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
-//                    {
-//                        Kullanici kullanici =snapshot.getValue(Kullanici.class);
-//                        mKullaniciler.add(kullanici);
-//                    }
-//                    kullaniciAdapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//    }
 
-//    private void kullanicileriOkuRefresh ()
-//    {
-//        DatabaseReference kullanicilerYolu = FirebaseDatabase.getInstance().getReference("Kullanıcılar");
-//
-//        refreshLayout.setRefreshing(false);
-//
-//        kullanicilerYolu.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (arama_bar.getText().toString().equals(""))
-//                {
-//                    mKullaniciler.clear();
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren())
-//                    {
-//                        Kullanici kullanici =snapshot.getValue(Kullanici.class);
-//                        mKullaniciler.add(kullanici);
-//                    }
-//                    kullaniciAdapter.notifyDataSetChanged();
-//                    refreshLayout.setRefreshing(false);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 }

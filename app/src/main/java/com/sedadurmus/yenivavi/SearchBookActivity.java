@@ -85,8 +85,6 @@ public class SearchBookActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
 

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //        setContentView(binding.getRoot());
 //        uygulamada reklam için ekledik
         MobileAds.initialize(this);
+
         bottomNavigationView = findViewById(R.id.botom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

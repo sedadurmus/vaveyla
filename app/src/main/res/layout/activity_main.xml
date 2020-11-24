@@ -13,11 +13,14 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom"
         android:id="@+id/fragment_container"/>
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
         android:layout_alignParentBottom="true">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/botom_navigation"
             android:layout_width="match_parent"
@@ -27,4 +30,71 @@
             app:menu="@menu/bottom_navigation"
             android:background="?android:attr/windowBackground"/>
     </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/toolbar">-->
+
+<!--        <FrameLayout-->
+<!--            android:id="@+id/frameLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+
+<!--        <com.gauravk.bubblenavigation.BubbleNavigationLinearView-->
+<!--            android:id="@+id/navigationBar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:background="@drawable/bg_rounded"-->
+<!--            android:elevation="8dp"-->
+<!--            android:padding="5dp">-->
+
+<!--            <com.gauravk.bubblenavigation.BubbleToggleView-->
+<!--                android:id="@+id/tabFilm"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:bt_colorActive="#81c784"-->
+<!--                app:bt_colorInactive="#78909c"-->
+<!--                app:bt_icon="@drawable/ic_home"-->
+<!--                app:bt_shape="@drawable/tab_movie_color"-->
+<!--                app:bt_title="Movie"-->
+<!--                app:bt_titlePadding="5dp"-->
+<!--                app:bt_titleSize="10sp" />-->
+
+<!--            <com.gauravk.bubblenavigation.BubbleToggleView-->
+<!--                android:id="@+id/tabTV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:bt_colorActive="#aa86f7"-->
+<!--                app:bt_colorInactive="#78909c"-->
+<!--                app:bt_icon="@drawable/ic_profile"-->
+<!--                app:bt_shape="@drawable/tab_tv_color"-->
+<!--                app:bt_title="Tv Show"-->
+<!--                app:bt_titlePadding="5dp"-->
+<!--                app:bt_titleSize="10sp" />-->
+
+<!--            <com.gauravk.bubblenavigation.BubbleToggleView-->
+<!--                android:id="@+id/tabFav"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:bt_colorActive="#f06292"-->
+<!--                app:bt_colorInactive="#78909c"-->
+<!--                app:bt_icon="@drawable/ic_favorite"-->
+<!--                app:bt_shape="@drawable/tab_fav_color"-->
+<!--                app:bt_title="Favorite"-->
+<!--                app:bt_titlePadding="5dp"-->
+<!--                app:bt_titleSize="10sp" />-->
+
+<!--        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>-->
+
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+
 </RelativeLayout>

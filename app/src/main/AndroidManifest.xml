@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Post_Book_SearchActivity"></activity>
+        <activity android:name=".Post_Book_SearchActivity" />
         <activity android:name=".SearchBookDetailActivity" />
         <activity android:name=".SearchBookActivity" />
         <activity android:name=".PostBookActivity" />
@@ -79,16 +79,14 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
-<!--        <service-->
-<!--            android:name=".notifications.MyFirebaseMessaging"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGİNG_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
+        </service> <!-- <service -->
+        <!-- android:name=".notifications.MyFirebaseMessaging" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGİNG_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
