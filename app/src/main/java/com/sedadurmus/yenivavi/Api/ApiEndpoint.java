@@ -6,10 +6,9 @@ package com.sedadurmus.yenivavi.Api;
 
 public class ApiEndpoint {
 
-//    859e1e2595ca61e03a724fb8889e0ddb
     public static String BASEURL = "http://api.themoviedb.org/3/";
     public static String APIKEY = "api_key=b7ee738bdfe5a91a0cec31c619d58968";
-    public static String LANGUAGE = "&language=en-US";
+    public static String LANGUAGE = "&language=tr-TR";
     public static String SEARCH_MOVIE = "search/movie?";
     public static String SEARCH_TV = "search/tv?";
     public static String QUERY = "&query=";

@@ -2,6 +2,7 @@ package com.sedadurmus.yenivavi.Fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.ramotion.cardslider.CardSnapHelper;
 import com.sedadurmus.yenivavi.Adapter.MovieAdapterCategory;
 import com.sedadurmus.yenivavi.Adapter.MovieHorizontalAdapter;
 import com.sedadurmus.yenivavi.Api.ApiEndpoint;
+import com.sedadurmus.yenivavi.DetailActivity;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
@@ -60,9 +62,9 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
         View rootView = inflater.inflate(R.layout.fragment_film, container, false);
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setTitle("Mohon Tunggu");
+        progressDialog.setTitle("Lütfen bekleyiniz...");
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Sedang menampilkan data");
+        progressDialog.setMessage("Yükleniyor...");
 
         searchFilm = rootView.findViewById(R.id.searchFilm);
         searchFilm.setQueryHint(getString(R.string.search_film));
@@ -123,14 +125,14 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                                 String datePost = jsonObject.getString("release_date");
 
-                                dataApi.setId(jsonObject.getString("id"));
+                                dataApi.setId(jsonObject.getInt("id"));
                                 dataApi.setTitle(jsonObject.getString("title"));
                                 dataApi.setVote_average(jsonObject.getDouble("vote_average"));
                                 dataApi.setOverview(jsonObject.getString("overview"));
                                 dataApi.setRelease_date(formatter.format(dateFormat.parse(datePost)));
                                 dataApi.setPoster_path(jsonObject.getString("poster_path"));
                                 dataApi.setBackdropPath(jsonObject.getString("backdrop_path"));
-                                dataApi.setPopularity(jsonObject.getDouble("popularity"));
+                                dataApi.setPopularity(jsonObject.getString("popularity"));
                                 moviePopular.add(dataApi);
                                 showMovie();
                             }
@@ -166,27 +168,27 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                                 String datePost = jsonObject.getString("release_date");
 
-                                dataApi.setId(jsonObject.getString("id"));
+                                dataApi.setId(jsonObject.getInt("id"));
                                 dataApi.setTitle(jsonObject.getString("title"));
                                 dataApi.setVote_average(jsonObject.getDouble("vote_average"));
                                 dataApi.setOverview(jsonObject.getString("overview"));
                                 dataApi.setRelease_date(formatter.format(dateFormat.parse(datePost)));
                                 dataApi.setPoster_path(jsonObject.getString("poster_path"));
                                 dataApi.setBackdropPath(jsonObject.getString("backdrop_path"));
-                                dataApi.setPopularity(jsonObject.getDouble("popularity"));
+                                dataApi.setPopularity(jsonObject.getString("popularity"));
                                 moviePlayNow.add(dataApi);
                                 showMovieHorizontal();
                             }
                         } catch (JSONException | ParseException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "Gagal menampilkan data!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Bulunamadı!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Tidak ada jaringan internet!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "İnternet bağlantınızı kontrol ediniz!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -210,27 +212,27 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
                                 String datePost = jsonObject.getString("release_date");
 
-                                dataApi.setId(jsonObject.getString("id"));
+                                dataApi.setId(jsonObject.getInt("id"));
                                 dataApi.setTitle(jsonObject.getString("title"));
                                 dataApi.setVote_average(jsonObject.getDouble("vote_average"));
                                 dataApi.setOverview(jsonObject.getString("overview"));
                                 dataApi.setRelease_date(formatter.format(dateFormat.parse(datePost)));
                                 dataApi.setPoster_path(jsonObject.getString("poster_path"));
                                 dataApi.setBackdropPath(jsonObject.getString("backdrop_path"));
-                                dataApi.setPopularity(jsonObject.getDouble("popularity"));
+                                dataApi.setPopularity(jsonObject.getString("popularity"));
                                 moviePopular.add(dataApi);
                                 showMovie();
                             }
                         } catch (JSONException | ParseException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "Gagal menampilkan data!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Bulunamadı!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Tidak ada jaringan internet!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "İnternet bağlantınızı kontrol ediniz!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -251,8 +253,8 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
 
     @Override
     public void onSelected(Movie modelMovie) {
-//        Intent intent = new Intent(getActivity(), DetailMovieActivity.class);
-//        intent.putExtra("detailMovie", modelMovie);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("detailMovie", modelMovie);
+        startActivity(intent);
     }
 }

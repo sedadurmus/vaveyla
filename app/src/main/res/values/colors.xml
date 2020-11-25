@@ -6,6 +6,9 @@
     <color name="colorBlack">#000</color>
     <color name="colorAlert">#88D2D0</color>
 
+    <color name="colorFilm">#212d3b</color>
+    <color name="colorFilmDark">#161d27</color>
+
     <color name="background">#FF403D3D</color>
     <color name="colorText">#EDEDED</color>
     <color name="colorSplash">#0d253f</color>

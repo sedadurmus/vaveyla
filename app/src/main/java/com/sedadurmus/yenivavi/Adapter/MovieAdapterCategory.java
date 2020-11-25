@@ -1,6 +1,7 @@
 package com.sedadurmus.yenivavi.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.sedadurmus.yenivavi.Api.ApiEndpoint;
+import com.sedadurmus.yenivavi.DetailActivity;
 import com.sedadurmus.yenivavi.Model.Movie;
 import com.sedadurmus.yenivavi.R;
 
@@ -107,6 +109,27 @@ public class MovieAdapterCategory extends RecyclerView.Adapter<MovieAdapterCateg
             tvRealeseDate = itemView.findViewById(R.id.tvRealeseDate);
             tvDesc = itemView.findViewById(R.id.tvDesc);
             ratingBar = itemView.findViewById(R.id.ratingBar);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION){
+                        Intent intent = new Intent(mContext, DetailActivity.class);
+                        intent.putExtra("title", items.get(pos).getTitle());
+                        intent.putExtra("poster_path", items.get(pos).getPosterPath());
+                        intent.putExtra("overview", items.get(pos).getOverview());
+                        intent.putExtra("release_date", items.get(pos).getRelease_date());
+                        intent.putExtra("vote_average", Double.toString(items.get(pos).getVote_average()));
+//                        intent.putExtra("vote_count", Integer.toString(items.get(pos).getVote_count()));
+                        intent.putExtra("video",(items.get(pos).getVideo()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                    }
+                }
+            });
+
         }
     }
 

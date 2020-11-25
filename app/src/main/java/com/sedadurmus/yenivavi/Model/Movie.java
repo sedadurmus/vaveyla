@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Movie implements Serializable {
     @SerializedName("popularity")
     private
-    double popularity;
+    String popularity;
 
     @SerializedName("vote_count")
     private
@@ -24,7 +24,7 @@ public class Movie implements Serializable {
     String title;
 
     @SerializedName("id")
-    String id;
+    int id;
 
     @SerializedName("overview")
     String overview;
@@ -46,7 +46,7 @@ public class Movie implements Serializable {
         BackdropPath = backdropPath;
     }
 
-    public void setPopularity(double popularity) {
+    public void setPopularity(String popularity) {
         this.popularity = popularity;
     }
 
@@ -66,7 +66,7 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -82,7 +82,7 @@ public class Movie implements Serializable {
         this.vote_average = vote_average;
     }
 
-    public double getPopularity() {
+    public String getPopularity() {
         return this.popularity;
     }
 
@@ -107,8 +107,8 @@ public class Movie implements Serializable {
     public Integer getVote_count() {
         return this.vote_count;
     }
-    public String getId() {
-        return this.id;
+    public int getId() {
+        return id;
     }
 
 }

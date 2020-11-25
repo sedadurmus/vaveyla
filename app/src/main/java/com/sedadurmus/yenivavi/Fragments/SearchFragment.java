@@ -35,7 +35,6 @@ public class SearchFragment extends Fragment {
 //    örnek api şeysi - api_key= buraya kendi key'ini yazman lazııııııım
 //    https://api.themoviedb.org/3/movie/550?api_key=b7ee738bdfe5a91a0cec31c619d58968
 
-//    ------------------------------------------
 
 //    https://image.tmdb.org/t/p/
 
