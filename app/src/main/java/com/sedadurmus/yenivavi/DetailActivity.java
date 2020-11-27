@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -47,22 +46,12 @@ public class DetailActivity extends AppCompatActivity {
     int Id;
     double Rating;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
 
-//        Toolbar toolbar =findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("Film");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -84,9 +73,8 @@ public class DetailActivity extends AppCompatActivity {
         tvRelease = findViewById(R.id.tvRelease);
         tvPopularity = findViewById(R.id.tvPopularity);
         tvOverview = findViewById(R.id.tvOverview);
-        rvTrailer = findViewById(R.id.rvTrailer);
+//        rvTrailer = findViewById(R.id.rvTrailer);
         fabShare = findViewById(R.id.fabShare);
-
         create = findViewById(R.id.create_gonderi);
 //        filmAdi=findViewById(R.id.movie_title);
 //        txtTarih=findViewById(R.id.tvReleaseDate);
@@ -156,8 +144,8 @@ public class DetailActivity extends AppCompatActivity {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgPhoto);
 
-            rvTrailer.setHasFixedSize(true);
-            rvTrailer.setLayoutManager(new LinearLayoutManager(this));
+//            rvTrailer.setHasFixedSize(true);
+//            rvTrailer.setLayoutManager(new LinearLayoutManager(this));
 
 //            getTrailer();
 
@@ -182,9 +170,10 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PostActivity.class);
-                intent.putExtra("poster", poster);
-                intent.putExtra("title",   getIntent().getExtras().getString("title"));
-                intent.putExtra("vote_average",   getIntent().getExtras().getString("vote_average"));
+                intent.putExtra("poster", Thumbnail);
+                intent.putExtra("title",  NameFilm);
+                intent.putExtra("vote_average",   Rating);
+                intent.putExtra("release_date",   ReleaseDate);
                 startActivity(intent);
             }
         });

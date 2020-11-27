@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -47,81 +48,179 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/constraint_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="75dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bar_gonderi"
         tools:ignore="MissingConstraints">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_movie"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:padding="7dp"
-                android:visibility="visible"
-                tools:ignore="MissingConstraints,NotSibling">
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp">
 
-                <!--            <ImageView-->
-                <!--                android:id="@+id/film_img"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="150dp"-->
-                <!--                android:background="?attr/selectableItemBackgroundBorderless"-->
-                <!--                android:scaleType="centerCrop"-->
-                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                app:layout_constraintStart_toStartOf="parent" />-->
-
-                <ImageView
-                    android:id="@+id/film_poster"
-                    android:layout_width="90dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="15dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_movie_baslik"
-                    android:layout_width="0dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvFilm"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_post_activity"
-                    android:padding="7dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="@+id/film_poster"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/film_poster"
-                    tools:ignore="MissingConstraints,NotSibling">
+                    android:layout_margin="5dp"
+                    app:cardBackgroundColor="@color/colorFilm"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp">
 
-                    <TextView
-                        android:id="@+id/movie_title_paylasim"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:text="Baslik"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/cardView"
-                        app:layout_constraintTop_toTopOf="@+id/cardView" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="105dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/movie_title_paylasim"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp" />
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvRating2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:ellipsize="end"-->
+<!--                                android:maxLines="2"-->
+<!--                                android:textAlignment="viewStart"-->
+<!--                                android:textColor="@android:color/white"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                            <RatingBar-->
+<!--                                android:id="@+id/ratingBar2"-->
+<!--                                style="@style/Widget.AppCompat.RatingBar.Small"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:progressTint="@color/colorAccent" />-->
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/puan_movie_paylasim"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5.5"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toStartOf="@+id/movie_title_paylasim"
-                        app:layout_constraintTop_toBottomOf="@+id/movie_title_paylasim" />
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_rounded"
+                        android:backgroundTint="@color/colorAccent"
+                        android:padding="5dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/film_poster"
+                    android:layout_width="90dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/constraint_movie"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:padding="7dp"-->
+<!--                android:visibility="visible"-->
+<!--                tools:ignore="MissingConstraints,NotSibling">-->
+
+<!--                &lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--                &lt;!&ndash;                android:id="@+id/film_img"&ndash;&gt;-->
+<!--                &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                android:layout_height="150dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                android:background="?attr/selectableItemBackgroundBorderless"&ndash;&gt;-->
+<!--                &lt;!&ndash;                android:scaleType="centerCrop"&ndash;&gt;-->
+<!--                &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                app:layout_constraintStart_toStartOf="parent" />&ndash;&gt;-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/film_poster"-->
+<!--                    android:layout_width="90dp"-->
+<!--                    android:layout_height="120dp"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraint_movie_baslik"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/background_post_activity"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:visibility="visible"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/film_poster"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/film_poster"-->
+<!--                    tools:ignore="MissingConstraints,NotSibling">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/movie_title_paylasim"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginEnd="24dp"-->
+<!--                        android:text="Baslik"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/cardView"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/cardView" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/puan_movie_paylasim"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="5.5"-->
+<!--                        android:textSize="15sp"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/movie_title_paylasim"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/movie_title_paylasim" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
         <EditText

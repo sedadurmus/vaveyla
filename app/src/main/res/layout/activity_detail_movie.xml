@@ -117,7 +117,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentStart="true"
                                     android:layout_centerInParent="true"
-                                    android:text="Rating :"
+                                    android:text=""
                                     android:textColor="@android:color/white"
                                     android:textSize="14sp" />
 
@@ -139,7 +139,7 @@
                                 style="@style/Widget.AppCompat.RatingBar.Small"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:progressTint="@color/colorFilm" />
+                                android:progressTint="@color/DarkGoldenrod" />
 
                         </LinearLayout>
 
@@ -193,7 +193,7 @@
                             android:id="@+id/tvRD"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tanggal Rilis :"
+                            android:text="Yayın Tarihi :"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -203,7 +203,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvRD"
-                            android:text="Alumni"
+                            android:text="Mezunlar"
                             android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
 
@@ -218,7 +218,7 @@
                             android:id="@+id/tvKP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Kepopuleran :"
+                            android:text="Popülerlik :"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -242,7 +242,7 @@
                             android:id="@+id/tvDesc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="STORYLINE :"
+                            android:text="HAKKINDA :"
                             android:textColor="@android:color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -262,22 +262,22 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Trailer"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="Trailer"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTrailer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rvTrailer"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:nestedScrollingEnabled="false" />-->
 
         </LinearLayout>
 
@@ -319,6 +319,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:background="@color/colorFilm"
-        android:src="@drawable/ic_add_white" />
+        android:src="@drawable/ic_share" />
 
 </RelativeLayout>

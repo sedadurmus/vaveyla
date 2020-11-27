@@ -17,6 +17,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,23 +49,21 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class PostActivity extends AppCompatActivity {
-    private static final int REQUEST_TAKE_GALLERY_VIDEO = 111;
+
     Uri resimUri, videoUri;
-    String benimUrim = "https://image.tmdb.org/t/p/w500/";
     Intent videoIntent = new Intent();
     String posterUrl;
     ImageView filmPoster, filmposter2;
-    EditText hakkinda;
-    ConstraintLayout constraintMovie;
 
     StorageTask yuklemeGorevi;
     StorageReference resimYukleYolu;
 
-
-    ImageView image_Kapat, image_Eklendi, btn_gonderiActivitye_git, btn_video;
-    TextView txt_Gonder, txt_puan, filmAdi;
+    double Rating;
+    RatingBar ratingBar;
+    TextView txt_Gonder, txt_puan, filmAdi, tvRating;
     EditText gonderi_hakkinda;
     private Bundle savedInstanceState;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,21 +83,28 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+//        ratingBar = findViewById(R.id.ratingBar2);
+//        tvRating = findViewById(R.id.tvRating2);
         filmAdi =findViewById(R.id.movie_title_paylasim);
         filmposter2=findViewById(R.id.film_poster);
-        constraintMovie =findViewById(R.id.constraint_movie);
         txt_Gonder = findViewById(R.id.txt_gonder);
         txt_puan = findViewById(R.id.puan_movie_paylasim);
         gonderi_hakkinda = findViewById(R.id.edit_gonderi_hakkinda_txtGonderiActivity);
         resimYukleYolu = FirebaseStorage.getInstance().getReference("Gonderiler");
 
-        constraintMovie.setVisibility(View.VISIBLE);
         String filmname = getIntent().getExtras().getString("title");
-        String puanla = getIntent().getExtras().getString("vote_average");
+        String tarih = getIntent().getExtras().getString("release_date");
+//        String vote = getIntent().getExtras().getString("vote_average");
 
         Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + posterUrl).into(filmposter2);
         filmAdi.setText(filmname);
-        txt_puan.setText(puanla);
+        txt_puan.setText(tarih);
+//        tvRating.setText(vote + "/ 10");
+
+//        float newValue = (float)Rating;
+//        ratingBar.setNumStars(5);
+//        ratingBar.setStepSize((float) 0.5);
+//        ratingBar.setRating(newValue / 2);
 
         txt_Gonder.setOnClickListener(new View.OnClickListener() {
             @Override

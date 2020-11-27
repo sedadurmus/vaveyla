@@ -37,12 +37,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.azhar.moviedb.R;
-//import com.azhar.moviedb.activities.DetailMovieActivity;
-//import com.azhar.moviedb.adapter.MovieAdapter;
-//import com.azhar.moviedb.adapter.MovieHorizontalAdapter;
-//import com.azhar.moviedb.model.ModelMovie;
-//import com.azhar.moviedb.networking.ApiEndpoint;
 
 public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.onSelectData, MovieAdapterCategory.onSelectData {
 
@@ -138,14 +132,14 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                             }
                         } catch (JSONException | ParseException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "Gagal menampilkan data!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Bulunamadı!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Tidak ada jaringan internet!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "İnternet bağlantınızı kontrol ediniz! ", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
