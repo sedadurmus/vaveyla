@@ -261,11 +261,8 @@ public class GonderiActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!isOkey) return;
                     Kullanici kullanici = dataSnapshot.getValue(Kullanici.class);
-
                     HashMap<String, Object> kullaniciGuncelleHashMap = new HashMap<>();
                     kullaniciGuncelleHashMap.put("profilPuan", kullanici.getProfilPuan() + 3);
-
-
                     kullaniciYolu.updateChildren(kullaniciGuncelleHashMap);
                     isOkey = false;
                 }
@@ -274,8 +271,9 @@ public class GonderiActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
-            startActivity(new Intent(GonderiActivity.this, MainActivity.class));
-            finish();
+//            startActivity(new Intent(GonderiActivity.this, MainActivity.class));
+//            finish();
+
         }
 
     }

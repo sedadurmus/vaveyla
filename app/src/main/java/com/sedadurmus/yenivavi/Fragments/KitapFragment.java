@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class KitapFragment extends Fragment {
     private RecyclerView recyclerView;
     private KitapAdapter kitapAdapter;
     private List<Book> books;
+    private ProgressDialog progressDialog;
     private FloatingActionButton fabBook;
 
     @Override
@@ -44,6 +46,11 @@ public class KitapFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
       View view=  inflater.inflate(R.layout.fragment_kitap, container, false);
+
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Lütfen bekleyiniz...");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Yükleniyor...");
 
             fabBook =view.findViewById(R.id.fabBook);
             recyclerView =view.findViewById(R.id.first_recycler_view);
@@ -67,6 +74,7 @@ public class KitapFragment extends Fragment {
     }
 
     private void loadPopular(){
+        progressDialog.show();
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url ="http://kitap.bildirimler.com/api/books";
         Log.e("BURASI", "response");
@@ -90,6 +98,7 @@ public class KitapFragment extends Fragment {
         queue.add(stringRequest);
 
         try{
+
             Log.e("BURASI", "loadpopularbooks");
             Client Client = new Client();
             ApiInterface apiService = Client.getClient().create(ApiInterface.class);
@@ -118,11 +127,12 @@ public class KitapFragment extends Fragment {
 
         }catch (Exception e){
             Log.d("Error", e.getMessage());
+            progressDialog.dismiss();
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
     private void loadDataAction( List<Book> items) {
-
+        progressDialog.show();
         if (items != null) {
             List<Book> models = items;
             Log.e("EKLEME", models.toArray().toString());
@@ -130,6 +140,7 @@ public class KitapFragment extends Fragment {
             kitapAdapter.addAll(items);
             kitapAdapter.notifyDataSetChanged();
         }
+        progressDialog.dismiss();
     }
 
 }

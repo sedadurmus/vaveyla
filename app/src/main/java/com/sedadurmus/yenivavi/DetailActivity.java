@@ -57,6 +57,12 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Lütfen bekleyiniz...");

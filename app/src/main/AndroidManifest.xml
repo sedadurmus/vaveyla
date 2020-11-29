@@ -88,6 +88,10 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/your_book_api_key">
+        </meta-data>
+        <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
         <meta-data

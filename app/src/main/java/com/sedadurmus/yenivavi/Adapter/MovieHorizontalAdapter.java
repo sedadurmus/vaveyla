@@ -21,9 +21,6 @@ import java.util.List;
 //import com.azhar.moviedb.model.ModelMovie;
 //import com.azhar.moviedb.networking.ApiEndpoint;
 
-/**
- * Created by Azhar Rivaldi on 22-12-2019.
- */
 
 public class MovieHorizontalAdapter extends RecyclerView.Adapter<com.sedadurmus.yenivavi.Adapter.MovieHorizontalAdapter.ViewHolder> {
 

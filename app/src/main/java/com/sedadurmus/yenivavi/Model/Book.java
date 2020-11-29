@@ -39,7 +39,53 @@ public class Book implements Serializable {
     Integer published_year;
 
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPage_count(Integer page_count) {
+        this.page_count = page_count;
+    }
+
+    public void setTranslator(String translator) {
+        this.translator = translator;
+    }
+
+    public void setPrinting_office(String printing_office) {
+        this.printing_office = printing_office;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setPublished_year(Integer published_year) {
+        this.published_year = published_year;
+    }
 
     public String getName() {
         return this.name;

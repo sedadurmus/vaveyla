@@ -23,4 +23,20 @@ public class ApiEndpoint {
     public static String MOVIE_VIDEO = "movie/{id}/videos?";
     public static String TV_VIDEO = "tv/{id}/videos?";
 
+
+
+
+    public static String BASEURL_BOOK = "http://kitap.bildirimler.com/api/books";
+    public static String APIKEY_BOOK = "api_key=AIzaSyDaOf7guOHsCXEaCZSJ-yP42xMnYNr1SHU";
+    public static String LANGUAGE_BOOK = "&language=tr-TR";
+    public static String SEARCH_BOOK = "search/movie?";
+    public static String QUERY_BOOK = "&query=";
+    public static String MOVIE_PLAYNOW_BOOK = "movie/now_playing?";
+    public static String MOVIE_POPULAR_BOOK = "discover/movie?";
+    public static String URLIMAGE_BOOK = "https://image.tmdb.org/t/p/w780/";
+    public static String URLFILM_BOOK = "https://www.themoviedb.org/movie/";
+    public static String NOTIF_DATE_BOOK = "&primary_release_date.gte=";
+    public static String REALESE_DATE_BOOK = "&primary_release_date.lte=";
+
+
 }

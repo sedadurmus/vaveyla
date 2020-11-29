@@ -64,22 +64,7 @@ public class AramaBarFragment extends Fragment {
         recyclerView.setAdapter(kullaniciAdapter);
 
         kullanicileriOku();
-//        arama_bar.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                kullaniciAra(s.toString().toLowerCase());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+
 
         ara.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.sedadurmus.yenivavi.Fragments;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -98,7 +99,8 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
 
         return rootView;
     }
-
+//  EEE,  d MMMM yyyy
+//yyyy-mm-dd
     private void setSearchMovie(String query) {
         progressDialog.show();
         AndroidNetworking.get(ApiEndpoint.BASEURL + ApiEndpoint.SEARCH_MOVIE
@@ -115,8 +117,8 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Movie dataApi = new Movie();
-                                SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMMM yyyy");
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                                 String datePost = jsonObject.getString("release_date");
 
                                 dataApi.setId(jsonObject.getInt("id"));
@@ -158,8 +160,8 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Movie dataApi = new Movie();
-                                SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMMM yyyy");
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                                 String datePost = jsonObject.getString("release_date");
 
                                 dataApi.setId(jsonObject.getInt("id"));
@@ -202,8 +204,8 @@ public class FragmentMovie extends Fragment implements MovieHorizontalAdapter.on
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Movie dataApi = new Movie();
-                                SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMMM yyyy");
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+                                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
                                 String datePost = jsonObject.getString("release_date");
 
                                 dataApi.setId(jsonObject.getInt("id"));

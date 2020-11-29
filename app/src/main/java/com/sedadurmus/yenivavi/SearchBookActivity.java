@@ -1,5 +1,6 @@
 package com.sedadurmus.yenivavi;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -41,6 +42,8 @@ public class SearchBookActivity extends AppCompatActivity {
     private RecyclerViewAdapter mAdapter;
     private RequestQueue mRequestQueue;
 
+    private ProgressDialog progressDialog;
+
     private static  final  String BASE_URL="https://www.googleapis.com/books/v1/volumes?q=";
 
     private EditText search_edit_text;
@@ -49,11 +52,15 @@ public class SearchBookActivity extends AppCompatActivity {
     private TextView error_message;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_book);
+
+//        progressDialog = new ProgressDialog(SearchBookActivity.this);
+//        progressDialog.setTitle("Lütfen bekleyiniz");
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Yükleniyor...");
 
         Toolbar toolbar =findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,11 +96,12 @@ public class SearchBookActivity extends AppCompatActivity {
 
 
     private void parseJson(String key) {
-
+//        progressDialog.show();
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, key.toString(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+//                        progressDialog.dismiss();
                         String title ="";
                         String author ="";
                         String publishedDate = "Yayım Tarihi Bulunamadı";
@@ -159,6 +167,7 @@ public class SearchBookActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+//                progressDialog.dismiss();
             }
         });
         mRequestQueue.add(request);
@@ -172,8 +181,8 @@ public class SearchBookActivity extends AppCompatActivity {
         is_connected=info!=null&&info.isConnectedOrConnecting();
         return is_connected;
     }
-    private void search()
-    {
+
+    private void search() {
         String search_query = search_edit_text.getText().toString();
 
         boolean is_connected = Read_network_state(this);

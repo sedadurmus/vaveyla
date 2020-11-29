@@ -8,9 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.sedadurmus.yenivavi.Model.Book;
 
 import java.util.ArrayList;
@@ -27,25 +27,27 @@ public class BookDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
-        Toolbar toolbar =findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Kitap");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        Toolbar toolbar =findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle("Kitap");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
 
          kitapAdi=findViewById(R.id.kitap_title);
          yazar =findViewById(R.id.yazar);
          tCevirmen =findViewById(R.id.cevirmen);
-        txtTarih=findViewById(R.id.BookDate);
-        kitapHakkinda=findViewById(R.id.kitap_hakkinda);
-        kitapGorsel=findViewById(R.id.kitap_poster);
-        create = findViewById(R.id.create_book_gonderi);
+         txtTarih=findViewById(R.id.BookDate);
+         kitapHakkinda=findViewById(R.id.kitap_hakkinda);
+         kitapGorsel=findViewById(R.id.kitap_poster);
+         create = findViewById(R.id.create_book_gonderi);
 
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_id);
+        collapsingToolbarLayout.setTitleEnabled(true);
 
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra("name")){
@@ -62,10 +64,14 @@ public class BookDetailActivity extends AppCompatActivity {
             kitapHakkinda.setText(hakkinda);
             tCevirmen.setText(cevirmen);
             txtTarih.setText(tarih);
+
         }else {
             Toast.makeText(this, "Bulunamadı", Toast.LENGTH_SHORT).show();
         }
 
+
+
+        collapsingToolbarLayout.setTitle( kitapAdi.getText());
 
         //        gönderide paylaştırabilmek için
         create.setOnClickListener(new View.OnClickListener() {
