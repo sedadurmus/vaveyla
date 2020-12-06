@@ -42,6 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         LayoutInflater inflater = LayoutInflater.from(mContext);
         view = inflater.inflate(R.layout.book_raw_item , parent , false);
         final MyViewHolder viewHolder =  new MyViewHolder(view);
+
         viewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

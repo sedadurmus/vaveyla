@@ -26,10 +26,10 @@ public class ApiEndpoint {
 
 
 
-    public static String BASEURL_BOOK = "http://kitap.bildirimler.com/api/books";
+    public static String BASEURL_BOOK = "https://www.googleapis.com/books/v1/volumes?q=";
     public static String APIKEY_BOOK = "api_key=AIzaSyDaOf7guOHsCXEaCZSJ-yP42xMnYNr1SHU";
     public static String LANGUAGE_BOOK = "&language=tr-TR";
-    public static String SEARCH_BOOK = "search/movie?";
+    public static String SEARCH_BOOK = "search/book?";
     public static String QUERY_BOOK = "&query=";
     public static String MOVIE_PLAYNOW_BOOK = "movie/now_playing?";
     public static String MOVIE_POPULAR_BOOK = "discover/movie?";

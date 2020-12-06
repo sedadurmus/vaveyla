@@ -141,7 +141,7 @@ public class MagazaAdapter extends RecyclerView.Adapter<MagazaAdapter.ViewHolder
                                             } catch (Exception e) {
                                                 String s=e.getMessage();
                                             }
-                                            //           tMailSender.send(null, "", subject, message, email);
+//                                                       tMailSender.send(null, "", subject, message, email);
                                         }
                                     }).start();
 //                                    veriYolu = FirebaseDatabase.getInstance().getReference("Magaza");

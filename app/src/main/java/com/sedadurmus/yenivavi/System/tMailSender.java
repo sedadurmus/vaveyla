@@ -70,8 +70,6 @@ public class tMailSender {
             }
 
             messageBodyPart = new MimeBodyPart();
-
-
             multipart.addBodyPart(messageBodyPart);
             messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText(bodyMessage);

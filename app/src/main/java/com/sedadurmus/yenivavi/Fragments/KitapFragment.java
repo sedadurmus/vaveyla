@@ -37,6 +37,7 @@ import retrofit2.Response;
 public class KitapFragment extends Fragment {
     private RecyclerView recyclerView;
     private KitapAdapter kitapAdapter;
+
     private List<Book> books;
     private ProgressDialog progressDialog;
     private FloatingActionButton fabBook;
@@ -55,9 +56,9 @@ public class KitapFragment extends Fragment {
             fabBook =view.findViewById(R.id.fabBook);
             recyclerView =view.findViewById(R.id.first_recycler_view);
             recyclerView.setHasFixedSize(true);
-            GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL , false);
+            GridLayoutManager gridLayoutManager =new GridLayoutManager(getContext(),
+                    3, GridLayoutManager.VERTICAL , false);
             recyclerView.setLayoutManager(gridLayoutManager);
-////            loadBooks();
             loadPopular();
             kitapAdapter =new KitapAdapter(getContext());
             recyclerView.setAdapter(kitapAdapter);

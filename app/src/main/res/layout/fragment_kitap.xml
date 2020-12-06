@@ -17,6 +17,7 @@
             android:layout_gravity="center_horizontal"
             tools:listitem="@layout/book_item"/>
         </LinearLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabBook"
             android:layout_width="wrap_content"

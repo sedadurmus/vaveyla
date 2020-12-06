@@ -92,7 +92,7 @@ public class SearchFragment extends Fragment {
     private void setUpViewPager(ViewPager viewPager) {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new FragmentMovie(),  "Film");
-        adapter.addFragment(new KitapFragment(), "Kitap");
+        adapter.addFragment(new FragmentBook(), "Kitap");
         viewPager.setAdapter(adapter);
     }
 
