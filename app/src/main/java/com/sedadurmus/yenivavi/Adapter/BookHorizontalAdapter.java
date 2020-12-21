@@ -44,19 +44,6 @@ public class BookHorizontalAdapter extends RecyclerView.Adapter<com.sedadurmus.y
     public void onBindViewHolder(BookHorizontalAdapter.ViewHolder holder, int position) {
         final Book data = mBooks.get(position);
 
-//        Glide.with(mContext)
-//                .load(ApiEndpoint.URLIMAGE + data.getImg_url())
-//                .apply(new RequestOptions()
-//                        .placeholder(R.drawable.ic_image)
-//                        .transform(new RoundedCorners(16)))
-//                .into(holder.imgPhoto);
-//
-//        holder.imgPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onSelectData.onSelected(data);
-//            }
-//        });
         new DownLoadImageTask(holder.imgPhoto).execute(mBooks.get(position).getImg_url());
     }
 

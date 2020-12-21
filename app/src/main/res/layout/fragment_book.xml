@@ -50,16 +50,17 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/aramaResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="Önerilerimiz"
-            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Arama Sonuçları..."
+            android:textColor="@color/gray"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBookRecommend"

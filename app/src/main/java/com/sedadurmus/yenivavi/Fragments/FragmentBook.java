@@ -32,10 +32,11 @@ import com.sedadurmus.yenivavi.Adapter.BookAdapterCategory;
 import com.sedadurmus.yenivavi.Adapter.BookHorizontalAdapter;
 import com.sedadurmus.yenivavi.Api.ApiInterface;
 import com.sedadurmus.yenivavi.Api.Client;
-import com.sedadurmus.yenivavi.DetailActivity;
+import com.sedadurmus.yenivavi.BookDetailActivity;
 import com.sedadurmus.yenivavi.Model.Book;
 import com.sedadurmus.yenivavi.Model.BookSearch;
 import com.sedadurmus.yenivavi.R;
+import com.sedadurmus.yenivavi.SearchBookDetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +60,7 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
     private BookAdapterCategory bookAdapter;
     private ProgressDialog progressDialog;
     private SearchView searchBook;
+    private TextView aramaResult;
     private List<Book> bookPlayNow = new ArrayList<>();
     private List<BookSearch> bookPopular = new ArrayList<>();
 
@@ -84,6 +86,8 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
         progressDialog.setMessage("Yükleniyor...");
 
         mRequestQueue = Volley.newRequestQueue(getContext());
+
+        aramaResult = rootView.findViewById(R.id.aramaResult);
 
         searchBook = rootView.findViewById(R.id.searchBook);
         searchBook.setQueryHint(getString(R.string.search_book));
@@ -111,8 +115,10 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.equals(""))
-
                     getBook(newText);
+
+                aramaResult.setVisibility(View.INVISIBLE);
+
                 return false;
             }
         });
@@ -137,9 +143,10 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
         getBookHorizontal();
 //        getBook();
 
-
         return rootView;
     }
+
+
 
     private void setSearchBook(String key) {
         progressDialog.show();
@@ -200,14 +207,18 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
 //                                bookAdapter = new BookAdapterCategory(getActivity(), bookPopular, this);
 //                                rvBookRecommend.setAdapter(bookAdapter);
                                 showBook();
+                                aramaResult.setVisibility(View.VISIBLE);
+//                                rvBookRecommend.setVisibility(View.VISIBLE);
                                 progressDialog.dismiss();
+
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("TAG" , e.toString());
-
+                            progressDialog.dismiss();
+//                            Toast.makeText(getActivity(), "Bulunamadı ", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -215,7 +226,8 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "İnternet bağlantınızı kontrol ediniz! ", Toast.LENGTH_SHORT).show();
             }
         });
         mRequestQueue.add(request);
@@ -223,45 +235,6 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
 
     private void getBookHorizontal() {
         progressDialog.show();
-//        AndroidNetworking.get(ApiEndpoint.BASEURL + ApiEndpoint.MOVIE_PLAYNOW + ApiEndpoint.APIKEY + ApiEndpoint.LANGUAGE)
-//                .setPriority(Priority.HIGH)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            progressDialog.dismiss();
-//                            JSONArray jsonArray = response.getJSONArray("results");
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                                Kitap dataApi = new Kitap();
-//                                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-//                                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-//                                String datePost = jsonObject.getString("release_date");
-//
-////                                dataApi.setId(jsonObject.getInt(""));
-//                                dataApi.setmTitle(jsonObject.getString("mTitle"));
-//                                dataApi.setmDescription(jsonObject.getString("mDescription"));
-//                                dataApi.setmAuthors(jsonObject.getString("mAuthors"));
-//                                dataApi.setmPublishedDate(formatter.format(dateFormat.parse(datePost)));
-//                                dataApi.setmThumbnail(jsonObject.getString("mThumbnail"));
-////                                dataApi.setBackdropPath(jsonObject.getString("backdrop_path"));
-////                                dataApi.setPopularity(jsonObject.getString("popularity"));
-//                                bookPlayNow.add(dataApi);
-//                                showBookHorizontal();
-//                            }
-//                        } catch (JSONException | ParseException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(getActivity(), "Bulunamadı!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//                        progressDialog.dismiss();
-//                        Toast.makeText(getActivity(), "İnternet bağlantınızı kontrol ediniz!", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url ="http://kitap.bildirimler.com/api/books";
         Log.e("BURASI", "response");
@@ -308,7 +281,7 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
                 @Override
                 public void onFailure(Call<List<Book>> call, Throwable t) {
                     Log.d("BURASI", t.getMessage());
-                    Toast.makeText(getContext(), "Error fetching trailer data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Veriler alınırken hata oluştu!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -374,17 +347,15 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
                                 bookPopular.add(new BookSearch(title , author , publishedDate , description ,categories
                                         ,thumbnail,buy,previewLink,price,pageCount,url));
 
-
-//                                bookAdapter = new BookAdapterCategory(getActivity(), bookPopular, this);
-//                                rvBookRecommend.setAdapter(bookAdapter);
                                 showBook();
+                                progressDialog.dismiss();
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("TAG" , e.toString());
-
+                            progressDialog.dismiss();
                         }
 
                     }
@@ -392,11 +363,12 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
         mRequestQueue.add(request);
     }
+
 
     private void loadDataAction( List<Book> items) {
         progressDialog.show();
@@ -404,8 +376,6 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
             List<Book> models = items;
             Log.e("EKLEME", models.toArray().toString());
             Collections.reverse(items);
-//            bookHorizontalAdapter.addAll(items);
-//            bookHorizontalAdapter.notifyDataSetChanged();
             showBookHorizontal(items);
         }
         progressDialog.dismiss();
@@ -427,16 +397,16 @@ public class FragmentBook extends Fragment implements BookHorizontalAdapter.onSe
 
     @Override
     public void onSelected(Book modelBook) {
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        Intent intent = new Intent(getActivity(), BookDetailActivity.class);
         intent.putExtra("detailBook", modelBook);
         startActivity(intent);
     }
 
-
-
     @Override
     public void onSelected(BookSearch ModelBook) {
-
+        Intent intent = new Intent(getActivity(), SearchBookDetailActivity.class);
+        intent.putExtra("detailBook", String.valueOf(ModelBook));
+        startActivity(intent);
     }
 
     private boolean Read_network_state(Context context)
