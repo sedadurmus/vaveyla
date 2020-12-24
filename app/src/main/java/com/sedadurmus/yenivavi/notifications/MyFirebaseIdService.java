@@ -28,13 +28,5 @@ public class MyFirebaseIdService extends FirebaseMessagingService{
         reference.child(firebaseUser.getUid()).setValue(token);
     }
     
-    @Override
-    public void onTokenRefresh(){
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG,"Refreshed token : "+refreshedToken);
-        sendRegistrationToServer(refreshedToken);
-    }
-    private void sendRegistrationToServer(String token){
-
-    }
+   
 }
